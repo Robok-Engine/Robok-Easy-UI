@@ -37,14 +37,20 @@ jobs:
           ./gradlew :robok-antlr4:assembleRelease
           ./gradlew :app:assembleDebug
 
-      - name: Upload release library
-        uses: actions/upload-artifact@v4
-        with:
-          name: library
-          path: robok-gui-lang/build/outputs/aar/
-
       - name: Upload debug app
         uses: actions/upload-artifact@v4
         with:
           name: app
           path: app/build/outputs/apk/debug/
+          
+      - name: Upload release library-gui
+        uses: actions/upload-artifact@v4
+        with:
+          name: library
+          path: robok-gui/build/outputs/aar/
+          
+      - name: Upload release library-antlr
+        uses: actions/upload-artifact@v4
+        with:
+          name: library
+          path: robok-lang/build/outputs/aar/
