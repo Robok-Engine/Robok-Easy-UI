@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mulambe</string>
+    <string name="app_name">Robok GUI Lang Demo</string>
     <string name="create_basic_gui">Create Basic GUI</string>
 </resources>
