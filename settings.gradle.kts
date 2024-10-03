@@ -17,4 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "Mulambe"
 
 include(":app")
-include(":RobokLang")
+include(":robok-gui-lang")

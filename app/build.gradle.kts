@@ -40,7 +40,7 @@ android {
 }
 
 dependencies{
-    implementation(project(":RobokLang"))
+    implementation(project(":robok-gui-lang"))
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
