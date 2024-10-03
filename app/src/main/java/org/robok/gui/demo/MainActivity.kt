@@ -1,13 +1,13 @@
-package org.robok.gui_lang.demo
+package org.robok.gui.demo
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.TextView
 
-import org.robok.gui_lang.demo.databinding.ActivityMainBinding
+import org.robok.gui.demo.databinding.ActivityMainBinding
 
-import org.robok.layout.*
+import org.robok.gui.*
 
 class MainActivity : Activity() {
 

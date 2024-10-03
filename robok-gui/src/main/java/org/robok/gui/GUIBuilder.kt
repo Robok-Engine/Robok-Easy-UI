@@ -1,4 +1,4 @@
-package org.robok.layout
+package org.robok.gui
 
 class GUIBuilder {
     private val stringBuilder = StringBuilder()

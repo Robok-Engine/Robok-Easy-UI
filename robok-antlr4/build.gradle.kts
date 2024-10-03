@@ -1,6 +1,6 @@
 plugins {
   id("com.android.library")
-  id("org.jetbrains.kotlin.android")
+  id("kotlin-android")
 }
 
 android {
@@ -27,15 +27,8 @@ android {
   }
 }
 
-kotlin {
-  jvmToolchain {
-    languageVersion.set(JavaLanguageVersion.of(11))
-  }
-  compilerOptions {
-    languageVersion.set("1.8")
-    apiVersion.set("1.8")
-    // Outras configurações
-  }
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions.jvmTarget = "11"
 }
 
 dependencies {

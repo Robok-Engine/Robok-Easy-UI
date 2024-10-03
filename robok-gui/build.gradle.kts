@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace = "org.robok.layout"
+  namespace = "org.robok.gui"
   compileSdk = 34
 
   defaultConfig {
@@ -27,14 +27,8 @@ android {
   }
 }
 
-kotlin {
-  jvmToolchain {
-    languageVersion.set(JavaLanguageVersion.of(11))
-  }
-  compilerOptions {
-    languageVersion.set("1.8")
-    apiVersion.set("1.8")
-  }
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions.jvmTarget = "11"
 }
 
 dependencies {

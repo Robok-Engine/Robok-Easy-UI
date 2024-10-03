@@ -1,4 +1,4 @@
-package org.robok.layout
+package org.robok.gui
 
 object DefaultValues {
     private const val XMLNS_ANDROID = "\txmlns:android=\"http://schemas.android.com/apk/res/android\""

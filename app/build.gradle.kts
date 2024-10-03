@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "org.robok.gui_lang.demo"
+    namespace = "org.robok.gui.demo"
     compileSdk = 34
     
     defaultConfig {
-        applicationId = "org.robok.gui_lang.demo"
+        applicationId = "org.robok.gui.demo"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -47,12 +47,10 @@ android {
     
 }
 
-dependencies{
-    implementation(project(":robok-layout"))
-}
-
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     kotlinOptions.jvmTarget = "11"
 }
 
-
+dependencies{
+    implementation(project(":robok-gui"))
+}
