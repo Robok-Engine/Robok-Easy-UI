@@ -10,8 +10,8 @@ on:
       - 'dev'
 
 jobs:
-  SDK-release-library:
-    name: Build SDK Release APK
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -31,17 +31,18 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v4
         
-      - name: Build with Gradle
-        id: gradle_build_release
-        run: ./gradlew assembleRelease  
-        
-      - name: Upload robok-gui-lang/build/
+      - name: Build library release and app debug
+        run: |
+          ./gradlew :robok-gui-lang:assembleRelease
+          ./gradlew :app:assembleDebug
+
+      - name: Upload release library
         uses: actions/upload-artifact@v4
         with:
-          name: library 
-          path: robok-gui-lang/build/
-      
-      - name: Upload app
+          name: library
+          path: robok-gui-lang/build/outputs/aar/
+
+      - name: Upload debug app
         uses: actions/upload-artifact@v4
         with:
           name: app
