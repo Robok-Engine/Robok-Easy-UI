@@ -33,7 +33,7 @@ jobs:
         
       - name: Build library release and app debug
         run: |
-          ./gradlew :robok-gui-lang:assembleRelease
+          ./gradlew :robok-gui:assembleRelease
           ./gradlew :app:assembleDebug
 
       - name: Upload release library
