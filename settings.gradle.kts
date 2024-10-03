@@ -18,3 +18,4 @@ rootProject.name = "Robok-Gui-Lang"
 
 include(":app")
 include(":robok-layout")
+include(":robok-antlr4")
