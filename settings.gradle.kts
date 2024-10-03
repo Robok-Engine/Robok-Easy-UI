@@ -17,4 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "Robok-Gui-Lang"
 
 include(":app")
-include(":robok-gui-lang")
+include(":robok-layout")

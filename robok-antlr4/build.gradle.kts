@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace = "org.robok.gui_lang"
+  namespace = "org.robok.antlr4.kotlin"
   compileSdk = 34
 
   defaultConfig {
@@ -33,6 +33,10 @@ dependencies {
   implementation("androidx.core:core-ktx:1.13.1")
   implementation("androidx.appcompat:appcompat:1.7.0")
   implementation("com.google.android.material:material:1.12.0")
+  
+  implementation("org.antlr:antlr4:4.13.2")
+  implementation("org.antlr:antlr4-runtime:4.13.2")
+  
   testImplementation("junit:junit:4.13.2")
   androidTestImplementation("androidx.test.ext:junit:1.2.1")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")

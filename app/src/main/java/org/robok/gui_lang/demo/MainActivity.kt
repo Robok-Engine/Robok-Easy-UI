@@ -7,6 +7,8 @@ import android.widget.TextView
 
 import org.robok.gui_lang.demo.databinding.ActivityMainBinding
 
+import org.robok.layout.*
+
 class MainActivity : Activity() {
 
     private var _binding: ActivityMainBinding? = null
