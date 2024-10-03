@@ -1,10 +1,11 @@
-package org.robok.gui_lang
+package org.robok.gui_lang.demo
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.TextView
-import org.robok.gui_lang.databinding.ActivityMainBinding
+
+import org.robok.gui_lang.demo.databinding.ActivityMainBinding
 
 class MainActivity : Activity() {
 
@@ -29,7 +30,7 @@ class MainActivity : Activity() {
             binding.xmlCode.setTextIsSelectable(true)
 
             try {
-                RobokLang.render(basicGuiXML, binding.preview)
+                
             } catch (e: Exception) {
                 showDialog(e.toString())
             }

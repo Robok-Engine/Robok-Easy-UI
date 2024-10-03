@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "org.robok.gui_lang"
+    namespace = "org.robok.gui_lang.demo"
     compileSdk = 34
     
     defaultConfig {
-        applicationId = "org.robok.gui_lang_demo"
+        applicationId = "org.robok.gui_lang.demo"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
