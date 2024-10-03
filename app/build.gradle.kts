@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "org.robok.gui_lang"
-    compileSdk = 33
+    compileSdk = 34
     
     defaultConfig {
-        applicationId = "org.robok.gui_lang"
+        applicationId = "org.robok.gui_lang_demo"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
         
@@ -37,6 +37,10 @@ android {
         
     }
     
+}
+
+dependencies{
+    implementation(project(":RobokLang"))
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {

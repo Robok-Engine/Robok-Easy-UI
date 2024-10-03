@@ -3,19 +3,10 @@ package org.robok.gui_lang
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
-import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
-import android.util.Xml
-import android.view.View
-
-import org.xmlpull.v1.XmlPullParser
-
-import java.io.StringReader
-
 import org.robok.gui_lang.databinding.ActivityMainBinding
 
-public class MainActivity : Activity() {
+class MainActivity : Activity() {
 
     private var _binding: ActivityMainBinding? = null
 
@@ -38,7 +29,7 @@ public class MainActivity : Activity() {
             binding.xmlCode.setTextIsSelectable(true)
 
             try {
-                preview(basicGuiXML)
+                RobokLang.render(basicGuiXML, binding.preview)
             } catch (e: Exception) {
                 showDialog(e.toString())
             }
@@ -58,43 +49,5 @@ public class MainActivity : Activity() {
                 dialog.dismiss()
             }
             .show()
-    }
-
-    private fun preview(xml: String) {
-        val xmlParser: XmlPullParser = Xml.newPullParser()
-        xmlParser.setInput(StringReader(xml))
-        val rootView = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-        }
-
-        var eventType = xmlParser.eventType
-        var currentView: View? = null
-
-        while (eventType != XmlPullParser.END_DOCUMENT) {
-            val tagName = xmlParser.name
-
-            when (eventType) {
-                XmlPullParser.START_TAG -> {
-                    currentView = when (tagName) {
-                        "Button" -> Button(this).apply {
-                            text = xmlParser.getAttributeValue(null, "text")
-                        }
-                        "Text" -> TextView(this).apply {
-                            text = xmlParser.getAttributeValue(null, "text")
-                        }
-                        else -> null
-                    }
-                    currentView?.let { rootView.addView(it) }
-                }
-                XmlPullParser.TEXT -> {
-                    if (currentView is TextView) {
-                        currentView.text = xmlParser.text
-                    }
-                }
-            }
-            eventType = xmlParser.next()
-        }
-
-        binding.preview.addView(rootView)
     }
 }
