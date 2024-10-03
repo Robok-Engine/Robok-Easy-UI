@@ -46,11 +46,11 @@ jobs:
       - name: Upload release library-gui
         uses: actions/upload-artifact@v4
         with:
-          name: library
+          name: library-gui
           path: robok-gui/build/outputs/aar/
           
       - name: Upload release library-antlr4
         uses: actions/upload-artifact@v4
         with:
-          name: library
+          name: library-antlr
           path: robok-antlr4/build/outputs/aar/
