@@ -34,6 +34,7 @@ jobs:
       - name: Build library release and app debug
         run: |
           ./gradlew :robok-gui:assembleRelease
+          ./gradlew :robok-antlr4:assembleRelease
           ./gradlew :app:assembleDebug
 
       - name: Upload release library
