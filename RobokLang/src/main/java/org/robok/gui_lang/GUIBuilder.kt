@@ -8,8 +8,8 @@ class GUIBuilder {
         
     fun rootView(block: GUIBuilder.() -> Unit) {
         stringBuilder.newLineLn("<LinearLayout\n${DefaultValues.XMLNS}")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}") 
-        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}") 
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         stringBuilder.newLineLn(">")
         indentLevel++
         this.block()
@@ -19,8 +19,8 @@ class GUIBuilder {
 
     fun Column(id: String = DefaultValues.NO_ID, block: GUIBuilder.() -> Unit) {
         stringBuilder.newLineLn("${indent}<LinearLayout")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}") 
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}") 
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
         stringBuilder.newLine("${indent}${addId(id)}")
         stringBuilder.newLineLn(">")
         indentLevel++
@@ -31,8 +31,8 @@ class GUIBuilder {
 
     fun Text(id: String = DefaultValues.NO_ID, text: String) {
         stringBuilder.newLineLn("${indent}<TextView")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}") 
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}") 
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
         stringBuilder.newLineLn("/>")
@@ -40,8 +40,8 @@ class GUIBuilder {
 
     fun Button(id: String = DefaultValues.NO_ID, text: String) {
         stringBuilder.newLineLn("${indent}<Button")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}") 
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}") 
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
         stringBuilder.newLineLn("/>")
