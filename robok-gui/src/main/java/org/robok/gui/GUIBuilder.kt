@@ -73,20 +73,35 @@ class GUIBuilder (
         stringBuilder.append(log)
     }
     
-    fun closeBlock(){
-        var tags = closingTagLayoutList.get((closingTagLayoutList.size -1)).split(":")
-        
-        if(tags.length > 0){
-            var closingTagGui = tags[0]
-            var closingTagXml = tags[1]
-            
+    fun closeBlock() {
+    // Verifica se o tamanho de closingTagLayoutList é maior que zero
+    if (closingTagLayoutList.isNotEmpty()) {
+        // Pega o último elemento de closingTagLayoutList
+        val tags = closingTagLayoutList.last().split(":")
+
+        if (tags.size >= 2) {  // Verifica se há pelo menos dois itens após o split
+            val closingTagGui = tags[0]
+            val closingTagXml = tags[1]
+
+            // Diminui o nível de indentação
             indentLevel--
+
             if (debugLogs) stringBuilder.newLineLn("<!-- closing $closingTagGui Layout -->")
-            stringBuilder.newLineLn("${indent}" + closingTagXml)
-            closingTagLayoutList.removeAt((closingTagLayoutList.size - 1))
-        
+
+            // Adiciona a tag de fechamento ao stringBuilder
+            stringBuilder.newLineLn("${indent}$closingTagXml")
+
+            // Remove o último elemento da lista
+            closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
+        } else {
+            // Lida com o caso onde não há dois elementos
+            stringBuilder.newLineLn("Erro: Formato inválido de tag de fechamento.")
         }
+    } else {
+        // Lida com o caso onde closingTagLayoutList está vazio
+        stringBuilder.newLineLn("Erro: Nenhum layout para fechar.")
     }
+}
     
     fun runMethod(methodName: String) {
         try {
