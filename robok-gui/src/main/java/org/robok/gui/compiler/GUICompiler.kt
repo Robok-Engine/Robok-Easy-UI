@@ -6,7 +6,8 @@ import org.antlr.v4.runtime.atn.PredictionMode
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import android.util.Log
 
-import org.robok.antlr4.gui.*
+import org.robok.antlr4.gui.GUILexer
+import org.robok.antlr4.gui.GUIParser
 import org.robok.gui.GUIBuilder
 import org.robok.gui.compiler.listener.GUIParserListener
 
