@@ -113,21 +113,23 @@ class MainActivity : ComponentActivity() {
                  modifier = Modifier
                     .clip(RoundedCornerShape(20.dp))
                     .clickable { isDebugLogs = !isDebugLogs }
-                    .padding(vertical =  7.dp, horizontal = 10.dp),
+                     .padding(vertical =  7.dp, horizontal = 10.dp),
                  verticalAlignment = Alignment.CenterVertically,
                  horizontalArrangement = Arrangement.Center
             ) {
                Text(
                   text = stringResource(id = R.string.debug_texts),
-                  modifier = Modifier.align(Alignment.CenterVertically)
+                  modifier = Modifier
+                      .align(Alignment.CenterVertically)
+                       .padding(vertical =  10.dp)
                )
                Spacer(modifier = Modifier.width(8.dp))
                Switch(
                    checked = isDebugLogs,
-                   onCheckedChange = {
-                      isDebugLogs = it
-                   },
-                   modifier = Modifier.align(Alignment.CenterVertically)
+                   onCheckedChange = null,
+                   modifier = Modifier
+                       .align(Alignment.CenterVertically)
+                       .padding(vertical =  10.dp)
                )
             }
         }
