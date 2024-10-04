@@ -6,6 +6,7 @@ import java.util.*
 
 class GUIBuilder (
     private val context: Context,
+    private val debugLogs: Boolean = false,
     private val onFinish: (String, Boolean) -> Unit
 ) {
     private val stringBuilder = StringBuilder()
@@ -72,7 +73,7 @@ class GUIBuilder (
     }
     
     fun runMethod(methodName: String) {
-        stringBuilder.append("\nCode called on runMethod " + methodName)
+        if (debugLogs) stringBuilder.append("\nCode called on runMethod " + methodName) 
         try {
             // using reflection to call method by name
             val method = this::class.java.getDeclaredMethod(methodName)

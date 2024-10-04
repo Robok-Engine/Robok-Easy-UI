@@ -5,13 +5,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.shape.*
+import androidx.compose.ui.*
+import androidx.compose.ui.draw.*
+import androidx.compose.ui.unit.*
 import androidx.compose.ui.res.stringResource
 
 import org.robok.gui.demo.R
@@ -41,6 +43,9 @@ class MainActivity : ComponentActivity() {
         var showDialog by remember { mutableStateOf(false) }
         var dialogMessage by remember { mutableStateOf("") }
         var isError by remember { mutableStateOf(false) }
+        
+        var isDebugLogs by remember { mutableStateOf(false) }  
+        
         // screen cintent
         Column(
             modifier = Modifier
@@ -53,6 +58,7 @@ class MainActivity : ComponentActivity() {
                 onClick = {
                     val guiBuilder = GUIBuilder(
                         context = this@MainActivity,
+                        debugLogs = isDebugLogs,
                         onFinish = { value, error ->
                             dialogMessage = value
                             isError = error
@@ -64,6 +70,27 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = stringResource(id = R.string.create_basic_gui))
+            }
+            Row(
+                 modifier = Modifier
+                    .clip(RoundedCornerShape(12.dp))
+                    .clickable { isDebugLogs = !isDebugLogs }
+                    .padding(vertical =  7.dp, horizontal = 10.dp),
+                 verticalAlignment = Alignment.CenterVertically,
+                 horizontalArrangement = Arrangement.Center
+            ) {
+               Text(
+                  text = stringResource(id = R.string.debug_texts),
+                  modifier = Modifier.align(Alignment.CenterVertically)
+               )
+               Spacer(modifier = Modifier.width(8.dp))
+               Switch(
+                   checked = isDebugLogs,
+                   onCheckedChange = {
+                      isDebugLogs = it
+                   },
+                   modifier = Modifier.align(Alignment.CenterVertically)
+               )
             }
         }
         // dialog
