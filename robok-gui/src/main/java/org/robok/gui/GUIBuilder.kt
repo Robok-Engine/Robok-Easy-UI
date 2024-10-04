@@ -103,7 +103,7 @@ class GUIBuilder (
         indentLevel--
         if (debugLogs) stringBuilder.newLineLn("<!-- closing Root Layout -->")
         stringBuilder.newLineLn("</LinearLayout>")
-        stringBuilder.append("\nEnd.")
+        if (debugLogs) stringBuilder.append("\nEnd.")
         onFinish(stringBuilder.toString(), false)
     }
     
