@@ -30,7 +30,10 @@ class MainActivity : Activity() {
                    runOnUiThread {
                      alertDialog(
                         title = if (!isError) "Finish Method" else "Un error ocurred",
-                        message = value
+                        message = value,
+                        confirm = {
+                            it.dismiss()
+                        }
                      )
                    }
                 }
@@ -43,7 +46,7 @@ class MainActivity : Activity() {
         title: String,
         message: String,
         confirmText: String = "OK",
-        confirm: (DialogInterface) -> Unit = dialog.dismiss()
+        confirm: (DialogInterface) -> Unit = {}
     ) {
         val messageTextView = TextView(this)
         messageTextView.text = message
