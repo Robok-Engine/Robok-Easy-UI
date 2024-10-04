@@ -10,32 +10,32 @@ import org.robok.antlr4.gui.*
 import org.robok.gui.GUIBuilder
 import org.robok.gui.compiler.listener.GUIParserListener
 
-class GUICompiler {
-
- constructor(
+class GUICompiler(
     guiBuilder: GUIBuilder,
     code: String
- ) {
-    val th = Thread {
-        try {
-            val input = CharStreams.fromString(code)
-            val lexer = GUILexer(input)
-            val tokens = CommonTokenStream(lexer)
-            val parser = GUIParser(tokens)
+) {
 
-            parser.interpreter.predictionMode = PredictionMode.SLL
+    init {
+         val th = Thread {
+            try {
+                val input = CharStreams.fromString(code)
+                val lexer = GUILexer(input)
+                val tokens = CommonTokenStream(lexer)
+                val parser = GUIParser(tokens)
 
-            val compilationUnitContext = parser.guiFile()
+                parser.interpreter.predictionMode = PredictionMode.SLL
 
-            // Create and add custom listener
-            val compiler = GUIParserListener(guiBuilder)
-            val walker = ParseTreeWalker.DEFAULT
-            walker.walk(compiler, compilationUnitContext)
-        } catch (e: Exception) {
-            guiBuilder.returnError(e.toString())
+                val compilationUnitContext = parser.guiFile()
+
+                // Create and add custom listener
+                val compiler = GUIParserListener(guiBuilder)
+                val walker = ParseTreeWalker.DEFAULT
+                walker.walk(compiler, compilationUnitContext)
+            } catch (e: Exception) {
+                guiBuilder.returnError(e.toString())
+            }
         }
+        th.priority = Thread.MIN_PRIORITY
+        th.start()
     }
-    th.priority = Thread.MIN_PRIORITY
-    th.start()
-}
 }
