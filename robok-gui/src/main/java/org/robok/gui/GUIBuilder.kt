@@ -21,7 +21,7 @@ class GUIBuilder (
     }
         
     fun rootView() {
-        stringBuilder.newLineLn("<!-- opening root layout -->")
+        if (debugLogs) stringBuilder.newLineLn("<!-- opening root layout -->")
         stringBuilder.newLineLn("<LinearLayout\n${DefaultValues.XMLNS}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
@@ -30,7 +30,7 @@ class GUIBuilder (
     }
 
     fun Column(/*id: String = DefaultValues.NO_ID*/) {
-        stringBuilder.newLineLn("<!-- opening layout Column -->")
+        if (debugLogs) stringBuilder.newLineLn("<!-- opening layout Column -->")
         stringBuilder.newLineLn("${indent}<LinearLayout")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
@@ -43,7 +43,7 @@ class GUIBuilder (
     
     // TO-DO: re-add params
     fun Text(/*id: String = DefaultValues.NO_ID, text: String*/) {
-        stringBuilder.newLineLn("<!-- component Text -->")
+        if (debugLogs) stringBuilder.newLineLn("<!-- component Text -->")
         stringBuilder.newLineLn("${indent}<TextView")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
@@ -56,7 +56,7 @@ class GUIBuilder (
     
     // TO-DO: re-add params
     fun Button(/*id: String = DefaultValues.NO_ID, text: String*/) {
-        stringBuilder.newLineLn("<!-- component Button -->")
+        if (debugLogs) stringBuilder.newLineLn("<!-- component Button -->")
         stringBuilder.newLineLn("${indent}<Button")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
@@ -101,7 +101,7 @@ class GUIBuilder (
     
     fun finish(){
         indentLevel--
-        stringBuilder.newLineLn("<!-- closing root layout -->")
+        if (debugLogs) stringBuilder.newLineLn("<!-- closing root layout -->")
         stringBuilder.newLineLn("</LinearLayout>")
         stringBuilder.append("\nEnd.")
         onFinish(stringBuilder.toString(), false)
