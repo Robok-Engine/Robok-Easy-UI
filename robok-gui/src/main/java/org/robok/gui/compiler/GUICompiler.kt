@@ -35,7 +35,7 @@ class GUICompiler {
             val walker = ParseTreeWalker.DEFAULT
             walker.walk(compiler, compilationUnitContext)
         } catch (e: Exception) {
-            gui.returnError(e.toString())
+            guiBuilder.returnError(e.toString())
         }
     }
     th.priority = Thread.MIN_PRIORITY
