@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.atn.PredictionMode
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import android.util.Log
 
-import org.robok.antlr4.kotlin.*
+import org.robok.antlr4.gui.*
 import org.robok.gui.GUIBuilder
 import org.robok.gui.compiler.listener.GUIParserListener
 
@@ -18,7 +18,7 @@ class GUICompiler {
                    
                 }"""
 
- constructor(gui: GUIBuilder) {
+ constructor(guiBuilder: GUIBuilder) {
     val th = Thread {
         try {
             val input = CharStreams.fromString(code)
@@ -28,11 +28,10 @@ class GUICompiler {
 
             parser.interpreter.predictionMode = PredictionMode.SLL
 
-            val compilationUnitContext = parser.guiFile()  // Ajustado para 'guiFile'
+            val compilationUnitContext = parser.guiFile()
 
-            // Cria e adiciona o listener personalizado
-            val walker = ParseTreeWalker.DEFAULT
-            val compiler = GUIParserListener(gui)
+            // Create and add custom listener
+            val compiler = GUIParserListener(guiBuilder)
             walker.walk(compiler, compilationUnitContext)
         } catch (e: Exception) {
             gui.returnError(e.toString())

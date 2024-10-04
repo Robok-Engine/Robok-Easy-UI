@@ -1,22 +1,20 @@
 package org.robok.gui
 
 import android.content.Context
-import android.widget.TextView
-import android.app.AlertDialog
+
 import java.util.*
 
 class GUIBuilder (
     private val context: Context,
-    private val whenFinish: (String) -> Unit
+    private val onFinish: (String, Boolean) -> Unit
 ) {
     private val stringBuilder = StringBuilder()
     private var indentLevel = 0
     private val indent: String
         get() = "\t".repeat(indentLevel)
     val codes: MutableList<String> = mutableListOf()
-    
-    
         
+    /* NOTE: not used now(why?) */
     fun rootView(block: GUIBuilder.() -> Unit) {
         stringBuilder.newLineLn("<LinearLayout\n${DefaultValues.XMLNS}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
@@ -32,71 +30,79 @@ class GUIBuilder (
         stringBuilder.newLineLn("${indent}<LinearLayout")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
-      //  stringBuilder.newLine("${indent}${addId(id)}")
+        // stringBuilder.newLine("${indent}${addId(id)}") 
         stringBuilder.newLineLn(">")
         indentLevel++
         codes.add("<LinearLayout/>")
         
     }
-
-    fun Text(id: String = DefaultValues.NO_ID, text: String) {
+    
+    // TO-DO: re-add params
+    fun Text(/*id: String = DefaultValues.NO_ID, text: String*/) {
         stringBuilder.newLineLn("${indent}<TextView")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        /*
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
-        stringBuilder.newLineLn("/>")
-    }
-
-    fun Button(id: String = DefaultValues.NO_ID, text: String) {
-        stringBuilder.newLineLn("${indent}<Button")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
-        stringBuilder.newLineLn("${indent}${addId(id)}")
-        stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
+        */
         stringBuilder.newLineLn("/>")
     }
     
-    public fun addStringBuilder(log: String){
+    // TO-DO: re-add params
+    fun Button(/*id: String = DefaultValues.NO_ID, text: String*/) {
+        stringBuilder.newLineLn("${indent}<Button")
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        /*
+        stringBuilder.newLineLn("${indent}${addId(id)}")
+        stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
+        */,
+        stringBuilder.newLineLn("/>")
+    }
+    
+    fun newLine(log: String){
         stringBuilder.append(log)
     }
     
     fun closeBlock(){
         indentLevel--
-        
         stringBuilder.newLineLn("${indent}" + codes.get(codes.size))
         codes.removeAt(codes.size)
     }
     
-    public fun start(methodName: String) {
-        stringBuilder.append("\ncodigo chamado no start " + methodName)
+    fun runMethod(methodName: String) {
+        stringBuilder.append("\nCode called on runMethod " + methodName)
         try {
-            // Usando a reflexão para chamar o método pelo nome
+            // using reflection to call method by name
             val method = this::class.java.getDeclaredMethod(methodName)
-            method.invoke(this)  // Chama o método na própria instância
+            method.invoke(this)  // Call the method on the instance itself=
         } catch (e: Exception) {
             stringBuilder.append("\n"+e.toString()+"\n")
-            e.printStackTrace() // Exibe a pilha de exceções se houver um erro
+            e.printStackTrace() // display the exception stack if there is an error
         }
     }
 
     private fun addId(id: String): String = if (id != DefaultValues.NO_ID) "\tandroid:id=\"@+id/$id\"" else ""
 
-    fun build(): String {
+    fun buildXML(): String {
         return stringBuilder.toString()
     }
     
-    public fun finish(){
-        stringBuilder.append("finalizou")
-        whenFinish(stringBuilder.toString())
+    fun finish(){
+        stringBuilder.append("\nEnd.")
+        onFinish(stringBuilder.toString(), false)
     }
     
-    public fun returnError(i: String){
-       whenFinish(i)
+    fun returnError(error: String){
+       onFinish(error, true)
     }
 }
-/*fun gui(block: GUIBuilder.() -> Unit): String {
+ 
+/* maybe it will be used in the future
+fun gui(block: GUIBuilder.() -> Unit): String {
     val builder = GUIBuilder()
     builder.rootView(block)
     return builder.build()
-}*/
+}
+*/

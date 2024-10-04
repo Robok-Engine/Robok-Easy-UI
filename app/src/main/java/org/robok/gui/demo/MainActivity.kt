@@ -2,13 +2,14 @@ package org.robok.gui.demo
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.DialogInterface
 import android.os.Bundle
 import android.widget.TextView
-import org.robok.gui.compiler.*
 
 import org.robok.gui.demo.databinding.ActivityMainBinding
 
-import org.robok.gui.*
+import org.robok.gui.GUIBuilder
+import org.robok.gui.compiler.GUICompiler
 
 class MainActivity : Activity() {
 
@@ -23,38 +24,27 @@ class MainActivity : Activity() {
         setContentView(binding.root)
 
         binding.createCode.setOnClickListener {
-            /*val basicGuiXML = gui {
-                Column {
-                    Button(text = "Click here", id = "a")
-                    Text(text = "Thanks love", id = "b")
-                   
-                }
-            }
-            binding.xmlCode.text = basicGuiXML
-            binding.xmlCode.setTextIsSelectable(true)
-
-            try {
-                
-            } catch (e: Exception) {
-                showDialog(e.toString())
-            }*/
             var guiBuilder = GUIBuilder(
-                    context = this,
-                    whenFinish = { str ->
-                        runOnUiThread {
-                                alertDialog(
-                                        title = "Finish Method",
-                                        message = str
-                                )
-                       }
-                  }
-          )
-          val guiCompiler = GUICompiler(guiBuilder)
+                context = this,
+                onFinish = { value, isError ->
+                   runOnUiThread {
+                     alertDialog(
+                        title = if (!isError) "Finish Method" else "Un error ocurred",
+                        message = str
+                     )
+                   }
+                }
+            )
+            val guiCompiler = GUICompiler(guiBuilder)
         }
     }
     
-    
-    private fun alertDialog(title: String, message: String) {
+    private fun alertDialog(
+        title: String,
+        message: String,
+        confirmText: String = "OK",
+        confirm: (DialogInterface) -> Unit = dialog.dismiss()
+    ) {
         val messageTextView = TextView(this)
         messageTextView.text = message
         messageTextView.textSize = 16f
@@ -63,8 +53,8 @@ class MainActivity : Activity() {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setView(messageTextView)
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
+            .setPositiveButton(confirmText) { dialog, _ ->
+                confirm(dialog)
             }
             .show()
     }

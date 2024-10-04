@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace = "org.robok.antlr4.kotlin"
+  namespace = "org.robok.antlr4.gui"
   compileSdk = 34
 
   defaultConfig {

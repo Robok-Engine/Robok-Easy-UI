@@ -1,9 +1,10 @@
 package org.robok.gui.compiler.listener;
 
 import java.lang.reflect.Method;
-import org.robok.antlr4.kotlin.GUIBaseListener;
+
 import org.robok.gui.GUIBuilder;
-import org.robok.antlr4.kotlin.GUIParser;
+import org.robok.antlr4.gui.GUIBaseListener;
+import org.robok.antlr4.gui.GUIParser;
 
 public class GUIParserListener extends GUIBaseListener {
 
@@ -15,7 +16,6 @@ public class GUIParserListener extends GUIBaseListener {
     
     private void startt(String s) {
         try {
-
             Class<?> clazz = guiBuilder.getClass();
             Method method = clazz.getDeclaredMethod(s);
             method.invoke(guiBuilder);
@@ -25,22 +25,16 @@ public class GUIParserListener extends GUIBaseListener {
         }
     }
 
-    private void start2(String methodName, Object... params) {
+    private void runMethodWithParams(String methodName, Object... params) {
         try {
             Class<?> clazz = guiBuilder.getClass();
-
-            // Obter os tipos dos parâmetros
+            // Get parameter types
             Class<?>[] paramTypes = new Class[params.length];
             for (int i = 0; i < params.length; i++) {
                 paramTypes[i] = params[i].getClass();
             }
-
-            // Encontrar o método com o nome e parâmetros corretos
-            Method method = clazz.getDeclaredMethod(methodName, paramTypes);
-
-            // Invocar o método com os parâmetros fornecidos
-            method.invoke(guiBuilder, params);
-
+            Method method = clazz.getDeclaredMethod(methodName, paramTypes); // Find the method with the correct name and parameters
+            method.invoke(guiBuilder, params); // Invoke the method with the given parameters
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,18 +47,16 @@ public class GUIParserListener extends GUIBaseListener {
         // TODO: Implement this method
     }
     
-
-
     // Detecta o início de um layout (ex: Column {)
     @Override
     public void enterComponent(GUIParser.ComponentContext ctx) {
         String componentName = ctx.IDENTIFIER().getText();
         if (ctx.getText().contains("{")) {
             guiBuilder.start(componentName);
-         //   start2("enterLayout", componentName);  // Chama o método específico para layouts ao abrir {
+            // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para layouts ao abrir {
         } else {
             guiBuilder.start(componentName);
-           // start2("addComponent", componentName);  // Para componentes normais como Button
+            // runMethodWithParams("addComponent", componentName);  // Para componentes normais como Button
         }
     }
 
@@ -74,7 +66,7 @@ public class GUIParserListener extends GUIBaseListener {
         if (ctx.getText().contains("}")) {
             String componentName = ctx.IDENTIFIER().getText();
             guiBuilder.start("closeBlock");
-          //  start2("exitLayout", componentName);  // Chama o método específico para layouts ao fechar }
+            // runMethodWithParams("exitLayout", componentName);  // Chama o método específico para layouts ao fechar }
         }
     }
 
@@ -82,7 +74,7 @@ public class GUIParserListener extends GUIBaseListener {
     @Override
     public void enterArgumentList(GUIParser.ArgumentListContext ctx) {
         String componentName = ctx.getParent().getChild(0).getText();
-       // start2("startArguments", componentName);
+       // runMethodWithParams("startArguments", componentName);
     }
 
     // Ao processar cada argumento
@@ -90,8 +82,6 @@ public class GUIParserListener extends GUIBaseListener {
     public void enterArgument(GUIParser.ArgumentContext ctx) {
         String key = ctx.IDENTIFIER().getText();
         String value = ctx.STRING().getText();
-       // start2("addArgument", key, value);
-        
-        
+        // runMethodWithParams("addArgument", key, value);
     }
 }
