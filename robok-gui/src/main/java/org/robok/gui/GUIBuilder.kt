@@ -4,6 +4,8 @@ import android.content.Context
 
 import java.util.*
 
+import java.lang.reflect.InvocationTargetException
+
 class GUIBuilder (
     private val context: Context,
     private val debugLogs: Boolean = false,
@@ -87,7 +89,7 @@ class GUIBuilder (
             // using reflection to call method by name
             val method = this::class.java.getDeclaredMethod(methodName)
             method.invoke(this)  // Call the method on the instance itself=
-        } catch (e: Exception) {
+        } catch (e: InvocationTargetException) {
             stringBuilder.append("\n"+e.toString()+"\n")
             e.printStackTrace() // display the exception stack if there is an error
         }
