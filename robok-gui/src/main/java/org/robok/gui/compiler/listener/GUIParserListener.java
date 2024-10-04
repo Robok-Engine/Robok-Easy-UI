@@ -2,9 +2,14 @@ package org.robok.gui.compiler.listener;
 
 import java.lang.reflect.Method;
 
+
+import static org.robok.antlr4.gui.GUIParser.GuiFileContext;
+import static org.robok.antlr4.gui.GUIParser.ComponentContext;
+import static org.robok.antlr4.gui.GUIParser.ArgumentContext;
+import static org.robok.antlr4.gui.GUIParser.ArgumentListContext;
+
 import org.robok.gui.GUIBuilder;
 import org.robok.antlr4.gui.GUIBaseListener;
-import org.robok.antlr4.gui.GUIParser;
 
 public class GUIParserListener extends GUIBaseListener {
 
@@ -14,7 +19,7 @@ public class GUIParserListener extends GUIBaseListener {
         this.guiBuilder = guiBuilder;
     }
     
-    private void runMethodt(String s) {
+    private void runMethod(String s) {
         try {
             Class<?> clazz = guiBuilder.getClass();
             Method method = clazz.getDeclaredMethod(s);
@@ -41,7 +46,7 @@ public class GUIParserListener extends GUIBaseListener {
     }
     
     @Override
-    public void exitGuiFile(GUIParser.GuiFileContext ctx) {
+    public void exitGuiFile(GuiFileContext ctx) {
         guiBuilder.finish();
         super.exitGuiFile(ctx);
         // TODO: Implement this method
@@ -49,7 +54,7 @@ public class GUIParserListener extends GUIBaseListener {
     
     // Detecta o início de um layout (ex: Column {)
     @Override
-    public void enterComponent(GUIParser.ComponentContext ctx) {
+    public void enterComponent(ComponentContext ctx) {
         String componentName = ctx.IDENTIFIER().getText();
         if (ctx.getText().contains("{")) {
             guiBuilder.runMethod(componentName);
@@ -62,7 +67,7 @@ public class GUIParserListener extends GUIBaseListener {
 
     // Detecta o fechamento de um layout (ex: })
     @Override
-    public void exitComponent(GUIParser.ComponentContext ctx) {
+    public void exitComponent(ComponentContext ctx) {
         if (ctx.getText().contains("}")) {
             String componentName = ctx.IDENTIFIER().getText();
             guiBuilder.runMethod("closeBlock");
@@ -72,14 +77,14 @@ public class GUIParserListener extends GUIBaseListener {
 
     // Ao entrar em uma lista de argumentos (ex: Button(text = "Click here"))
     @Override
-    public void enterArgumentList(GUIParser.ArgumentListContext ctx) {
+    public void enterArgumentList(ArgumentListContext ctx) {
         String componentName = ctx.getParent().getChild(0).getText();
        // runMethodWithParams("runMethodArguments", componentName);
     }
 
     // Ao processar cada argumento
     @Override
-    public void enterArgument(GUIParser.ArgumentContext ctx) {
+    public void enterArgument(ArgumentContext ctx) {
         String key = ctx.IDENTIFIER().getText();
         String value = ctx.STRING().getText();
         // runMethodWithParams("addArgument", key, value);
