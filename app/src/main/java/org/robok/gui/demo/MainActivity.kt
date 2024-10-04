@@ -15,6 +15,8 @@ import androidx.compose.ui.*
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 
 import org.robok.gui.demo.R
 import org.robok.gui.demo.ui.theme.RobokTheme
@@ -42,6 +44,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MainScreen() {
         var showDialog by remember { mutableStateOf(false) }
+        var showProgress by remember { mutableStateOf(false) }
         var dialogMessage by remember { mutableStateOf("") }
         var isError by remember { mutableStateOf(false) }
         var code by remember { mutableStateOf("""Column {
@@ -68,6 +71,7 @@ class MainActivity : ComponentActivity() {
             )
             Button(
                 onClick = {
+                    showProgress = true
                     val guiBuilder = GUIBuilder(
                         context = this@MainActivity,
                         debugLogs = isDebugLogs,
@@ -75,14 +79,14 @@ class MainActivity : ComponentActivity() {
                             dialogMessage = value
                             isError = error
                             showDialog = true
+                            showProgress = false
                         }
                     )
                     val guiCompiler = GUICompiler(
                         guiBuilder = guiBuilder,
                         code = code
                     )
-                },
-                modifier = Modifier.fillMaxWidth()
+                }
             ) {
                 Text(text = stringResource(id = R.string.create_basic_gui))
             }
@@ -126,6 +130,30 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             )
+        }
+        if (showProgress) {
+            LoadingIndicatorDialog(showDialog = showProgress, onDismiss = { showProgress = false })
+         }
+    }
+    @Composable
+    fun LoadingIndicatorDialog(showDialog: Boolean, onDismiss: () -> Unit) {
+        if (showDialog) {
+            Dialog(
+                onDismissRequest = { onDismiss() },
+                DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
+            ) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(22.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .padding(16.dp)
+                        )
+                }
+            }
         }
     }
 }
