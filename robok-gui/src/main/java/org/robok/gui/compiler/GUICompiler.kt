@@ -32,6 +32,7 @@ class GUICompiler {
 
             // Create and add custom listener
             val compiler = GUIParserListener(guiBuilder)
+            val walker = ParseTreeWalker.DEFAULT
             walker.walk(compiler, compilationUnitContext)
         } catch (e: Exception) {
             gui.returnError(e.toString())
