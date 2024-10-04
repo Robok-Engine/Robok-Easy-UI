@@ -90,7 +90,10 @@ class GUIBuilder (
             val method = this::class.java.getDeclaredMethod(methodName)
             method.invoke(this)  // Call the method on the instance itself=
         } catch (e: InvocationTargetException) {
-            stringBuilder.append("\n"+e.getCause().toString()+"\n")
+        
+            val originalException = e.cause
+    
+            stringBuilder.append("\n ${originalException?.message}\n")
             e.printStackTrace() // display the exception stack if there is an error
         }
     }
