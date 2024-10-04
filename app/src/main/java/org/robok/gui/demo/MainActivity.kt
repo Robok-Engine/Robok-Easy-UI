@@ -20,6 +20,8 @@ import androidx.compose.ui.window.DialogProperties
 
 import org.robok.gui.demo.R
 import org.robok.gui.demo.ui.theme.RobokTheme
+import org.robok.gui.demo.ui.components.editor.HighlightingEditor
+import org.robok.gui.demo.ui.components.syntax.SyntaxType
 import org.robok.gui.GUIBuilder
 import org.robok.gui.compiler.GUICompiler
 
@@ -62,12 +64,12 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            OutlinedTextField(
+            HighlightingEditor(
                 value = code,
                 onValueChange = {
                       code = it
                 },
-                label = { Text(text = stringResource(R.string.code)) }
+                syntaxType = SyntaxType.XML
             )
             Button(
                 onClick = {
@@ -121,7 +123,12 @@ class MainActivity : ComponentActivity() {
                 },
                 text = {
                     SelectionContainer {
-                        Text(dialogMessage)
+                        HighlightingEditor(
+                            value = dialogMessage,
+                            onValueChange = {  },
+                            focusable = false,
+                            syntaxType = SyntaxType.XML
+                        )
                     }
                 },
                 confirmButton = {
