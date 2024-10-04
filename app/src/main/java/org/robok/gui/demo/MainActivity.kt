@@ -1,9 +1,9 @@
 package org.robok.gui.demo
 
+import android.os.Bundle
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.DialogInterface
-import android.os.Bundle
+import android.content.DialogInterface
 import android.widget.TextView
 
 import org.robok.gui.demo.databinding.ActivityMainBinding
