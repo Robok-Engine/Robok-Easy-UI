@@ -13,7 +13,7 @@ class GUIBuilder (
     private var indentLevel = 0
     private val indent: String
         get() = "\t".repeat(indentLevel)
-    val codes: MutableList<String> = mutableListOf()
+    val closingTagLayoutList: MutableList<String> = mutableListOf()
     
     
     init {
@@ -30,18 +30,20 @@ class GUIBuilder (
     }
 
     fun Column(/*id: String = DefaultValues.NO_ID*/) {
+        stringBuilder.newLineLn("<!-- opening layout Column -->")
         stringBuilder.newLineLn("${indent}<LinearLayout")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
         // stringBuilder.newLine("${indent}${addId(id)}") 
         stringBuilder.newLineLn(">")
         indentLevel++
-        codes.add("<LinearLayout/>")
+        closingTagLayoutList.add("Column:<LinearLayout/>")
         
     }
     
     // TO-DO: re-add params
     fun Text(/*id: String = DefaultValues.NO_ID, text: String*/) {
+        stringBuilder.newLineLn("<!-- component Text -->")
         stringBuilder.newLineLn("${indent}<TextView")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
@@ -54,6 +56,7 @@ class GUIBuilder (
     
     // TO-DO: re-add params
     fun Button(/*id: String = DefaultValues.NO_ID, text: String*/) {
+        stringBuilder.newLineLn("<!-- component Button -->")
         stringBuilder.newLineLn("${indent}<Button")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
@@ -69,9 +72,13 @@ class GUIBuilder (
     }
     
     fun closeBlock(){
+        var tags = closingTagLayoutList.get(closingTagLayoutList.size).split(":")
+        
+        var closingTagGui = tags[0]
+        var closingTagXml = tags[1]
         indentLevel--
-        stringBuilder.newLineLn("${indent}" + codes.get(codes.size))
-        codes.removeAt(codes.size)
+        stringBuilder.newLineLn("${indent}" + closingTagXml)
+        closingTagLayoutList.removeAt(closingTagLayoutList.size)
     }
     
     fun runMethod(methodName: String) {
@@ -93,7 +100,6 @@ class GUIBuilder (
     }
     
     fun finish(){
-    
         indentLevel--
         stringBuilder.newLineLn("<!-- closing root layout -->")
         stringBuilder.newLineLn("</LinearLayout>")
