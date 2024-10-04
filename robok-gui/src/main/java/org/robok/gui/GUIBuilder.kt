@@ -28,11 +28,11 @@ class GUIBuilder (
         stringBuilder.newLineLn("</LinearLayout>")
     }
 
-    fun Column(id: String = DefaultValues.NO_ID, block: GUIBuilder.() -> Unit) {
+    fun Column(/*id: String = DefaultValues.NO_ID*/) {
         stringBuilder.newLineLn("${indent}<LinearLayout")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
-        stringBuilder.newLine("${indent}${addId(id)}")
+      //  stringBuilder.newLine("${indent}${addId(id)}")
         stringBuilder.newLineLn(">")
         indentLevel++
         codes.add("<LinearLayout/>")
@@ -57,11 +57,27 @@ class GUIBuilder (
         stringBuilder.newLineLn("/>")
     }
     
-    private fun closeBlock(){
+    public fun addStringBuilder(log: String){
+        stringBuilder.append(log)
+    }
+    
+    fun closeBlock(){
         indentLevel--
         
         stringBuilder.newLineLn("${indent}" + codes.get(codes.size))
         codes.removeAt(codes.size)
+    }
+    
+    public fun start(methodName: String) {
+        stringBuilder.append("\ncodigo chamado no start " + methodName)
+        try {
+            // Usando a reflexão para chamar o método pelo nome
+            val method = this::class.java.getDeclaredMethod(methodName)
+            method.invoke(this)  // Chama o método na própria instância
+        } catch (e: Exception) {
+            stringBuilder.append("\n"+e.toString()+"\n")
+            e.printStackTrace() // Exibe a pilha de exceções se houver um erro
+        }
     }
 
     private fun addId(id: String): String = if (id != DefaultValues.NO_ID) "\tandroid:id=\"@+id/$id\"" else ""
@@ -70,11 +86,12 @@ class GUIBuilder (
         return stringBuilder.toString()
     }
     
-    fun finish(){
+    public fun finish(){
+        stringBuilder.append("finalizou")
         whenFinish(stringBuilder.toString())
     }
     
-    fun returnError(i: String){
+    public fun returnError(i: String){
        whenFinish(i)
     }
 }

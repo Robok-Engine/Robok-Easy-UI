@@ -18,27 +18,27 @@ class GUICompiler {
                    
                 }"""
 
-    constructor(gui: GUIBuilder){
-        val th = Thread {
-            try {
-                val input = CharStreams.fromString(code)
-                val lexer = KotlinLexer(input)
-                val tokens = CommonTokenStream(lexer)
-                val parser = KotlinParser(tokens)
+ constructor(gui: GUIBuilder) {
+    val th = Thread {
+        try {
+            val input = CharStreams.fromString(code)
+            val lexer = GUILexer(input)
+            val tokens = CommonTokenStream(lexer)
+            val parser = GUIParser(tokens)
 
-                parser.interpreter.predictionMode = PredictionMode.SLL
+            parser.interpreter.predictionMode = PredictionMode.SLL
 
-                val compilationUnitContext = parser.kotlinFile()
+            val compilationUnitContext = parser.guiFile()  // Ajustado para 'guiFile'
 
-                // Cria e adiciona o listener personalizado
-                val walker = ParseTreeWalker.DEFAULT
-                val compiler = GUIParserListener(gui)
-                walker.walk(compiler, compilationUnitContext)
-            } catch (e: Exception) {
-                gui.returnError(e.toString())
-            }
+            // Cria e adiciona o listener personalizado
+            val walker = ParseTreeWalker.DEFAULT
+            val compiler = GUIParserListener(gui)
+            walker.walk(compiler, compilationUnitContext)
+        } catch (e: Exception) {
+            gui.returnError(e.toString())
         }
-        th.priority = Thread.MIN_PRIORITY
-        th.start()
     }
+    th.priority = Thread.MIN_PRIORITY
+    th.start()
+}
 }
