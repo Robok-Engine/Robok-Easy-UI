@@ -2,6 +2,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -34,6 +35,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
     
     signingConfigs {
@@ -53,4 +55,14 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 dependencies{
     implementation(project(":robok-gui"))
+    
+    // compose
+    implementation(platform("androidx.compose:compose-bom:2022.10.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.activity:activity-compose:1.5.1")
+    
 }

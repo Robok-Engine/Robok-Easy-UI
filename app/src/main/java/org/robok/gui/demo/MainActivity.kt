@@ -1,64 +1,89 @@
 package org.robok.gui.demo
 
 import android.os.Bundle
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.widget.TextView
 
-import org.robok.gui.demo.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 
+import org.robok.gui.demo.R
+import org.robok.gui.demo.ui.theme.RobokTheme
 import org.robok.gui.GUIBuilder
 import org.robok.gui.compiler.GUICompiler
 
-class MainActivity : Activity() {
-
-    private var _binding: ActivityMainBinding? = null
-
-    private val binding: ActivityMainBinding
-        get() = checkNotNull(_binding) { "Activity has been destroyed" }
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.createCode.setOnClickListener {
-            var guiBuilder = GUIBuilder(
-                context = this,
-                onFinish = { value, isError ->
-                   runOnUiThread {
-                     alertDialog(
-                        title = if (!isError) "Finish Method" else "Un error ocurred",
-                        message = value,
-                        confirm = {
-                            it.dismiss()
-                        }
-                     )
-                   }
+        setContent {
+            RobokTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                      MainScreen()
                 }
-            )
-            val guiCompiler = GUICompiler(guiBuilder)
+            }
         }
     }
-    
-    private fun alertDialog(
-        title: String,
-        message: String,
-        confirmText: String = "OK",
-        confirm: (DialogInterface) -> Unit = {}
-    ) {
-        val messageTextView = TextView(this)
-        messageTextView.text = message
-        messageTextView.textSize = 16f
-        messageTextView.setPadding(32, 32, 32, 32)
-        messageTextView.setTextIsSelectable(true)
-        AlertDialog.Builder(this)
-            .setTitle(title)
-            .setView(messageTextView)
-            .setPositiveButton(confirmText) { dialog, _ ->
-                confirm(dialog)
+
+    @Composable
+    fun MainScreen() {
+        var showDialog by remember { mutableStateOf(false) }
+        var dialogMessage by remember { mutableStateOf("") }
+        var isError by remember { mutableStateOf(false) }
+        // screen cintent
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(
+                onClick = {
+                    val guiBuilder = GUIBuilder(
+                        context = this@MainActivity,
+                        onFinish = { value, error ->
+                            dialogMessage = value
+                            isError = error
+                            showDialog = true
+                        }
+                    )
+                    val guiCompiler = GUICompiler(guiBuilder)
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = stringResource(id = R.string.create_basic_gui))
             }
-            .show()
+        }
+        // dialog
+        if (showDialog) {
+            AlertDialog(
+                onDismissRequest = { showDialog = false },
+                title = {
+                    Text(if (!isError) stringResource(id = R.string.finish_method) else stringResource(id = R.string.error_ocurred) )
+                },
+                text = {
+                    SelectionContainer {
+                        Text(dialogMessage)
+                    }
+                },
+                confirmButton = {
+                    Button(onClick = { showDialog = false }) {
+                        Text("OK")
+                    }
+                }
+            )
+        }
     }
 }

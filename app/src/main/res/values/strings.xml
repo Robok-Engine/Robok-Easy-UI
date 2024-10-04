@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Robok GUI Lang Demo</string>
     <string name="create_basic_gui">Create Basic GUI</string>
+    <string name="finish_method">Finish Method</string>
+    <string name="error_ocurred">An errod ocurred</string>
 </resources>
