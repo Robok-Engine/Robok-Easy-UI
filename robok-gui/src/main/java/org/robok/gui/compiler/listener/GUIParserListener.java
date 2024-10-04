@@ -2,7 +2,6 @@ package org.robok.gui.compiler.listener;
 
 import java.lang.reflect.Method;
 
-
 import static org.robok.antlr4.gui.GUIParser.GuiFileContext;
 import static org.robok.antlr4.gui.GUIParser.ComponentContext;
 import static org.robok.antlr4.gui.GUIParser.ArgumentContext;
