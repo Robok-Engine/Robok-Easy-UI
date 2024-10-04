@@ -76,7 +76,7 @@ class GUIBuilder (
     fun closeBlock(){
         var tags = closingTagLayoutList.get((closingTagLayoutList.size -1)).split(":")
         
-        if(tags > 0){
+        if(tags.length > 0){
             var closingTagGui = tags[0]
             var closingTagXml = tags[1]
             
