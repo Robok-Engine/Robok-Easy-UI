@@ -24,7 +24,8 @@ class GUIBuilder (
         
     fun rootView() {
         if (debugLogs) stringBuilder.newLineLn("<!-- opening Root Layout -->")
-        stringBuilder.newLineLn("<LinearLayout\n${DefaultValues.XMLNS}")
+        stringBuilder.newLineLn("<LinearLayout")
+        stringBuilder.newLineLn("${DefaultValues.XMLNS}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         stringBuilder.newLineLn(">")
