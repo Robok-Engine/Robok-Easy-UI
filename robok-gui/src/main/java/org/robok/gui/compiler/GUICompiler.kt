@@ -12,13 +12,10 @@ import org.robok.gui.compiler.listener.GUIParserListener
 
 class GUICompiler {
 
-    var code : String = """Column {
-                    Button(text = "Click here", id = "a")
-                    Text(text = "Thanks love", id = "b")
-                   
-                }"""
-
- constructor(guiBuilder: GUIBuilder) {
+ constructor(
+    guiBuilder: GUIBuilder,
+    code: String
+ ) {
     val th = Thread {
         try {
             val input = CharStreams.fromString(code)

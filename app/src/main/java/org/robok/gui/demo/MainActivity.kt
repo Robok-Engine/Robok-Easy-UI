@@ -21,6 +21,7 @@ import org.robok.gui.demo.ui.theme.RobokTheme
 import org.robok.gui.GUIBuilder
 import org.robok.gui.compiler.GUICompiler
 
+@OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +44,11 @@ class MainActivity : ComponentActivity() {
         var showDialog by remember { mutableStateOf(false) }
         var dialogMessage by remember { mutableStateOf("") }
         var isError by remember { mutableStateOf(false) }
-        
+        var code by remember { mutableStateOf("""Column {
+                    Button(text = "Click here", id = "a")
+                    Text(text = "Thanks love", id = "b")
+                   
+                }""") }
         var isDebugLogs by remember { mutableStateOf(false) }  
         
         // screen cintent
@@ -54,6 +59,13 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            OutlinedTextField(
+                value = code,
+                onValueChange = {
+                      code = it
+                },
+                label = { Text(text = stringResource(R.string.code)) }
+            )
             Button(
                 onClick = {
                     val guiBuilder = GUIBuilder(
@@ -65,7 +77,10 @@ class MainActivity : ComponentActivity() {
                             showDialog = true
                         }
                     )
-                    val guiCompiler = GUICompiler(guiBuilder)
+                    val guiCompiler = GUICompiler(
+                        guiBuilder = guiBuilder,
+                        code = code
+                    )
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
