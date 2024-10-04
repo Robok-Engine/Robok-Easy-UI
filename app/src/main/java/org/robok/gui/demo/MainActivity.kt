@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.TextView
+import org.robok.gui.compiler.*
 
 import org.robok.gui.demo.databinding.ActivityMainBinding
 
@@ -22,10 +23,11 @@ class MainActivity : Activity() {
         setContentView(binding.root)
 
         binding.createCode.setOnClickListener {
-            val basicGuiXML = gui {
+            /*val basicGuiXML = gui {
                 Column {
                     Button(text = "Click here", id = "a")
                     Text(text = "Thanks love", id = "b")
+                   
                 }
             }
             binding.xmlCode.text = basicGuiXML
@@ -35,7 +37,9 @@ class MainActivity : Activity() {
                 
             } catch (e: Exception) {
                 showDialog(e.toString())
-            }
+            }*/
+            var guiBuilder = GUIBuilder(this)
+            val guiCompiler = GUICompiler(guiBuilder)
         }
     }
 
