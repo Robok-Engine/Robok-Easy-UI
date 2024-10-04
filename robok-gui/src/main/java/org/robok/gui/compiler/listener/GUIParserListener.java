@@ -14,7 +14,7 @@ public class GUIParserListener extends GUIBaseListener {
         this.guiBuilder = guiBuilder;
     }
     
-    private void startt(String s) {
+    private void runMethodt(String s) {
         try {
             Class<?> clazz = guiBuilder.getClass();
             Method method = clazz.getDeclaredMethod(s);
@@ -52,10 +52,10 @@ public class GUIParserListener extends GUIBaseListener {
     public void enterComponent(GUIParser.ComponentContext ctx) {
         String componentName = ctx.IDENTIFIER().getText();
         if (ctx.getText().contains("{")) {
-            guiBuilder.start(componentName);
+            guiBuilder.runMethod(componentName);
             // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para layouts ao abrir {
         } else {
-            guiBuilder.start(componentName);
+            guiBuilder.runMethod(componentName);
             // runMethodWithParams("addComponent", componentName);  // Para componentes normais como Button
         }
     }
@@ -65,7 +65,7 @@ public class GUIParserListener extends GUIBaseListener {
     public void exitComponent(GUIParser.ComponentContext ctx) {
         if (ctx.getText().contains("}")) {
             String componentName = ctx.IDENTIFIER().getText();
-            guiBuilder.start("closeBlock");
+            guiBuilder.runMethod("closeBlock");
             // runMethodWithParams("exitLayout", componentName);  // Chama o método específico para layouts ao fechar }
         }
     }
@@ -74,7 +74,7 @@ public class GUIParserListener extends GUIBaseListener {
     @Override
     public void enterArgumentList(GUIParser.ArgumentListContext ctx) {
         String componentName = ctx.getParent().getChild(0).getText();
-       // runMethodWithParams("startArguments", componentName);
+       // runMethodWithParams("runMethodArguments", componentName);
     }
 
     // Ao processar cada argumento
