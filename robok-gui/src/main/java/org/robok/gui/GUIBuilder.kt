@@ -57,7 +57,7 @@ class GUIBuilder (
         /*
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
-        */,
+        */
         stringBuilder.newLineLn("/>")
     }
     
