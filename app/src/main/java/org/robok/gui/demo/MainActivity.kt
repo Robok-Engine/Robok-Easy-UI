@@ -38,19 +38,30 @@ class MainActivity : Activity() {
             } catch (e: Exception) {
                 showDialog(e.toString())
             }*/
-            var guiBuilder = GUIBuilder(this)
-            val guiCompiler = GUICompiler(guiBuilder)
+            var guiBuilder = GUIBuilder(
+                    context = this,
+                    whenFinish = { str ->
+                        runOnUiThread {
+                                alertDialog(
+                                        title = "Finish Method",
+                                        message = str
+                                )
+                       }
+                  }
+          )
+          val guiCompiler = GUICompiler(guiBuilder)
         }
     }
-
-    private fun showDialog(s: String) {
+    
+    
+    private fun alertDialog(title: String, message: String) {
         val messageTextView = TextView(this)
-        messageTextView.text = s
+        messageTextView.text = message
         messageTextView.textSize = 16f
         messageTextView.setPadding(32, 32, 32, 32)
         messageTextView.setTextIsSelectable(true)
         AlertDialog.Builder(this)
-            .setTitle("Error")
+            .setTitle(title)
             .setView(messageTextView)
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()

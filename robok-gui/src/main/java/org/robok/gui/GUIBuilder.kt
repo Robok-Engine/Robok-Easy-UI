@@ -5,7 +5,10 @@ import android.widget.TextView
 import android.app.AlertDialog
 import java.util.*
 
-class GUIBuilder (private val context: Context) {
+class GUIBuilder (
+    private val context: Context,
+    private val whenFinish: (String) -> Unit
+) {
     private val stringBuilder = StringBuilder()
     private var indentLevel = 0
     private val indent: String
@@ -68,21 +71,13 @@ class GUIBuilder (private val context: Context) {
     }
     
     fun finish(){
-        val messageTextView = TextView(context)
-        messageTextView.text = stringBuilder.toString()
-        messageTextView.textSize = 16f
-        messageTextView.setPadding(32, 32, 32, 32)
-        messageTextView.setTextIsSelectable(true)
-        AlertDialog.Builder(context)
-            .setTitle("Error")
-            .setView(messageTextView)
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
+        whenFinish(stringBuilder.toString())
+    }
+    
+    fun returnError(i: String){
+       whenFinish(i)
     }
 }
-
 /*fun gui(block: GUIBuilder.() -> Unit): String {
     val builder = GUIBuilder()
     builder.rootView(block)

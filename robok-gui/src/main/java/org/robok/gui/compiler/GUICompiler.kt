@@ -35,7 +35,7 @@ class GUICompiler {
                 val compiler = GUIParserListener(gui)
                 walker.walk(compiler, compilationUnitContext)
             } catch (e: Exception) {
-                Log.e("TAG", "Error reading file", e)
+                gui.returnError(e.toString())
             }
         }
         th.priority = Thread.MIN_PRIORITY
