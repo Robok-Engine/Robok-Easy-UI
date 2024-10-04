@@ -30,7 +30,7 @@ class MainActivity : Activity() {
                    runOnUiThread {
                      alertDialog(
                         title = if (!isError) "Finish Method" else "Un error ocurred",
-                        message = str
+                        message = value
                      )
                    }
                 }
