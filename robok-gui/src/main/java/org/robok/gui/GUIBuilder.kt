@@ -76,12 +76,16 @@ class GUIBuilder (
     fun closeBlock(){
         var tags = closingTagLayoutList.get((closingTagLayoutList.size -1)).split(":")
         
-        var closingTagGui = tags[0]
-        var closingTagXml = tags[1]
-        indentLevel--
-        if (debugLogs) stringBuilder.newLineLn("<!-- closing $closingTagGui Layout -->")
-        stringBuilder.newLineLn("${indent}" + closingTagXml)
-        closingTagLayoutList.removeAt(closingTagLayoutList.size)
+        if(tags > 0){
+            var closingTagGui = tags[0]
+            var closingTagXml = tags[1]
+            
+            indentLevel--
+            if (debugLogs) stringBuilder.newLineLn("<!-- closing $closingTagGui Layout -->")
+            stringBuilder.newLineLn("${indent}" + closingTagXml)
+            closingTagLayoutList.removeAt((closingTagLayoutList.size - 1))
+        
+        }
     }
     
     fun runMethod(methodName: String) {
