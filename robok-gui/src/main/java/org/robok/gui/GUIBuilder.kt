@@ -82,7 +82,6 @@ class GUIBuilder (
     }
     
     fun runMethod(methodName: String) {
-        if (debugLogs) stringBuilder.append("\nCode called on runMethod " + methodName) 
         try {
             // using reflection to call method by name
             val method = this::class.java.getDeclaredMethod(methodName)
