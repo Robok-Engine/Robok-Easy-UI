@@ -77,6 +77,7 @@ class GUIBuilder (
         var closingTagGui = tags[0]
         var closingTagXml = tags[1]
         indentLevel--
+        if (debugLogs) stringBuilder.newLineLn("<!-- closing $closingTagGui Layout -->")
         stringBuilder.newLineLn("${indent}" + closingTagXml)
         closingTagLayoutList.removeAt(closingTagLayoutList.size)
     }
