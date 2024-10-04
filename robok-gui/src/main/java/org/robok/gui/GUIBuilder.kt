@@ -33,7 +33,7 @@ class GUIBuilder (
         if (debugLogs) stringBuilder.newLineLn("<!-- opening Column Layout -->")
         stringBuilder.newLineLn("${indent}<LinearLayout")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         // stringBuilder.newLine("${indent}${addId(id)}") 
         stringBuilder.newLineLn(">")
         indentLevel++
@@ -46,7 +46,7 @@ class GUIBuilder (
         if (debugLogs) stringBuilder.newLineLn("<!-- Text Component -->")
         stringBuilder.newLineLn("${indent}<TextView")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         /*
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
@@ -59,7 +59,7 @@ class GUIBuilder (
         if (debugLogs) stringBuilder.newLineLn("<!-- Button  Component -->")
         stringBuilder.newLineLn("${indent}<Button")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         /*
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
