@@ -14,17 +14,19 @@ class GUIBuilder (
     private val indent: String
         get() = "\t".repeat(indentLevel)
     val codes: MutableList<String> = mutableListOf()
+    
+    
+    init {
+        rootView()
+    }
         
-    /* NOTE: not used now(why?) */
-    fun rootView(block: GUIBuilder.() -> Unit) {
+    fun rootView() {
+        stringBuilder.newLineLn("<!-- opening root layout -->")
         stringBuilder.newLineLn("<LinearLayout\n${DefaultValues.XMLNS}")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
         stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         stringBuilder.newLineLn(">")
         indentLevel++
-        this.block()
-        indentLevel--
-        stringBuilder.newLineLn("</LinearLayout>")
     }
 
     fun Column(/*id: String = DefaultValues.NO_ID*/) {
@@ -91,6 +93,10 @@ class GUIBuilder (
     }
     
     fun finish(){
+    
+        indentLevel--
+        stringBuilder.newLineLn("<!-- closing root layout -->")
+        stringBuilder.newLineLn("</LinearLayout>")
         stringBuilder.append("\nEnd.")
         onFinish(stringBuilder.toString(), false)
     }
