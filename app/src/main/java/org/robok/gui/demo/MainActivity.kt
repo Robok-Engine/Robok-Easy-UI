@@ -111,7 +111,7 @@ class MainActivity : ComponentActivity() {
             }
             Row(
                  modifier = Modifier
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(20.dp))
                     .clickable { isDebugLogs = !isDebugLogs }
                     .padding(vertical =  7.dp, horizontal = 10.dp),
                  verticalAlignment = Alignment.CenterVertically,
