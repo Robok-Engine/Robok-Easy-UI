@@ -61,8 +61,10 @@ public class GUIParserListener extends GUIBaseListener {
     public void exitComponent(ComponentContext ctx) {
         if (ctx.getText().contains("}")) {
             String componentName = ctx.IDENTIFIER().getText();
-            guiBuilder.runMethod("closeBlock");
+            
             // runMethodWithParams("exitLayout", componentName);  // Chama o método específico para layouts ao fechar }
+        }else{
+            guiBuilder.runMethod("closeBlock");
         }
     }
 
