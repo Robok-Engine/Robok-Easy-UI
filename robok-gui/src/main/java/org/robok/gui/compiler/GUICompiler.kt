@@ -29,6 +29,11 @@ import org.robok.antlr4.gui.GUIParser
 import org.robok.gui.GUIBuilder
 import org.robok.gui.compiler.listener.GUIParserListener
 
+/*
+* Class that uses ANTLR4 to compile the Code and use { @link GUIParserListener }.
+* @author Thiarley Rocha (ThDev-only).
+*/
+
 class GUICompiler(
     guiBuilder: GUIBuilder,
     code: String

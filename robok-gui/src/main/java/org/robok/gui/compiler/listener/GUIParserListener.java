@@ -27,6 +27,11 @@ import org.robok.antlr4.gui.GUIBaseListener;
 
 import java.lang.reflect.Method;
 
+/*
+* Class that identifies the code and uses the { @link GUIBuilder } to generate de the.
+* @author Thiarley Rocha (ThDev-only).
+*/
+
 public class GUIParserListener extends GUIBaseListener {
 
     private GUIBuilder guiBuilder;

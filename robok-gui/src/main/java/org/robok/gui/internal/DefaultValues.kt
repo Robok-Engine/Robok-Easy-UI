@@ -1,4 +1,4 @@
-package org.robok.gui
+package org.robok.gui.internal
 
 /*
  *  This file is part of Robok © 2024.
@@ -22,7 +22,7 @@ package org.robok.gui
 * @author Aquiles Trindade (trindadedev).
 */
 
-object DefaultValues {
+internal object DefaultValues {
     private const val XMLNS_ANDROID = "\txmlns:android=\"http://schemas.android.com/apk/res/android\""
     private const val XMLNS_APP = "\txmlns:app=\"http://schemas.android.com/apk/res-auto\""
     private const val XMLNS_TOOLS = "\txmlns:tools=\"http://schemas.android.com/tools\""

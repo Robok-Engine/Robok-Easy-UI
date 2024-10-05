@@ -19,8 +19,14 @@ package org.robok.gui
 
 import android.content.Context
 
-import java.lang.reflect.InvocationTargetException
+import org.robok.gui.internal.DefaultValues
 import org.robok.gui.converter.ConvertAtributeToXML
+
+import java.lang.reflect.InvocationTargetException
+
+/*
+* Class that generates XML from the received data.
+*/
 
 class GUIBuilder (
     private val context: Context,
@@ -65,9 +71,9 @@ class GUIBuilder (
     fun Text(/*id: String = DefaultValues.NO_ID, text: String*/) {
         if (debugLogs) stringBuilder.newLineLn("<!-- Text Component -->")
         stringBuilder.newLineLn("${indent}<TextView")
-       // stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-      //  stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         /*
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
         */
@@ -78,9 +84,9 @@ class GUIBuilder (
     fun Button(/*id: String = DefaultValues.NO_ID, text: String*/) {
         if (debugLogs) stringBuilder.newLineLn("<!-- Button  Component -->")
         stringBuilder.newLineLn("${indent}<Button")
-      //  stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-      //  stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         /*
+        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
         */
