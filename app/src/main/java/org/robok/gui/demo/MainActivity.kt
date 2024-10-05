@@ -145,7 +145,6 @@ class MainActivity : ComponentActivity() {
                         HighlightingEditor(
                             value = dialogMessage,
                             onValueChange = {  },
-                            focusable = false,
                             syntaxType = SyntaxType.XML
                         )
                     }
