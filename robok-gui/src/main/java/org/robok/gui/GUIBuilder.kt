@@ -71,7 +71,7 @@ class GUIBuilder (
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
         */
-        stringBuilder.newLineLn("/>")
+        closingTagLayoutList.add("Text:/>")
     }
     
     // TO-DO: re-add params
@@ -84,7 +84,7 @@ class GUIBuilder (
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
         */
-        stringBuilder.newLineLn("/>")
+        closingTagLayoutList.add("Button:/>")
     }
     
     fun newLine(log: String){

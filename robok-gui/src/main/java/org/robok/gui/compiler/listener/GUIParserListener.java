@@ -51,6 +51,7 @@ public class GUIParserListener extends GUIBaseListener {
             guiBuilder.runMethod(componentName);
             // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para layouts ao abrir {
         } else {
+            guiBuilder.runMethod(componentName);
             this.componentName = componentName;
         }
     }
