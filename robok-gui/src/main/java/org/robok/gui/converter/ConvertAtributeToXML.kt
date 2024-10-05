@@ -44,7 +44,7 @@ class ConvertAtributeToXML {
        )
     }
     
-    fun convert(attr, String): String? {
+    fun convert(attr: String): String? {
         return atributesMap?.get(attr)
     }
     
