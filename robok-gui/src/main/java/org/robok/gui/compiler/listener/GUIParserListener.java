@@ -75,21 +75,27 @@ public class GUIParserListener extends GUIBaseListener {
        // runMethodWithParams("runMethodArguments", componentName);
     }
 
-    // Ao processar cada argumento
     @Override
     public void enterArgument(ArgumentContext ctx) {
-        String key = ctx.IDENTIFIER_COLON().getText();
-        String value = ctx.STRING().getText();
-        
-        guiBuilder.newLine("\n" + "key: " + key + "\nvalue: " + value + "\n");
-        
-        if(value.startsWith("\"") && value.endsWith("\"")){
-            value = value.substring(1, value.length() - 1);
-        }
-        if(value.contains("\\\"")) {
-            value = value.replaceAll("\\\"", "&quot;");
-        }
-        
-        guiBuilder.runMethodWithParameters("addAtributesForComponent", componentName, key, value);
+    String key;
+
+    if (ctx.IDENTIFIER() != null) {
+        key = ctx.IDENTIFIER().getText();
+    } else {
+        key = ctx.IDENTIFIER_COLON().getText();
     }
+
+    String value = ctx.STRING().getText();
+
+    guiBuilder.newLine("\n\n" + "key: " + key + "\nvalue: " + value + "\n\n");
+    
+    if (value.startsWith("\"") && value.endsWith("\"")) {
+        value = value.substring(1, value.length() - 1);
+    }
+    if (value.contains("\\\"")) {
+        value = value.replaceAll("\\\"", "&quot;");
+    }
+
+    guiBuilder.runMethodWithParameters("addAtributesForComponent", componentName, key, value);
+}
 }

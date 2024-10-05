@@ -1,6 +1,5 @@
 // Generated from GUI.g4 by ANTLR 4.13.2
 package org.robok.antlr4.gui;
-
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
