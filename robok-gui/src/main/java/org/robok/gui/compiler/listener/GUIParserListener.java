@@ -81,7 +81,7 @@ public class GUIParserListener extends GUIBaseListener {
         String key = ctx.IDENTIFIER().getText();
         String value = ctx.value_atribute().STRING().getText();
         
-        guiBuilder.newLine("\n" + "key: " + key + "\nvalue: " + value + "\n")
+        guiBuilder.newLine("\n" + "key: " + key + "\nvalue: " + value + "\n");
         
         if(value.startsWith("\"") && value.endsWith("\"")){
             value = value.substring(1, value.length() - 1);
