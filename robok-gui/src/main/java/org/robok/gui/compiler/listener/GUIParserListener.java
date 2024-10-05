@@ -78,8 +78,8 @@ public class GUIParserListener extends GUIBaseListener {
     // Ao processar cada argumento
     @Override
     public void enterArgument(ArgumentContext ctx) {
-        String key = ctx.IDENTIFIER().getText();
-        String value = ctx.value_atribute().STRING().getText();
+        String key = ctx.IDENTIFIER_COLON().getText();
+        String value = ctx.STRING().getText();
         
         guiBuilder.newLine("\n" + "key: " + key + "\nvalue: " + value + "\n");
         

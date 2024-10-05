@@ -48,14 +48,4 @@ public interface GUIListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArgument(GUIParser.ArgumentContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GUIParser#value_atribute}.
-	 * @param ctx the parse tree
-	 */
-	void enterValue_atribute(GUIParser.Value_atributeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GUIParser#value_atribute}.
-	 * @param ctx the parse tree
-	 */
-	void exitValue_atribute(GUIParser.Value_atributeContext ctx);
 }

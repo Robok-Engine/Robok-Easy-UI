@@ -3,28 +3,19 @@ grammar GUI;
 guiFile: component* EOF;
 
 component
-    : IDENTIFIER '{' (component | argumentList)* '}'  // Layouts like Column, Row...
-    | IDENTIFIER '(' argumentList ')'                 // Components like Button, Text
+    : IDENTIFIER '{' (component | argumentList)* '}'  // Layouts como Column
+    | IDENTIFIER '(' argumentList ')'                 // Componentes como Button, Text
     ;
 
 argumentList
-    : argument (',' argument)*  // A list of arguments
+    : argument (',' argument)*  // Uma lista de argumentos
     ;
 
 argument
-    : IDENTIFIER '=' value_atribute  // Uses an identifier and a value
+    : IDENTIFIER_COLON '=' STRING  // Um argumento é uma chave-valor
     ;
 
-value_atribute
-    : STRING               // A string value
-    | VALUE                // An identifier value (without colons)
-    ;
-
-VALUE
-    : [a-zA-Z_][a-zA-Z_0-9]*;  // Identifiers without colons
-
-IDENTIFIER
-    : [a-zA-Z_][a-zA-Z_0-9:]*;  // Identifiers with letters, numbers, underscores, and colons
-
-STRING: '"' (~["\\] | '\\' .)* '"';  // A string value
-WS: [ \t\r\n]+ -> skip;  // Whitespace is skipped
+IDENTIFIER: [a-zA-Z_][a-zA-Z_0-9]*;  // Um identificador para componentes e nomes de parâmetros
+IDENTIFIER_COLON: [a-zA-Z_][a-zA-Z_0-9:]*;  // Um identificador para componentes e nomes de parâmetros que pode ter dois pontos
+STRING: '"' (~["\\] | '\\' .)* '"';  // Um valor de string
+WS: [ \t\r\n]+ -> skip;  // Espaços em branco são ignorados

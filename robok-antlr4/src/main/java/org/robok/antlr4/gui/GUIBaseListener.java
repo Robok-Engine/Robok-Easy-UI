@@ -60,18 +60,6 @@ public class GUIBaseListener implements GUIListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArgument(GUIParser.ArgumentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterValue_atribute(GUIParser.Value_atributeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitValue_atribute(GUIParser.Value_atributeContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -18,7 +18,7 @@ public class GUILexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, VALUE=7, IDENTIFIER=8, 
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, IDENTIFIER=7, IDENTIFIER_COLON=8, 
 		STRING=9, WS=10;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
@@ -30,7 +30,7 @@ public class GUILexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "VALUE", "IDENTIFIER", 
+			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "IDENTIFIER", "IDENTIFIER_COLON", 
 			"STRING", "WS"
 		};
 	}
@@ -44,8 +44,8 @@ public class GUILexer extends Lexer {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, "VALUE", "IDENTIFIER", "STRING", 
-			"WS"
+			null, null, null, null, null, null, null, "IDENTIFIER", "IDENTIFIER_COLON", 
+			"STRING", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
