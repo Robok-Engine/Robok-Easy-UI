@@ -79,7 +79,7 @@ public class GUIParserListener extends GUIBaseListener {
     @Override
     public void enterArgument(ArgumentContext ctx) {
         String key = ctx.IDENTIFIER().getText();
-        String value = ctx.STRING().getText();
+        String value = ctx.value_atribute().STRING().getText();
         
         if(value.startsWith("\"") && value.endsWith("\"")){
             value = value.substring(1, value.length() - 1);
