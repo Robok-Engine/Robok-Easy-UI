@@ -64,13 +64,8 @@ public class GUIParserListener extends GUIBaseListener {
     // Detecta o fechamento de um layout (ex: })
     @Override
     public void exitComponent(ComponentContext ctx) {
-        if (ctx.getText().contains("}")) {
-            String componentName = ctx.IDENTIFIER().getText();
-            
-            // runMethodWithParams("exitLayout", componentName);  // Chama o método específico para layouts ao fechar }
-        }else{
-            guiBuilder.runMethod("closeBlock");
-        }
+        
+        guiBuilder.runMethod("closeBlock");
     }
 
     // Ao entrar em uma lista de argumentos (ex: Button(text = "Click here"))
