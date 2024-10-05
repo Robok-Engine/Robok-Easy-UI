@@ -82,7 +82,7 @@ public class GUIParserListener extends GUIBaseListener {
         String value = ctx.STRING().getText();
         
         if(value.contains("\"")) {
-            value = value.replaceAll("\"", "\\\"");
+            value = value.replaceAll("\"", "&quot;");
         }
         
         guiBuilder.runMethodWithParameters("addAtributesForComponent", componentName, key, value);
