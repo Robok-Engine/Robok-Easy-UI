@@ -65,6 +65,9 @@ public class GUIParserListener extends GUIBaseListener {
     @Override
     public void exitComponent(ComponentContext ctx) {
         
+        if(ctx.getText().endsWith("}")){
+            guiBuilder.newLine("Layout is closing");
+        }
         guiBuilder.runMethod("closeBlock");
     }
 
