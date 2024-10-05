@@ -65,4 +65,6 @@ dependencies{
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.activity:activity-compose:1.5.1")
     
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.13.0-alpha06")
 }
