@@ -96,7 +96,7 @@ class GUIBuilder (
     }
     
     fun newLine(log: String){
-        stringBuilder.append(log)
+        if(debugLogs) stringBuilder.append(log)
     }
     
     fun closeBlock() {
