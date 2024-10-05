@@ -77,6 +77,7 @@ class GUIBuilder (
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
         */
+        indentLevel++
         closingTagLayoutList.add("Text:/>")
     }
     
@@ -90,6 +91,7 @@ class GUIBuilder (
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
         */
+        indentLevel++
         closingTagLayoutList.add("Button:/>")
     }
     
