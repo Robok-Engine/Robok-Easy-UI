@@ -110,7 +110,8 @@ class GUIBuilder (
                 if (debugLogs) stringBuilder.newLineLn("<!-- closing $closingTagGui Layout -->")
                 
                 stringBuilder.newLineLn("${indent}$closingTagXml")
-                closingTagLayoutList.removeAt(closingTagLayoutList.lastIndex - 1)
+                if (debugLogs) stringBuilder.newLineLn("<!-- removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1)))
+                closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
             } else {
                 stringBuilder.newLineLn("Erro: Formato inválido de tag de fechamento.")
             }
