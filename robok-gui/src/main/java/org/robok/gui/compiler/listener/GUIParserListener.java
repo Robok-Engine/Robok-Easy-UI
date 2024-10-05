@@ -30,35 +30,10 @@ import java.lang.reflect.Method;
 public class GUIParserListener extends GUIBaseListener {
 
     private GUIBuilder guiBuilder;
+    private String componentName;
 
     public GUIParserListener(GUIBuilder guiBuilder) {
         this.guiBuilder = guiBuilder;
-    }
-    
-    private void runMethod(String s) {
-        try {
-            Class<?> clazz = guiBuilder.getClass();
-            Method method = clazz.getDeclaredMethod(s);
-            method.invoke(guiBuilder);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void runMethodWithParams(String methodName, Object... params) {
-        try {
-            Class<?> clazz = guiBuilder.getClass();
-            // Get parameter types
-            Class<?>[] paramTypes = new Class[params.length];
-            for (int i = 0; i < params.length; i++) {
-                paramTypes[i] = params[i].getClass();
-            }
-            Method method = clazz.getDeclaredMethod(methodName, paramTypes); // Find the method with the correct name and parameters
-            method.invoke(guiBuilder, params); // Invoke the method with the given parameters
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     
     @Override
@@ -76,8 +51,7 @@ public class GUIParserListener extends GUIBaseListener {
             guiBuilder.runMethod(componentName);
             // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para layouts ao abrir {
         } else {
-            guiBuilder.runMethod(componentName);
-            // runMethodWithParams("addComponent", componentName);  // Para componentes normais como Button
+            this.componentName = componentName;
         }
     }
 
@@ -103,6 +77,7 @@ public class GUIParserListener extends GUIBaseListener {
     public void enterArgument(ArgumentContext ctx) {
         String key = ctx.IDENTIFIER().getText();
         String value = ctx.STRING().getText();
-        // runMethodWithParams("addArgument", key, value);
+        
+        guiBuilder.runMethodWithParameters("addAtributesForComponent", componentName, key, value);
     }
 }

@@ -20,6 +20,7 @@ package org.robok.gui
 import android.content.Context
 
 import java.lang.reflect.InvocationTargetException
+import org.robok.gui.converter.ConvertAtributeToXML
 
 class GUIBuilder (
     private val context: Context,
@@ -31,10 +32,11 @@ class GUIBuilder (
     private val indent: String
         get() = "\t".repeat(indentLevel)
     val closingTagLayoutList: MutableList<String> = mutableListOf()
-    
+    var convertAtribute: ConvertAtributeToXML? = null
     
     init {
         rootView()
+        convertAtribute = ConvertAtributeToXML()
     }
         
     fun rootView() {
@@ -60,7 +62,7 @@ class GUIBuilder (
     }
     
     // TO-DO: re-add params
-    fun Text(/*id: String = DefaultValues.NO_ID, text: String*/) {
+    fun Text(id: String = DefaultValues.NO_ID, text: String) {
         if (debugLogs) stringBuilder.newLineLn("<!-- Text Component -->")
         stringBuilder.newLineLn("${indent}<TextView")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
@@ -73,7 +75,7 @@ class GUIBuilder (
     }
     
     // TO-DO: re-add params
-    fun Button(/*id: String = DefaultValues.NO_ID, text: String*/) {
+    fun Button(id: String = DefaultValues.NO_ID, text: String) {
         if (debugLogs) stringBuilder.newLineLn("<!-- Button  Component -->")
         stringBuilder.newLineLn("${indent}<Button")
         stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
@@ -126,7 +128,38 @@ class GUIBuilder (
             e.printStackTrace() // display the exception stack if there is an error
         }
     }
+    
+    fun runMethodWithParameters(methodName: String, vararg args: Any?) {
+    try {
+        // Recupera os tipos dos parâmetros para encontrar o método correto
+        val parameterTypes = args.map { it?.javaClass }.toTypedArray()
 
+        // Obtém o método com base no nome e nos tipos dos parâmetros
+        val method = this::class.java.getDeclaredMethod(methodName, *parameterTypes)
+
+        // Invoca o método, passando os argumentos fornecidos
+        method.invoke(this, *args)
+    } catch (e: NoSuchMethodException) {
+        stringBuilder.append("\nMétodo não encontrado: $methodName\n")
+        e.printStackTrace()
+    } catch (e: InvocationTargetException) {
+        val originalException = e.cause
+        stringBuilder.append("\nErro ao executar o método: ${originalException?.message}\n")
+        e.printStackTrace()
+    } catch (e: IllegalAccessException) {
+        stringBuilder.append("\nAcesso ao método não permitido: $methodName\n")
+        e.printStackTrace()
+    }
+    }  
+      
+    fun addAtributesForComponent(methodName: String, key: String, value: String){
+        
+        val atributeConverted = convertAtribute?.convert(key)
+        
+        stringBuilder.newLineLn(atributeConverted + "=" + "\"$value\"")
+        
+    }
+    
     private fun addId(id: String): String = if (id != DefaultValues.NO_ID) "\tandroid:id=\"@+id/$id\"" else ""
 
     fun buildXML(): String {
@@ -145,11 +178,4 @@ class GUIBuilder (
        onFinish(error, true)
     }
 }
- 
-/* maybe it will be used in the future
-fun gui(block: GUIBuilder.() -> Unit): String {
-    val builder = GUIBuilder()
-    builder.rootView(block)
-    return builder.build()
-}
-*/
+
