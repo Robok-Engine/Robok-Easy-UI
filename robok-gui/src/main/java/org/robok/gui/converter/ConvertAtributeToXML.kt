@@ -6,6 +6,7 @@ public class ConvertAtributeToXML {
     
     init{
        atributesMap = mapOf(
+        "id" to "android:id",
         "width" to "android:layout_width",
         "height" to "android:layout_height",
         "text" to "android:text",

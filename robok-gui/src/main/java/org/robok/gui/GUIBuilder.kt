@@ -65,8 +65,8 @@ class GUIBuilder (
     fun Text(/*id: String = DefaultValues.NO_ID, text: String*/) {
         if (debugLogs) stringBuilder.newLineLn("<!-- Text Component -->")
         stringBuilder.newLineLn("${indent}<TextView")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
+       // stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+      //  stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         /*
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
@@ -78,8 +78,8 @@ class GUIBuilder (
     fun Button(/*id: String = DefaultValues.NO_ID, text: String*/) {
         if (debugLogs) stringBuilder.newLineLn("<!-- Button  Component -->")
         stringBuilder.newLineLn("${indent}<Button")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
+      //  stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+      //  stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
         /*
         stringBuilder.newLineLn("${indent}${addId(id)}")
         stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
