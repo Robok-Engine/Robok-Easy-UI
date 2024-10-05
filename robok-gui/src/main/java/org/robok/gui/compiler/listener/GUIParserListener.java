@@ -84,8 +84,8 @@ public class GUIParserListener extends GUIBaseListener {
         if(value.startsWith("\"") && value.endsWith("\"")){
             value = value.substring(1, value.length() - 1);
         }
-        if(value.contains("\"")) {
-            value = value.replaceAll("\"", "&quot;");
+        if(value.contains("\\\"")) {
+            value = value.replaceAll("\\\"", "&quot;");
         }
         
         guiBuilder.runMethodWithParameters("addAtributesForComponent", componentName, key, value);

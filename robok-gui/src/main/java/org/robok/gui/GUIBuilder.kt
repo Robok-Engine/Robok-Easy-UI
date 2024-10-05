@@ -154,6 +154,7 @@ class GUIBuilder (
       
     fun addAtributesForComponent(methodName: String, key: String, value: String){
         
+        if (debugLogs) stringBuilder.newLineLn("<!-- converting $key -->")
         val atributeConverted = convertAtribute?.convert(key)
         
         stringBuilder.newLineLn(atributeConverted + "=" + "\"$value\"")
