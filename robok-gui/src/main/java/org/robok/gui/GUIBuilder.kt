@@ -148,6 +148,7 @@ class GUIBuilder (
       
     fun addAttribute(methodName: String, key: String, value: String){
          var containsCloseTag = false
+         var containsSingleCloseTag = false
          var attribute = ""
          
          if(xmlCodeList.get((xmlCodeList.size -1)).contains("/>")){
@@ -158,6 +159,11 @@ class GUIBuilder (
              indentLevel++
          }
          
+         if(xmlCodeList.get((xmlCodeList.size -1)).contains(">")){
+            containsSingleCloseTag = true
+            xmlCodeList.removeAt(xmlCodeList.size - 1)
+         }
+         
          indentLevel++
          val attributeConverted = attributeConverter?.convert(key)
          xmlCodeList.newLineBroken(indent + attributeConverted + "=" + "\"$value\"")
@@ -166,6 +172,10 @@ class GUIBuilder (
          if(containsCloseTag){
              closingTagLayoutList.newLine("$methodName:/>")
              closeBlock()
+         }
+         
+         if(containsSingleTag){
+            xmlCodeList.newLineBroken(">")
          }
     }
     
