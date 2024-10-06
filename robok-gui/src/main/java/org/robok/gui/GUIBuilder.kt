@@ -69,7 +69,7 @@ class GUIBuilder (
          xmlCodeList.newLineBroken("${indent}${DefaultValues.LAYOUT_HEIGHT}")
          xmlCodeList.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
          */
-         closingTagLayoutList.newLine(">")
+         closingTagLayoutList.newLine("Atr:>")
          indentLevel++
          closingTagLayoutList.newLine("Column:</LinearLayout>")
     }
