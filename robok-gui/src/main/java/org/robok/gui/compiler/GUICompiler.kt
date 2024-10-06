@@ -51,12 +51,11 @@ class GUICompiler(
 
                 val compilationUnitContext = parser.guiFile()
 
-                // Create and add custom listener
                 val compiler = GUIParserListener(guiBuilder)
                 val walker = ParseTreeWalker.DEFAULT
                 walker.walk(compiler, compilationUnitContext)
             } catch (e: Exception) {
-                guiBuilder.returnError(e.toString())
+                guiBuilder.onError(e)
             }
         }
         th.priority = Thread.MIN_PRIORITY

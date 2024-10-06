@@ -17,7 +17,7 @@ package org.robok.gui.converter
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */ 
 
-class ConvertAtributeToXML {
+class AttributeConverter {
 
     var atributesMap: Map<String, String>? = null
     

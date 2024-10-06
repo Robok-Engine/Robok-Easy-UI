@@ -30,5 +30,5 @@ internal object DefaultValues {
     const val LAYOUT_HEIGHT = "\tandroid:layout_height=\"wrap_content\""
     const val LAYOUT_WIDTH= "\tandroid:layout_width=\"match_parent\""
     
-    fun XMLNS(indent: String): String = XMLNS = "${indent}${XMLNS_ANDROID}\n${indent}${XMLNS_APP}\n${indent}${XMLNS_TOOLS}"
+    fun XMLNS(indent: String): String = "${indent}${XMLNS_ANDROID}\n${indent}${XMLNS_APP}\n${indent}${XMLNS_TOOLS}"
 }

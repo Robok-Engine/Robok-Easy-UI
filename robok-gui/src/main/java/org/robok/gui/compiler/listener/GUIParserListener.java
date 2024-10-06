@@ -34,73 +34,63 @@ import java.lang.reflect.Method;
 
 public class GUIParserListener extends GUIBaseListener {
 
-    private GUIBuilder guiBuilder;
-    private String componentName;
+     private GUIBuilder guiBuilder;
+     private String componentName;
 
-    public GUIParserListener(GUIBuilder guiBuilder) {
-        this.guiBuilder = guiBuilder;
-    }
+     public GUIParserListener(GUIBuilder guiBuilder) {
+          this.guiBuilder = guiBuilder;
+     }
     
-    @Override
-    public void exitGuiFile(GuiFileContext ctx) {
-        guiBuilder.finish();
-        super.exitGuiFile(ctx);
-        // TODO: Implement this method
-    }
+     @Override
+     public void exitGuiFile(GuiFileContext ctx) {
+          guiBuilder.finish();
+          super.exitGuiFile(ctx);
+     }
     
-    // Detecta o início de um layout (ex: Column {)
-    @Override
-    public void enterComponent(ComponentContext ctx) {
-        String componentName = ctx.IDENTIFIER().getText();
-        if (ctx.getText().contains("{")) {
-            guiBuilder.runMethod(componentName);
-            // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para layouts ao abrir {
-        } else {
-            guiBuilder.runMethod(componentName);
-            this.componentName = componentName;
-        }
-    }
+     // Detecta o início de um layout (ex: Column {)
+     @Override
+     public void enterComponent(ComponentContext ctx) {
+          String componentName = ctx.IDENTIFIER().getText();
+          if (ctx.getText().contains("{")) {
+              guiBuilder.runMethod(componentName);
+              // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para layouts ao abrir {
+          } else {
+              guiBuilder.runMethod(componentName);
+              this.componentName = componentName;
+          }
+     }
 
-    // Detecta o fechamento de um layout (ex: })
-    @Override
-    public void exitComponent(ComponentContext ctx) {
-        
-        if(ctx.getText().endsWith("}")){
-            guiBuilder.newLine("Layout is closing");
-        }
-        
-        guiBuilder.runMethod("closeBlock");
-        
-    }
+     // Detecta o fechamento de um layout (ex: })
+     @Override
+     public void exitComponent(ComponentContext ctx) {
+          if(ctx.getText().endsWith("}")){
+              guiBuilder.newLog("Layout is closing");
+          }
+          guiBuilder.runMethod("closeBlock");
+     }
 
-    // Ao entrar em uma lista de argumentos (ex: Button(text = "Click here"))
-    @Override
-    public void enterArgumentList(ArgumentListContext ctx) {
-        String componentName = ctx.getParent().getChild(0).getText();
-       // runMethodWithParams("runMethodArguments", componentName);
-    }
+     // Ao entrar em uma lista de argumentos (ex: Button(text = "Click here"))
+     @Override
+     public void enterArgumentList(ArgumentListContext ctx) {
+          String componentName = ctx.getParent().getChild(0).getText();
+          // runMethodWithParams("runMethodArguments", componentName);
+     }
 
     @Override
     public void enterArgument(ArgumentContext ctx) {
-    String key;
-
-    if (ctx.IDENTIFIER() != null) {
-        key = ctx.IDENTIFIER().getText();
-    } else {
-        key = ctx.IDENTIFIER_COLON().getText();
+         String key;
+         if (ctx.IDENTIFIER() != null) {
+             key = ctx.IDENTIFIER().getText();
+         } else {
+            key = ctx.IDENTIFIER_COLON().getText();
+         }
+         String value = ctx.STRING().getText();
+         if (value.startsWith("\"") && value.endsWith("\"")) {
+             value = value.substring(1, value.length() - 1);
+         }
+         if (value.contains("\\\"")) {
+            value = value.replaceAll("\\\"", "&quot;");
+         }
+         guiBuilder.runMethodWithParameters("addAttribute", componentName, key, value);
     }
-
-    String value = ctx.STRING().getText();
-
-    //guiBuilder.newLine("\n\n" + "key: " + key + "\nvalue: " + value + "\n\n");
-    
-    if (value.startsWith("\"") && value.endsWith("\"")) {
-        value = value.substring(1, value.length() - 1);
-    }
-    if (value.contains("\\\"")) {
-        value = value.replaceAll("\\\"", "&quot;");
-    }
-
-    guiBuilder.runMethodWithParameters("addAtributesForComponent", componentName, key, value);
-}
 }

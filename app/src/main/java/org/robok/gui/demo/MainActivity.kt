@@ -62,9 +62,9 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun MainScreen() {
-        var showDialog by remember { mutableStateOf(false) }
+        var showCodeDialog = remember { mutableStateOf(false) }
         var showProgress by remember { mutableStateOf(false) }
-        var dialogMessage by remember { mutableStateOf("") }
+        var generatedCode by remember { mutableStateOf("") }
         var isError by remember { mutableStateOf(false) }
         var code by remember { mutableStateOf("""Column {
                     Button(text = "Click here", id = "a")
@@ -94,12 +94,12 @@ class MainActivity : ComponentActivity() {
                     val guiBuilder = GUIBuilder(
                         context = this@MainActivity,
                         debugLogs = isDebugLogs,
-                        onFinish = { value, error ->
-                            dialogMessage = value
-                            isError = error
-                            showDialog = true
+                        onGenerateCode = { code ->
+                            generatedCode = code
+                            showCodeDialog.value = true
                             showProgress = false
-                        }
+                        },
+                        onError = { /* TO-DO dialog of error */}
                     )
                     val guiCompiler = GUICompiler(
                         guiBuilder = guiBuilder,
@@ -134,35 +134,61 @@ class MainActivity : ComponentActivity() {
             }
         }
         // dialog
-        if (showDialog) {
-            AlertDialog(
-                onDismissRequest = { showDialog = false },
-                title = {
-                    Text(if (!isError) stringResource(id = R.string.finish_method) else stringResource(id = R.string.error_ocurred) )
-                },
-                text = {
-                    SelectionContainer {
-                        HighlightingEditor(
-                            value = dialogMessage,
-                            onValueChange = {  },
-                            syntaxType = SyntaxType.XML
-                        )
-                    }
-                },
-                confirmButton = {
-                    Button(onClick = { showDialog = false }) {
-                        Text("OK")
-                    }
-                }
+        if (showCodeDialog.value) {
+            generatedCodeDialog(
+                generatedCode = generatedCode,
+                showCodeDialog = showCodeDialog
             )
         }
         if (showProgress) {
-            LoadingIndicatorDialog(showDialog = showProgress, onDismiss = { showProgress = false })
-         }
+            LoadingIndicatorDialog(
+                isShow = showProgress,
+                onDismiss = {
+                   showProgress = false
+                }
+            )
+        }
     }
+    
     @Composable
-    fun LoadingIndicatorDialog(showDialog: Boolean, onDismiss: () -> Unit) {
-        if (showDialog) {
+    fun generatedCodeDialog(
+       generatedCode: String,  
+       showCodeDialog: MutableState<Boolean>
+    ) {
+        AlertDialog(
+           onDismissRequest = { 
+               showCodeDialog.value = false
+           },
+           title = {
+               Text(text= stringResource(id = R.string.generated_code))
+           },
+           text = {
+               SelectionContainer {
+                  HighlightingEditor(
+                      value = generatedCode,
+                      onValueChange = {  },
+                      syntaxType = SyntaxType.XML
+                  )
+               }
+           },
+           confirmButton = {
+               Button(
+                 onClick = { 
+                    showCodeDialog.value = false
+                 }
+               ) {
+                    Text("OK")
+               }
+           }
+        )
+    }
+    
+    @Composable
+    fun LoadingIndicatorDialog(
+        isShow: Boolean, 
+        onDismiss: () -> Unit
+    ) {
+        if (isShow) {
             Dialog(
                 onDismissRequest = { onDismiss() },
                 DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
