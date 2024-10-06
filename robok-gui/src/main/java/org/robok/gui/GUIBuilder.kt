@@ -33,7 +33,7 @@ class GUIBuilder (
     private val debugLogs: Boolean = false,
     private val onFinish: (String, Boolean) -> Unit
 ) {
-    private val stringBuilder = StringBuilder()
+    val xmlCodeList: MutableList<String> = mutableListOf()
     private var indentLevel = 0
     private val indent: String
         get() = "\t".repeat(indentLevel)
@@ -46,36 +46,38 @@ class GUIBuilder (
     }
         
     fun rootView() {
-        if (debugLogs) stringBuilder.newLineLn("<!-- opening Root Layout -->")
-        stringBuilder.newLineLn("<LinearLayout")
-        stringBuilder.newLineLn("${DefaultValues.XMLNS}")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
-        stringBuilder.newLineLn(">")
+        if (debugLogs) xmlCodeList.newLineLn("<!-- opening Root Layout -->")
+        xmlCodeList.newLineLn("<LinearLayout")
+        indentLevel++
+        xmlCodeList.newLineLn(DefaultValues.XMLNS(indent))
+        xmlCodeList.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        xmlCodeList.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        xmlCodeList.newLineLn(">")
         indentLevel++
     }
 
     fun Column(/*id: String = DefaultValues.NO_ID*/) {
-        if (debugLogs) stringBuilder.newLineLn("<!-- opening Column Layout -->")
-        stringBuilder.newLineLn("${indent}<LinearLayout")
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
-        // stringBuilder.newLine("${indent}${addId(id)}") 
-        stringBuilder.newLineLn(">")
+        if (debugLogs) xmlCodeList.newLineLn("<!-- opening Column Layout -->")
+        xmlCodeList.newLineLn("${indent}<LinearLayout")
         indentLevel++
-        closingTagLayoutList.add("Column:<LinearLayout/>")
+        xmlCodeList.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        xmlCodeList.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        // xmlCodeList.newLine("${indent}${addId(id)}") 
+        xmlCodeList.newLineLn(">")
+        indentLevel++
+        closingTagLayoutList.add("Column:</LinearLayout>")
         
     }
     
     // TO-DO: re-add params
     fun Text(/*id: String = DefaultValues.NO_ID, text: String*/) {
-        if (debugLogs) stringBuilder.newLineLn("<!-- Text Component -->")
-        stringBuilder.newLineLn("${indent}<TextView")
+        if (debugLogs) xmlCodeList.newLineLn("<!-- Text Component -->")
+        xmlCodeList.newLineLn("${indent}<TextView")
         /*
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
-        stringBuilder.newLineLn("${indent}${addId(id)}")
-        stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
+        xmlCodeList.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        xmlCodeList.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        xmlCodeList.newLineLn("${indent}${addId(id)}")
+        xmlCodeList.newLine("${indent}\tandroid:text=\"$text\"")
         */
         indentLevel++
         closingTagLayoutList.add("Text:/>")
@@ -83,42 +85,51 @@ class GUIBuilder (
     
     // TO-DO: re-add params
     fun Button(/*id: String = DefaultValues.NO_ID, text: String*/) {
-        if (debugLogs) stringBuilder.newLineLn("<!-- Button  Component -->")
-        stringBuilder.newLineLn("${indent}<Button")
+        if (debugLogs) xmlCodeList.newLineLn("<!-- Button  Component -->")
+        xmlCodeList.newLineLn("${indent}<Button")
         /*
-        stringBuilder.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-        stringBuilder.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
-        stringBuilder.newLineLn("${indent}${addId(id)}")
-        stringBuilder.newLine("${indent}\tandroid:text=\"$text\"")
+        xmlCodeList.newLineLn("${indent}${DefaultValues.LAYOUT_HEIGHT}")
+        xmlCodeList.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
+        xmlCodeList.newLineLn("${indent}${addId(id)}")
+        xmlCodeList.newLine("${indent}\tandroid:text=\"$text\"")
         */
         indentLevel++
         closingTagLayoutList.add("Button:/>")
     }
     
     fun newLine(log: String){
-        if(debugLogs) stringBuilder.append(log)
+        if(debugLogs) xmlCodeList.add(log)
     }
     
     fun closeBlock() {
-        if (debugLogs) stringBuilder.newLineLn("<!-- closeBlock adicionado\nultima tag de fechamento é: ->" + closingTagLayoutList.last())
+        if (debugLogs) xmlCodeList.newLineLn("<!-- closeBlock adicionado\nultima tag de fechamento é: ->" + closingTagLayoutList.last())
         if (closingTagLayoutList.isNotEmpty()) {
             val tags = closingTagLayoutList.last().split(":")
   
             if (tags.size >= 2) {
                 val closingTagGui = tags[0]
                 val closingTagXml = tags[1]
+                
+                if (debugLogs) xmlCodeList.newLineLn("<!-- closing $closingTagGui Layout -->")
+                
+                if(closingTagXml.equals("/>")){
+                    var previousAttribute: String = xmlCodeList.last()
+                    if(previousAttribute.contains("\n")) previousAttribute = previousAttribute.replace("\n", "")
+                    
+                    xmlCodeList.removeAt(xmlCodeList.size - 1)
+                    xmlCodeList.newLineLn(previousAttribute + closingTagXml)
+                }else{
+                    xmlCodeList.newLineLn("${indent}$closingTagXml" + "\n")
+                }
                 indentLevel--
-                
-                if (debugLogs) stringBuilder.newLineLn("<!-- closing $closingTagGui Layout -->")
-                
-                stringBuilder.newLineLn("${indent}$closingTagXml")
-                if (debugLogs) stringBuilder.newLineLn("<!-- removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1)))
+                if (debugLogs) xmlCodeList.newLineLn("<!-- removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1)))
                 closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
+                
             } else {
-                stringBuilder.newLineLn("Erro: Formato inválido de tag de fechamento.")
+                xmlCodeList.newLineLn("Erro: Formato inválido de tag de fechamento.")
             }
         } else {
-            stringBuilder.newLineLn("Erro: Nenhum layout para fechar.")
+            xmlCodeList.newLineLn("Erro: Nenhum layout para fechar.")
         }
     }
     
@@ -131,7 +142,7 @@ class GUIBuilder (
         
             val originalException = e.cause
     
-            stringBuilder.append("\n ${originalException?.message}\n")
+            xmlCodeList.add("\n ${originalException?.message}\n")
             e.printStackTrace() // display the exception stack if there is an error
         }
     }
@@ -147,39 +158,63 @@ class GUIBuilder (
         // Invoca o método, passando os argumentos fornecidos
         method.invoke(this, *args)
     } catch (e: NoSuchMethodException) {
-        stringBuilder.append("\nMétodo não encontrado: $methodName\n")
+        xmlCodeList.add("\nMétodo não encontrado: $methodName\n")
         e.printStackTrace()
     } catch (e: InvocationTargetException) {
         val originalException = e.cause
-        stringBuilder.append("\nErro ao executar o método: ${originalException?.message}\n")
+        xmlCodeList.add("\nErro ao executar o método: ${originalException?.message}\n")
         e.printStackTrace()
     } catch (e: IllegalAccessException) {
-        stringBuilder.append("\nAcesso ao método não permitido: $methodName\n")
+        xmlCodeList.add("\nAcesso ao método não permitido: $methodName\n")
         e.printStackTrace()
     }
     }  
       
     fun addAtributesForComponent(methodName: String, key: String, value: String){
+        var containsCloseTag = false
+        var atribute = ""
         
-        if (debugLogs) stringBuilder.newLineLn("<!-- converting $key -->")
-        val atributeConverted = convertAtribute?.convert(key)
-        
-        stringBuilder.newLineLn(atributeConverted + "=" + "\"$value\"")
-        
+        if(xmlCodeList.get((xmlCodeList.size -1)).contains("/>")){
+            containsCloseTag = true
+            atribute = xmlCodeList.last().replace("/>","").replace("\n","")
+            xmlCodeList.removeAt(xmlCodeList.size - 1)
+            xmlCodeList.newLineLn(atribute)
+            indentLevel++
+         }
+         
+         if (debugLogs) xmlCodeList.newLineLn("<!-- converting $key -->")
+            indentLevel++
+            val atributeConverted = convertAtribute?.convert(key)
+            xmlCodeList.newLineLn(indent + atributeConverted + "=" + "\"$value\"")
+            indentLevel--
+            
+        if(containsCloseTag){
+           //indentLevel--
+           closingTagLayoutList.add("$methodName:/>")
+           closeBlock()
+           
+        }
     }
     
     private fun addId(id: String): String = if (id != DefaultValues.NO_ID) "\tandroid:id=\"@+id/$id\"" else ""
 
     fun buildXML(): String {
-        return stringBuilder.toString()
+        var codes: StringBuilder = StringBuilder()
+        
+        xmlCodeList.forEach {
+            codes.append(it)
+        }
+        
+        return codes.toString()
     }
     
     fun finish(){
         indentLevel--
-        if (debugLogs) stringBuilder.newLineLn("<!-- closing Root Layout -->")
-        stringBuilder.newLineLn("</LinearLayout>")
-        if (debugLogs) stringBuilder.append("\nEnd.")
-        onFinish(stringBuilder.toString(), false)
+        indentLevel--
+        if (debugLogs) xmlCodeList.newLineLn("<!-- closing Root Layout -->")
+        xmlCodeList.newLineLn("</LinearLayout>")
+        if (debugLogs) xmlCodeList.add("\nEnd.")
+        onFinish(buildXML(), false)
     }
     
     fun returnError(error: String){

@@ -20,17 +20,22 @@ package org.robok.gui
 /*
 * Add new line on StringBuilder.
 */
-fun StringBuilder.newLine(text: String) {
+fun MutableList<String>.newLine(text: String) {
     if (text.isNotEmpty()) {
-        this.append("$text")
+        this.add("$text")
     }
 }
 
 /* 
 * Add new line with \n in StringBuilder.
 */
-fun StringBuilder.newLineLn(text: String) {
+fun MutableList<String>.newLineLn(text: String) {
     if (text.isNotEmpty()) {
-        this.append("$text\n")
+        this.add("$text\n")
     }
+    
 }
+
+fun MutableList<String>.newLineEmpty() {
+    this.add("\n")
+}        

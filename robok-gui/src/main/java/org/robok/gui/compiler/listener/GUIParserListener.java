@@ -67,8 +67,9 @@ public class GUIParserListener extends GUIBaseListener {
         
         if(ctx.getText().endsWith("}")){
             guiBuilder.newLine("Layout is closing");
-            guiBuilder.runMethod("closeBlock");
         }
+        
+        guiBuilder.runMethod("closeBlock");
         
     }
 
@@ -76,7 +77,6 @@ public class GUIParserListener extends GUIBaseListener {
     @Override
     public void enterArgumentList(ArgumentListContext ctx) {
         String componentName = ctx.getParent().getChild(0).getText();
-        guiBuilder.runMethod("closeBlock");
        // runMethodWithParams("runMethodArguments", componentName);
     }
 
