@@ -34,7 +34,7 @@ class GUIBuilder (
     private val context: Context,
     private val codeComments: Boolean = false,
     private val onGenerateCode: (String) -> Unit,
-    val onError: (Exception) -> Unit
+    val onError: (String) -> Unit
 ) {
     val xmlCodeList: MutableList<String> = mutableListOf()
     private var indentLevel = 0
@@ -50,7 +50,7 @@ class GUIBuilder (
     }
         
     private fun rootView() {
-         if (codeComments) xmlCodeList.newLineBroken("<!-- opening Root Layout -->")
+         if (codeComments) xmlCodeList.newLineBroken("<!-- Opening Root Layout -->")
          xmlCodeList.newLineBroken("<LinearLayout")
          indentLevel++
          xmlCodeList.newLineBroken(DefaultValues.XMLNS(indent))
@@ -61,7 +61,7 @@ class GUIBuilder (
     }
 
     fun Column() {
-         if (codeComments) xmlCodeList.newLineBroken("<!-- opening Column Layout -->")
+         if (codeComments) xmlCodeList.newLineBroken("<!-- Opening Column Layout -->")
          xmlCodeList.newLineBroken("${indent}<LinearLayout")
          indentLevel++
          /*
@@ -92,7 +92,6 @@ class GUIBuilder (
     }
     
     fun closeBlock() {
-         if (codeComments) xmlCodeList.newLineBroken("<!-- closeBlock adicionado\nultima tag de fechamento é: ->" + closingTagLayoutList.last())
          if (closingTagLayoutList.isNotEmpty()) {
              val tags = closingTagLayoutList.last().split(":")
   
@@ -100,7 +99,7 @@ class GUIBuilder (
                  val closingTagGui = tags[0]
                  val closingTagXml = tags[1]
                 
-                 if (codeComments) xmlCodeList.newLineBroken("<!-- closing $closingTagGui Layout -->")
+                 if (codeComments) xmlCodeList.newLineBroken("<!-- Closing $closingTagGui Layout -->")
                  
                  if(closingTagXml.equals("/>")){
                      var previousAttribute: String = xmlCodeList.last()
@@ -115,10 +114,10 @@ class GUIBuilder (
                  if (codeComments) xmlCodeList.newLineBroken("<!-- removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1)))
                  closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
              } else {
-                 xmlCodeList.newLineBroken("Erro: Formato inválido de tag de fechamento.")
+                 onError("Error: invalid tag format  tag of closing.")
              }
          } else {
-             xmlCodeList.newLineBroken("Erro: Nenhum layout para fechar.")
+             onError("Error: No layout to close.")
          }
     }
     
@@ -127,7 +126,7 @@ class GUIBuilder (
              val method = this::class.java.getDeclaredMethod(methodName)
              method.invoke(this)
          } catch (e: InvocationTargetException) {
-             onError(e)
+             onError(e.toString())
          }
     }
     
@@ -137,12 +136,12 @@ class GUIBuilder (
              val method = this::class.java.getDeclaredMethod(methodName, *parameterTypes)
              method.invoke(this, *args)
          } catch (e: NoSuchMethodException) {
-             onError(e)
+             onError(e.toString())
          } catch (e: InvocationTargetException) {
              val originalException = e.cause
-             onError(e)
+             onError(e.toString())
          } catch (e: IllegalAccessException) {
-             onError(e)
+             onError(e.toString())
          }
     }  
       
