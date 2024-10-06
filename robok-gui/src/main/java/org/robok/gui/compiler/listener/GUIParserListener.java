@@ -67,8 +67,9 @@ public class GUIParserListener extends GUIBaseListener {
     public void exitComponent(ComponentContext ctx) {
         if (ctx.getText().endsWith("}")) {
             guiBuilder.newLog(Utils.comment("Layout is closing"));
-        }
-        guiBuilder.runMethod("closeBlock");
+            guiBuilder.runMethod("closeBlockLayout");
+        }else guiBuilder.runMethod("closeBlockComponent");
+        
     }
 
     // Ao entrar em uma lista de argumentos (ex: Button(text = "Click here"))

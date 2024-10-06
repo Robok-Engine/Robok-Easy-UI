@@ -92,7 +92,7 @@ class GUIBuilder (
          if (codeComments) xmlCodeList.newLine(log)
     }
     
-    fun closeBlock() {
+    fun closeBlockComponent() {
          if (closingTagLayoutList.isNotEmpty()) {
              val tags = closingTagLayoutList.last().split(":")
   
@@ -108,9 +108,30 @@ class GUIBuilder (
                     
                      xmlCodeList.removeAt(xmlCodeList.size - 1)
                      xmlCodeList.newLineBroken(previousAttribute + closingTagXml)
-                 } else {
-                    xmlCodeList.newLineBroken("${indent}$closingTagXml" + "\n")
                  }
+                 indentLevel--
+                 if (codeComments) xmlCodeList.newLineBroken(comment("removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1))))
+                 closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
+             } else {
+                 onError("Error: invalid tag format  tag of closing.")
+             }
+         } else {
+             onError("Error: No layout to close.")
+         }
+    }
+    
+    fun closeBlockLayout() {
+         if (closingTagLayoutList.isNotEmpty()) {
+             val tags = closingTagLayoutList.last().split(":")
+  
+             if (tags.size >= 2) {
+                 val closingTagGui = tags[0]
+                 val closingTagXml = tags[1]
+                
+                 if (codeComments) xmlCodeList.newLineBroken(comment("Closing $closingTagGui Layout"))
+                 
+                 
+                    xmlCodeList.newLineBroken("${indent}$closingTagXml" + "\n")
                  indentLevel--
                  if (codeComments) xmlCodeList.newLineBroken(comment("removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1))))
                  closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
@@ -171,7 +192,7 @@ class GUIBuilder (
             
          if(containsCloseTag){
              closingTagLayoutList.newLine("$methodName:/>")
-             closeBlock()
+             closeBlockComponent()
          }
          
          if(containsSingleCloseTag){
