@@ -15,7 +15,7 @@ package org.robok.gui.compiler.listener;
  *
  *  You should have received a copy of the GNU General Public License
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
- */ 
+ */
 
 import static org.robok.antlr4.gui.GUIParser.GuiFileContext;
 import static org.robok.antlr4.gui.GUIParser.ComponentContext;
@@ -28,69 +28,70 @@ import org.robok.antlr4.gui.GUIBaseListener;
 import java.lang.reflect.Method;
 
 /*
-* Class that identifies the code and uses the { @link GUIBuilder } to generate de the.
-* @author Thiarley Rocha (ThDev-only).
-*/
+ * Class that identifies the code and uses the { @link GUIBuilder } to generate de the.
+ * @author Thiarley Rocha (ThDev-only).
+ */
 
 public class GUIParserListener extends GUIBaseListener {
 
-     private GUIBuilder guiBuilder;
-     private String componentName;
+    private GUIBuilder guiBuilder;
+    private String componentName;
 
-     public GUIParserListener(GUIBuilder guiBuilder) {
-          this.guiBuilder = guiBuilder;
-     }
-    
-     @Override
-     public void exitGuiFile(GuiFileContext ctx) {
-          guiBuilder.finish();
-          super.exitGuiFile(ctx);
-     }
-    
-     // Detecta o início de um layout (ex: Column {)
-     @Override
-     public void enterComponent(ComponentContext ctx) {
-          String componentName = ctx.IDENTIFIER().getText();
-          if (ctx.getText().contains("{")) {
-              guiBuilder.runMethod(componentName);
-              // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para layouts ao abrir {
-          } else {
-              guiBuilder.runMethod(componentName);
-              this.componentName = componentName;
-          }
-     }
+    public GUIParserListener(GUIBuilder guiBuilder) {
+        this.guiBuilder = guiBuilder;
+    }
 
-     // Detecta o fechamento de um layout (ex: })
-     @Override
-     public void exitComponent(ComponentContext ctx) {
-          if(ctx.getText().endsWith("}")){
-              guiBuilder.newLog("Layout is closing");
-          }
-          guiBuilder.runMethod("closeBlock");
-     }
+    @Override
+    public void exitGuiFile(GuiFileContext ctx) {
+        guiBuilder.finish();
+        super.exitGuiFile(ctx);
+    }
 
-     // Ao entrar em uma lista de argumentos (ex: Button(text = "Click here"))
-     @Override
-     public void enterArgumentList(ArgumentListContext ctx) {
-          String componentName = ctx.getParent().getChild(0).getText();
-          // runMethodWithParams("runMethodArguments", componentName);
-     }
+    // Detecta o início de um layout (ex: Column {)
+    @Override
+    public void enterComponent(ComponentContext ctx) {
+        String componentName = ctx.IDENTIFIER().getText();
+        if (ctx.getText().contains("{")) {
+            guiBuilder.runMethod(componentName);
+            // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para
+            // layouts ao abrir {
+        } else {
+            guiBuilder.runMethod(componentName);
+            this.componentName = componentName;
+        }
+    }
+
+    // Detecta o fechamento de um layout (ex: })
+    @Override
+    public void exitComponent(ComponentContext ctx) {
+        if (ctx.getText().endsWith("}")) {
+            guiBuilder.newLog("Layout is closing");
+        }
+        guiBuilder.runMethod("closeBlock");
+    }
+
+    // Ao entrar em uma lista de argumentos (ex: Button(text = "Click here"))
+    @Override
+    public void enterArgumentList(ArgumentListContext ctx) {
+        String componentName = ctx.getParent().getChild(0).getText();
+        // runMethodWithParams("runMethodArguments", componentName);
+    }
 
     @Override
     public void enterArgument(ArgumentContext ctx) {
-         String key;
-         if (ctx.IDENTIFIER() != null) {
-             key = ctx.IDENTIFIER().getText();
-         } else {
+        String key;
+        if (ctx.IDENTIFIER() != null) {
+            key = ctx.IDENTIFIER().getText();
+        } else {
             key = ctx.IDENTIFIER_COLON().getText();
-         }
-         String value = ctx.STRING().getText();
-         if (value.startsWith("\"") && value.endsWith("\"")) {
-             value = value.substring(1, value.length() - 1);
-         }
-         if (value.contains("\\\"")) {
+        }
+        String value = ctx.STRING().getText();
+        if (value.startsWith("\"") && value.endsWith("\"")) {
+            value = value.substring(1, value.length() - 1);
+        }
+        if (value.contains("\\\"")) {
             value = value.replaceAll("\\\"", "&quot;");
-         }
-         guiBuilder.runMethodWithParameters("addAttribute", componentName, key, value);
+        }
+        guiBuilder.runMethodWithParameters("addAttribute", componentName, key, value);
     }
 }
