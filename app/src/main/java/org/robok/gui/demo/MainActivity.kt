@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
         var showCodeDialog = remember { mutableStateOf(false) }
         var showErrorDialog = remember { mutableStateOf(false) }
         var showProgress by remember { mutableStateOf(false) }
-        var isDebugLogs by remember { mutableStateOf(false) }  
+        var codeComments = remember { mutableStateOf(false) }  
         
         var error by remember { mutableStateOf("") }
         var generatedCode by remember { mutableStateOf("") }
@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
                     showProgress = true
                     val guiBuilder = GUIBuilder(
                         context = this@MainActivity,
-                        debugLogs = isDebugLogs,
+                        codeComments = codeComments.value,
                         onGenerateCode = { 
                             generatedCode = it
                             showCodeDialog.value = true
@@ -115,29 +115,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 Text(text = stringResource(id = R.string.create_basic_gui))
             }
-            Row(
-                 modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .clickable { isDebugLogs = !isDebugLogs }
-                     .padding(vertical =  7.dp, horizontal = 10.dp),
-                 verticalAlignment = Alignment.CenterVertically,
-                 horizontalArrangement = Arrangement.Center
-            ) {
-               Text(
-                  text = stringResource(id = R.string.debug_texts),
-                  modifier = Modifier
-                      .align(Alignment.CenterVertically)
-                       .padding(vertical =  10.dp)
-               )
-               Spacer(modifier = Modifier.width(8.dp))
-               Switch(
-                   checked = isDebugLogs,
-                   onCheckedChange = null,
-                   modifier = Modifier
-                       .align(Alignment.CenterVertically)
-                       .padding(vertical =  10.dp)
-               )
-            }
+            CodeCommentsWidget(codeComments)
         }
         // dialog
         if (showCodeDialog.value) {
@@ -162,6 +140,37 @@ class MainActivity : ComponentActivity() {
                 }
             )
         }
+    }
+    
+    @Composable
+    fun CodeCommentsWidget(
+       codeComments: MutableState<Boolean>
+    ) {
+       Row(
+          modifier = Modifier
+              .clip(RoundedCornerShape(20.dp))
+              .clickable { 
+                  codeComments.value = !codeComments.value
+              }
+              .padding(vertical =  7.dp, horizontal = 10.dp),
+          verticalAlignment = Alignment.CenterVertically,
+          horizontalArrangement = Arrangement.Center
+       ) {
+          Text(
+            text = stringResource(id = R.string.code_comments),
+            modifier = Modifier
+               .align(Alignment.CenterVertically)
+               .padding(vertical =  10.dp)
+          )
+          Spacer(modifier = Modifier.width(8.dp))
+          Switch(
+             checked = codeComments.value,
+             onCheckedChange = null,
+             modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(vertical =  10.dp)
+          )
+       }
     }
     
     @Composable
