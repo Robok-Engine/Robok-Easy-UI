@@ -36,6 +36,9 @@ internal fun MutableList<String>.newLineBroken(text: String) {
     
 }
 
+/*
+* Add Empty Line in List
+*/
 internal fun MutableList<String>.newEmptyLine() {
     this.add("\n")
 }        
