@@ -174,7 +174,7 @@ class GUIBuilder (
              closeBlock()
          }
          
-         if(containsSingleTag){
+         if(containsSingleCloseTag){
             xmlCodeList.newLineBroken(">")
          }
     }
