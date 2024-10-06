@@ -16,6 +16,10 @@ package org.robok.gui.converter
  *  You should have received a copy of the GNU General Public License
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */ 
+ 
+ /*
+ * This class converts the Robok Easy UI Attributes Names to Android View Names.
+ */
 
 class AttributeConverter {
 
@@ -47,5 +51,4 @@ class AttributeConverter {
     fun convert(attr: String): String? {
         return atributesMap?.get(attr)
     }
-    
-}
+}    
