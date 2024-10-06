@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
                             showProgress = false
                         },
                         onError = { 
-                            error = it.toString()
+                            error = it
                             showErrorDialog.value = true
                             showProgress = false
                         }
