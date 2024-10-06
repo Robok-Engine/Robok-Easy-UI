@@ -64,8 +64,10 @@ class GUIBuilder (
          if (debugLogs) xmlCodeList.newLineBroken("<!-- opening Column Layout -->")
          xmlCodeList.newLineBroken("${indent}<LinearLayout")
          indentLevel++
+         /*
          xmlCodeList.newLineBroken("${indent}${DefaultValues.LAYOUT_HEIGHT}")
          xmlCodeList.newLine("${indent}${DefaultValues.LAYOUT_WIDTH}")
+         */
          xmlCodeList.newLineBroken(">")
          indentLevel++
          closingTagLayoutList.add("Column:</LinearLayout>")
