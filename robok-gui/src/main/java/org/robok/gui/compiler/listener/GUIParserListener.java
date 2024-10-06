@@ -23,6 +23,7 @@ import static org.robok.antlr4.gui.GUIParser.ArgumentContext;
 import static org.robok.antlr4.gui.GUIParser.ArgumentListContext;
 
 import org.robok.gui.GUIBuilder;
+import org.robok.gui.internal.Utils;
 import org.robok.antlr4.gui.GUIBaseListener;
 
 import java.lang.reflect.Method;
@@ -65,7 +66,7 @@ public class GUIParserListener extends GUIBaseListener {
     @Override
     public void exitComponent(ComponentContext ctx) {
         if (ctx.getText().endsWith("}")) {
-            guiBuilder.newLog("Layout is closing");
+            guiBuilder.newLog(Utils.comment("Layout is closing"));
         }
         guiBuilder.runMethod("closeBlock");
     }

@@ -19,6 +19,7 @@ package org.robok.gui
 
 import android.content.Context
 
+import org.robok.gui.internal.Utils.comment
 import org.robok.gui.internal.DefaultValues
 import org.robok.gui.internal.newLine
 import org.robok.gui.internal.newLineBroken
@@ -50,7 +51,7 @@ class GUIBuilder (
     }
         
     private fun rootView() {
-         if (codeComments) xmlCodeList.newLineBroken("<!-- Opening Root Layout -->")
+         if (codeComments) xmlCodeList.newLineBroken(comment("Opening Root Layout"))
          xmlCodeList.newLineBroken("<LinearLayout")
          indentLevel++
          xmlCodeList.newLineBroken(DefaultValues.XMLNS(indent))
@@ -61,7 +62,7 @@ class GUIBuilder (
     }
 
     fun Column() {
-         if (codeComments) xmlCodeList.newLineBroken("<!-- Opening Column Layout -->")
+         if (codeComments) xmlCodeList.newLineBroken(comment("Opening Column Layout"))
          xmlCodeList.newLineBroken("${indent}<LinearLayout")
          indentLevel++
          /*
@@ -74,14 +75,14 @@ class GUIBuilder (
     }
     
     fun Text() {
-         if (codeComments) xmlCodeList.newLineBroken("<!-- Text Component -->")
+         if (codeComments) xmlCodeList.newLineBroken(comment("Text Component"))
          xmlCodeList.newLineBroken("${indent}<TextView")
          indentLevel++
          closingTagLayoutList.add("Text:/>")
     }
     
     fun Button() {
-         if (codeComments) xmlCodeList.newLineBroken("<!-- Button  Component -->")
+         if (codeComments) xmlCodeList.newLineBroken(comment("Button  Component"))
          xmlCodeList.newLineBroken("${indent}<Button")
          indentLevel++
          closingTagLayoutList.add("Button:/>")
@@ -99,7 +100,7 @@ class GUIBuilder (
                  val closingTagGui = tags[0]
                  val closingTagXml = tags[1]
                 
-                 if (codeComments) xmlCodeList.newLineBroken("<!-- Closing $closingTagGui Layout -->")
+                 if (codeComments) xmlCodeList.newLineBroken(comment("Closing $closingTagGui Layout"))
                  
                  if(closingTagXml.equals("/>")){
                      var previousAttribute: String = xmlCodeList.last()
@@ -111,7 +112,7 @@ class GUIBuilder (
                     xmlCodeList.newLineBroken("${indent}$closingTagXml" + "\n")
                  }
                  indentLevel--
-                 if (codeComments) xmlCodeList.newLineBroken("<!-- removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1)))
+                 if (codeComments) xmlCodeList.newLineBroken(comment("removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1))))
                  closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
              } else {
                  onError("Error: invalid tag format  tag of closing.")
@@ -181,7 +182,7 @@ class GUIBuilder (
     fun finish(){
          indentLevel--
          indentLevel--
-         if (codeComments) xmlCodeList.newLineBroken("<!-- closing Root Layout -->")
+         if (codeComments) xmlCodeList.newLineBroken(comment("Closing Root Layout"))
          xmlCodeList.newLineBroken("</LinearLayout>")
          if (codeComments) xmlCodeList.add("\nEnd.")
          onGenerateCode(buildXML())
