@@ -20,7 +20,7 @@ package org.robok.gui.internal
 /*
 * Add new line on MutableList.
 */
-fun MutableList<String>.newLine(text: String) {
+internal fun MutableList<String>.newLine(text: String) {
     if (text.isNotEmpty()) {
         this.add("$text")
     }
@@ -29,13 +29,13 @@ fun MutableList<String>.newLine(text: String) {
 /* 
 * Add new line with \n in MutableList.
 */
-fun MutableList<String>.newLineBroken(text: String) {
+internal fun MutableList<String>.newLineBroken(text: String) {
     if (text.isNotEmpty()) {
         this.add("$text\n")
     }
     
 }
 
-fun MutableList<String>.newEmptyLine() {
+internal fun MutableList<String>.newEmptyLine() {
     this.add("\n")
 }        
