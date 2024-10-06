@@ -71,25 +71,25 @@ class GUIBuilder (
          */
          xmlCodeList.newLineBroken(">")
          indentLevel++
-         closingTagLayoutList.add("Column:</LinearLayout>")
+         closingTagLayoutList.newLine("Column:</LinearLayout>")
     }
     
     fun Text() {
          if (codeComments) xmlCodeList.newLineBroken(comment("Text Component"))
          xmlCodeList.newLineBroken("${indent}<TextView")
          indentLevel++
-         closingTagLayoutList.add("Text:/>")
+         closingTagLayoutList.newLine("Text:/>")
     }
     
     fun Button() {
          if (codeComments) xmlCodeList.newLineBroken(comment("Button  Component"))
          xmlCodeList.newLineBroken("${indent}<Button")
          indentLevel++
-         closingTagLayoutList.add("Button:/>")
+         closingTagLayoutList.newLine("Button:/>")
     }
     
     fun newLog(log: String){
-         if (codeComments) xmlCodeList.add(log)
+         if (codeComments) xmlCodeList.newLine(log)
     }
     
     fun closeBlock() {
@@ -164,7 +164,7 @@ class GUIBuilder (
          indentLevel--
             
          if(containsCloseTag){
-             closingTagLayoutList.add("$methodName:/>")
+             closingTagLayoutList.newLine("$methodName:/>")
              closeBlock()
          }
     }
@@ -184,7 +184,7 @@ class GUIBuilder (
          indentLevel--
          if (codeComments) xmlCodeList.newLineBroken(comment("Closing Root Layout"))
          xmlCodeList.newLineBroken("</LinearLayout>")
-         if (codeComments) xmlCodeList.add("\nEnd.")
+         if (codeComments) xmlCodeList.newLine("\n" + comment("End."))
          onGenerateCode(buildXML())
     }
 }
