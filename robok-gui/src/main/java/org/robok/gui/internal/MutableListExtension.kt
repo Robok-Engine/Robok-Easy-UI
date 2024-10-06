@@ -1,4 +1,4 @@
-package org.robok.gui
+package org.robok.gui.internal
 
 /*
  *  This file is part of Robok © 2024.
@@ -18,7 +18,7 @@ package org.robok.gui
  */ 
 
 /*
-* Add new line on StringBuilder.
+* Add new line on MutableList.
 */
 fun MutableList<String>.newLine(text: String) {
     if (text.isNotEmpty()) {
@@ -27,15 +27,15 @@ fun MutableList<String>.newLine(text: String) {
 }
 
 /* 
-* Add new line with \n in StringBuilder.
+* Add new line with \n in MutableList.
 */
-fun MutableList<String>.newLineLn(text: String) {
+fun MutableList<String>.newLineBroken(text: String) {
     if (text.isNotEmpty()) {
         this.add("$text\n")
     }
     
 }
 
-fun MutableList<String>.newLineEmpty() {
+fun MutableList<String>.newEmptyLine() {
     this.add("\n")
 }        
