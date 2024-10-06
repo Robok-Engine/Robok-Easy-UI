@@ -63,15 +63,17 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MainScreen() {
         var showCodeDialog = remember { mutableStateOf(false) }
+        var showErrorDialog = remember { mutableStateOf(false) }
         var showProgress by remember { mutableStateOf(false) }
+        var isDebugLogs by remember { mutableStateOf(false) }  
+        
+        var error by remember { mutableStateOf("") }
         var generatedCode by remember { mutableStateOf("") }
-        var isError by remember { mutableStateOf(false) }
         var code by remember { mutableStateOf("""Column {
                     Button(text = "Click here", id = "a")
                     Text(text = "Thanks love", id = "b")
                    
                 }""") }
-        var isDebugLogs by remember { mutableStateOf(false) }  
         
         // screen cintent
         Column(
@@ -94,12 +96,16 @@ class MainActivity : ComponentActivity() {
                     val guiBuilder = GUIBuilder(
                         context = this@MainActivity,
                         debugLogs = isDebugLogs,
-                        onGenerateCode = { code ->
-                            generatedCode = code
+                        onGenerateCode = { 
+                            generatedCode = it
                             showCodeDialog.value = true
                             showProgress = false
                         },
-                        onError = { /* TO-DO dialog of error */}
+                        onError = { 
+                            error = it.toString()
+                            showErrorDialog.value = true
+                            showProgress = false
+                        }
                     )
                     val guiCompiler = GUICompiler(
                         guiBuilder = guiBuilder,
@@ -135,11 +141,19 @@ class MainActivity : ComponentActivity() {
         }
         // dialog
         if (showCodeDialog.value) {
-            generatedCodeDialog(
+            GeneratedCodeDialog(
                 generatedCode = generatedCode,
                 showCodeDialog = showCodeDialog
             )
         }
+        
+        if (showErrorDialog.value) {
+            ErrorDialog(
+                error = error,
+                showErrorDialog = showErrorDialog
+            )
+        }
+        
         if (showProgress) {
             LoadingIndicatorDialog(
                 isShow = showProgress,
@@ -151,7 +165,7 @@ class MainActivity : ComponentActivity() {
     }
     
     @Composable
-    fun generatedCodeDialog(
+    fun GeneratedCodeDialog(
        generatedCode: String,  
        showCodeDialog: MutableState<Boolean>
     ) {
@@ -160,7 +174,7 @@ class MainActivity : ComponentActivity() {
                showCodeDialog.value = false
            },
            title = {
-               Text(text= stringResource(id = R.string.generated_code))
+               Text(text = stringResource(id = R.string.generated_code))
            },
            text = {
                SelectionContainer {
@@ -181,6 +195,57 @@ class MainActivity : ComponentActivity() {
                }
            }
         )
+    }
+    
+    @Composable
+    fun ErrorDialog(
+       error: String,  
+       showErrorDialog: MutableState<Boolean>
+    ) {
+        AlertDialog(
+           onDismissRequest = { 
+               showErrorDialog.value = false
+           },
+           title = {
+               Text(text= stringResource(id = R.string.error_ocurred))
+           },
+           text = {
+               ErrorCard(error)
+           },
+           confirmButton = {
+               Button(
+                 onClick = { 
+                    showErrorDialog.value = false
+                 }
+               ) {
+                   Text("OK")
+               }
+           }
+        )
+    }
+    
+    @Composable
+    fun ErrorCard(
+         error: String
+    ) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(18.dp)),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.errorContainer
+            ),
+            shape = RoundedCornerShape(18.dp) 
+        ) {
+            SelectionContainer {
+                Text(
+                    text = error,
+                    modifier = Modifier
+                        .padding(16.dp), 
+                    color = MaterialTheme.colorScheme.onErrorContainer 
+                )
+            }
+        }
     }
     
     @Composable

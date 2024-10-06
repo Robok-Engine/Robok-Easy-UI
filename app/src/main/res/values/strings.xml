@@ -3,7 +3,7 @@
     <string name="app_name">Robok GUI Lang Demo</string>
     <string name="create_basic_gui">Create Basic GUI</string>
     <string name="generated_code">Generated Code</string>
-    <string name="error_ocurred">An errod ocurred</string>
+    <string name="error_ocurred">An error ocurred</string>
     <string name="debug_texts">Use debug logs/text/commets on result</string>
     <string name="code">Code</string>
 </resources>
