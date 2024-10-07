@@ -12,10 +12,17 @@ argumentList
     ;
 
 argument
-    : IDENTIFIER '=' STRING               // Um argumento com um identificador simples
-    | IDENTIFIER_COLON '=' STRING;        // Um argumento com um identificador que pode ter dois pontos
+    : IDENTIFIER '=' value               // Um argumento com um identificador simples
+    | IDENTIFIER_COLON '=' value;        // Um argumento com um identificador que pode ter dois pontos
+
+value
+   : STRING
+   | NUMBER
+   | IDENTIFIER_DOT;  // Valor pode ser uma string, número, booleano ou um identificador com ponto
 
 IDENTIFIER: [a-zA-Z_][a-zA-Z_0-9]*;  // Um identificador para componentes e nomes de parâmetros
 IDENTIFIER_COLON: [a-zA-Z_][a-zA-Z_0-9:]*;  // Um identificador que pode ter dois pontos
 STRING: '"' (~["\\] | '\\' .)* '"';  // Um valor de string
+NUMBER: [0-9]+ ('.' [0-9]+)?;
+IDENTIFIER_DOT: [a-zA-Z_][a-zA-Z_0-9]*('.'[a-zA-Z_][a-zA-Z_0-9]*)*;
 WS: [ \t\r\n]+ -> skip;  // Espaços em branco são ignorados
