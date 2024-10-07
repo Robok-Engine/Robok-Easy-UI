@@ -107,6 +107,7 @@ public String getValue(ArgumentContext ctx){
         value = ctx.value().NUMBER().getText();
     } else if (ctx.value().BOOLEAN() != null) {
         value = ctx.value().BOOLEAN().getText();
+        guiBuilder.newLog(Utils.comment("Boolean: " + value));
     } else if (ctx.value().IDENTIFIER_DOT() != null) {
         value = ctx.value().IDENTIFIER_DOT().getText();
     }
