@@ -106,9 +106,6 @@ public String getValue(ArgumentContext ctx){
     }else if(ctx.value().NUMBER() != null){
         value = ctx.value().NUMBER().getText();
         
-    }else if(ctx.value().BOOLEAN() != null){
-        value = ctx.value().BOOLEAN().getText();
-        
     }else if(ctx.value().IDENTIFIER_DOT() != null){
         value = ctx.value().IDENTIFIER_DOT().getText();
         
