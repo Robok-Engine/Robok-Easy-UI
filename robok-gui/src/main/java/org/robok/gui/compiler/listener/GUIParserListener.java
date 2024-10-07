@@ -100,16 +100,16 @@ public class GUIParserListener extends GUIBaseListener {
 public String getValue(ArgumentContext ctx){
     String value = "null";
 
-    if(ctx.value().STRING().getText() != null){
+    if(ctx.value().STRING() != null){
         value = ctx.value().STRING().getText();
         
-    }else if(ctx.value().NUMBER().getText() != null){
+    }else if(ctx.value().NUMBER() != null){
         value = ctx.value().NUMBER().getText();
         
-    }else if(ctx.value().BOOLEAN().getText() != null){
+    }else if(ctx.value().BOOLEAN() != null){
         value = ctx.value().BOOLEAN().getText();
         
-    }else if(ctx.value().IDENTIFIER_DOT().getText() != null){
+    }else if(ctx.value().IDENTIFIER_DOT() != null){
         value = ctx.value().IDENTIFIER_DOT().getText();
         
     }
