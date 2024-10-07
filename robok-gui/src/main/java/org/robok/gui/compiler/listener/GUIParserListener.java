@@ -87,7 +87,7 @@ public class GUIParserListener extends GUIBaseListener {
         } else {
             key = ctx.IDENTIFIER_COLON().getText();
         }
-        String value = ctx.value().STRING().getText();
+        String value = getValue(ctx);
         if (value.startsWith("\"") && value.endsWith("\"")) {
             value = value.substring(1, value.length() - 1);
         }
@@ -96,4 +96,21 @@ public class GUIParserListener extends GUIBaseListener {
         }
         guiBuilder.runMethodWithParameters("addAttribute", componentName, key, value);
     }
+
+//method to set the string value regardless of the type
+public String getValue(ArgumentContext ctx){
+    String value = "";
+    
+    if (ctx.value().STRING() != null) {
+        value = ctx.value().STRING().getText();
+    } else if (ctx.value().NUMBER() != null) {
+        value = ctx.value().NUMBER().getText();
+    } else if (ctx.value().BOOLEAN() != null) {
+        value = ctx.value().BOOLEAN().getText();
+    } else if (ctx.value().IDENTIFIER_DOT() != null) {
+        value = ctx.value().IDENTIFIER_DOT().getText();
+    }
+
+return value;
+}
 }
