@@ -87,7 +87,7 @@ public class GUIParserListener extends GUIBaseListener {
         } else {
             key = ctx.IDENTIFIER_COLON().getText();
         }
-        String value = ctx.STRING().getText();
+        String value = ctx.value().STRING().getText();
         if (value.startsWith("\"") && value.endsWith("\"")) {
             value = value.substring(1, value.length() - 1);
         }
