@@ -98,7 +98,7 @@ public class GUIParserListener extends GUIBaseListener {
     }
 
 //method to set the string value regardless of the type
-public String getValue(ArgumentContext ctx){
+public String getValue(ArgumentContext ctx) {
     String value = "";
     
     if (ctx.value().STRING() != null) {
@@ -110,8 +110,10 @@ public String getValue(ArgumentContext ctx){
         guiBuilder.newLog(Utils.comment("Boolean: " + value));
     } else if (ctx.value().IDENTIFIER_DOT() != null) {
         value = ctx.value().IDENTIFIER_DOT().getText();
+    } else {
+        guiBuilder.newLog(Utils.comment("Unknown value type: " + ctx.value().getText()));
     }
 
-return value;
+    return value;
 }
 }
