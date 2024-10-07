@@ -1,5 +1,6 @@
 // Generated from GUI.g4 by ANTLR 4.13.2
 package org.robok.antlr4.gui;
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -23,6 +24,18 @@ public class GUIBaseListener implements GUIListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitGuiFile(GUIParser.GuiFileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLayout(GUIParser.LayoutContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLayout(GUIParser.LayoutContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -59,6 +72,18 @@ public class GUIBaseListener implements GUIListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArgument(GUIParser.ArgumentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValue(GUIParser.ValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValue(GUIParser.ValueContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
