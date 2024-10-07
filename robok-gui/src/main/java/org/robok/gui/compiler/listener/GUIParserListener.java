@@ -78,7 +78,7 @@ public class GUIParserListener extends GUIBaseListener {
         String componentName = ctx.getParent().getChild(0).getText();
         // runMethodWithParams("runMethodArguments", componentName);
     }
-
+    
     @Override
     public void enterArgument(ArgumentContext ctx) {
         String key;
@@ -87,7 +87,7 @@ public class GUIParserListener extends GUIBaseListener {
         } else {
             key = ctx.IDENTIFIER_COLON().getText();
         }
-        String value = ctx.STRING().getText();
+        String value = getValue(ctx);
         if (value.startsWith("\"") && value.endsWith("\"")) {
             value = value.substring(1, value.length() - 1);
         }
@@ -96,4 +96,24 @@ public class GUIParserListener extends GUIBaseListener {
         }
         guiBuilder.runMethodWithParameters("addAttribute", componentName, key, value);
     }
+
+public String getValue(ArgumentContext ctx){
+    String value = "null";
+
+    if(ctx.value().STRING().getText() != null){
+        value = ctx.value().STRING().getText();
+        
+    }else if(ctx.value().NUMBER().getText() != null){
+        value = ctx.value().NUMBER().getText();
+        
+    }else if(ctx.value().BOOLEAN().getText() != null){
+        value = ctx.value().BOOLEAN().getText();
+        
+    }else if(ctx.value().IDENTIFIER_DOT().getText() != null){
+        value = ctx.value().IDENTIFIER_DOT().getText();
+        
+    }
+
+    return value;
+}
 }
