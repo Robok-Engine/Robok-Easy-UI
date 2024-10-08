@@ -44,7 +44,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "com.github.robok-engine"
             artifactId = "robok-gui"
-            version  = "1.0.0"
+            version  = "1.0.0-Alpha01"
             
             from(components.findByName("release"))
         }
