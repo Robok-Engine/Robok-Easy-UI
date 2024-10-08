@@ -42,7 +42,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "com.github.robok-engine"
             artifactId = "robok-antlr4"
-            version  = "1.0.0"
+            version  = "1.0.0-Alpha01"
             
             from(components.findByName("release"))
         }
