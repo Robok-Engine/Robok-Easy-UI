@@ -15,7 +15,7 @@ package org.robok.gui.demo.ui.theme
  *
  *  You should have received a copy of the GNU General Public License
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
- */ 
+ */
 
 import androidx.compose.material3.Typography
 

@@ -15,32 +15,26 @@ package org.robok.gui.compiler
  *
  *  You should have received a copy of the GNU General Public License
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
- */ 
-
-import android.util.Log
+ */
 
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.atn.PredictionMode
 import org.antlr.v4.runtime.tree.ParseTreeWalker
-
 import org.robok.antlr4.gui.GUILexer
 import org.robok.antlr4.gui.GUIParser
 import org.robok.gui.GUIBuilder
 import org.robok.gui.compiler.listener.GUIParserListener
 
 /*
-* Class that uses ANTLR4 to compile the Code and use { @link GUIParserListener }.
-* @author Thiarley Rocha (ThDev-only).
-*/
+ * Class that uses ANTLR4 to compile the Code and use { @link GUIParserListener }.
+ * @author Thiarley Rocha (ThDev-only).
+ */
 
-class GUICompiler(
-    guiBuilder: GUIBuilder,
-    code: String
-) {
+class GUICompiler(guiBuilder: GUIBuilder, code: String) {
 
     init {
-         val th = Thread {
+        val th = Thread {
             try {
                 val input = CharStreams.fromString(code)
                 val lexer = GUILexer(input)

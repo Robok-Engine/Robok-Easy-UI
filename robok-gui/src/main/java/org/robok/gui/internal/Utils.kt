@@ -15,9 +15,8 @@ package org.robok.gui.internal
  *
  *  You should have received a copy of the GNU General Public License
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
- */ 
+ */
 
 internal object Utils {
-    @JvmStatic
-    fun comment(cmmt: String): String = "<!-- ${cmmt} -->"
+    @JvmStatic fun comment(cmmt: String): String = "<!-- ${cmmt} -->"
 }

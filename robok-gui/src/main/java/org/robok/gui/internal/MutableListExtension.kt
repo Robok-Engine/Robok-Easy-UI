@@ -15,30 +15,29 @@ package org.robok.gui.internal
  *
  *  You should have received a copy of the GNU General Public License
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
- */ 
+ */
 
 /*
-* Add new line on MutableList.
-*/
+ * Add new line on MutableList.
+ */
 internal fun MutableList<String>.newLine(text: String) {
     if (text.isNotEmpty()) {
         this.add("$text")
     }
 }
 
-/* 
-* Add new line with \n in MutableList.
-*/
+/*
+ * Add new line with \n in MutableList.
+ */
 internal fun MutableList<String>.newLineBroken(text: String) {
     if (text.isNotEmpty()) {
         this.add("$text\n")
     }
-    
 }
 
 /*
-* Add Empty Line in List
-*/
+ * Add Empty Line in List
+ */
 internal fun MutableList<String>.newEmptyLine() {
     this.add("\n")
-}        
+}

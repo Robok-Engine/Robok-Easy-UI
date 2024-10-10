@@ -15,7 +15,7 @@ package org.robok.gui.demo.ui.components.syntax
  *
  *  You should have received a copy of the GNU General Public License
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
- */ 
+ */
 
 import android.text.*
 import android.text.style.CharacterStyle
@@ -33,7 +33,7 @@ class SimpleHighlighter(private val mEditor: EditText?, syntaxType: String) {
         init()
     }
 
-  /*  constructor(textView: TextView, syntaxType: String) : this(null, syntaxType) {
+    /*  constructor(textView: TextView, syntaxType: String) : this(null, syntaxType) {
         mTextView = textView
         init()
     }*/
@@ -48,28 +48,43 @@ class SimpleHighlighter(private val mEditor: EditText?, syntaxType: String) {
 
     private fun init() {
         mEditor?.let { editor ->
-            editor.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-                override fun afterTextChanged(s: Editable) {
-                    removeSpans(s, ForegroundColorSpan::class.java)
-                    createHighlightSpans(syntaxList, s)
+            editor.addTextChangedListener(
+                object : TextWatcher {
+                    override fun beforeTextChanged(
+                        s: CharSequence,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {}
+
+                    override fun onTextChanged(
+                        s: CharSequence,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {}
+
+                    override fun afterTextChanged(s: Editable) {
+                        removeSpans(s, ForegroundColorSpan::class.java)
+                        createHighlightSpans(syntaxList, s)
+                    }
                 }
-            })
+            )
             removeSpans(editor.text, ForegroundColorSpan::class.java)
             createHighlightSpans(syntaxList, editor.text)
-        } ?: mTextView?.let { textView ->
-            val text = textView.text
-            if (text is Editable) {
-                removeSpans(text, ForegroundColorSpan::class.java)
-                createHighlightSpans(syntaxList, text)
-            } else {
-                val builder = SpannableStringBuilder(text)
-                removeSpans(builder, ForegroundColorSpan::class.java)
-                createHighlightSpans(syntaxList, builder)
-                textView.text = builder
-            }
         }
+            ?: mTextView?.let { textView ->
+                val text = textView.text
+                if (text is Editable) {
+                    removeSpans(text, ForegroundColorSpan::class.java)
+                    createHighlightSpans(syntaxList, text)
+                } else {
+                    val builder = SpannableStringBuilder(text)
+                    removeSpans(builder, ForegroundColorSpan::class.java)
+                    createHighlightSpans(syntaxList, builder)
+                    textView.text = builder
+                }
+            }
     }
 
     private fun createHighlightSpans(syntaxList: List<SyntaxScheme>, editable: Editable) {
@@ -77,9 +92,19 @@ class SimpleHighlighter(private val mEditor: EditText?, syntaxType: String) {
             val matcher = scheme.pattern.matcher(editable)
             while (matcher.find()) {
                 if (scheme == scheme.getPrimarySyntax()) {
-                    editable.setSpan(ForegroundColorSpan(scheme.color), matcher.start(), matcher.end() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    editable.setSpan(
+                        ForegroundColorSpan(scheme.color),
+                        matcher.start(),
+                        matcher.end() - 1,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
+                    )
                 } else {
-                    editable.setSpan(ForegroundColorSpan(scheme.color), matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    editable.setSpan(
+                        ForegroundColorSpan(scheme.color),
+                        matcher.start(),
+                        matcher.end(),
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
+                    )
                 }
             }
         }
@@ -101,6 +126,6 @@ class SimpleHighlighter(private val mEditor: EditText?, syntaxType: String) {
 }
 
 object SyntaxType {
-      const val XML = "xml"
-      const val JAVA = "java"
+    const val XML = "xml"
+    const val JAVA = "java"
 }
