@@ -52,12 +52,13 @@ class AttributeConverter {
         "gravity" to "android:gravity",
         
         "layout:gravity" to "android:layout_gravity",
-        
         "layout:gravity:center:horizontal" to "android:layout_centerHorizontal",
         "layout:gravity:cr:hl" to "android:layout_centerHorizontal", //abbreviations
         
         "layout:gravity:center:vertical" to "android:layout_centerVertical",
         "layout:gravity:cr:vl" to "android:layout_centerVertical", //abbreviations
+        
+        "layout:weight" to "android:layout_weight",
         
         "layout:startof" to "android:layout_toStartOf",
         "layout:endof" to "android:layout_toEndOf",
@@ -65,24 +66,38 @@ class AttributeConverter {
         "layout:below" to "android:layout_below",
         
         "layout:align:start" to "android:layout_alignParentStart",
+        "layout:an:st" to "android:layout_alignParentStart", //abbreviations
+        
         "layout:align:end" to "android:layout_alignParentEnd",
+        "layout:an:ed" to "android:layout_alignParentEnd", //abbreviations
+        
         "layout:align:top" to "android:layout_alignParentTop",
+        "layout:an:tp" to "android:layout_alignParentTop", //abbreviations
+        
         "layout:align:bottom" to "android:layout_alignParentBottom",
+        "layout:an:bm" to "android:layout_alignParentBottom", //abbreviations
+        
         "layout:align:baseline" to "android:layout_alignBaseline",
+        "layout:an:be" to "android:layout_alignBaseline", //abbreviations
         
         "background" to "android:background",
         
         "orientation" to "android:orientation",
-        
-        "layout:weight" to "android:layout_weight",
        
         "visibility" to "android:visibility",
+        
         "clickable" to "android:clickable",
+        
         "enabled" to "android:enabled",
+        
         "focusable" to "android:focusable",
+        
         "hint" to "android:hint",
+        
         "input:type" to "android:inputType",
+        
         "src" to "android:src",
+        
         "scale:type" to "android:scaleType"
     )
 }
