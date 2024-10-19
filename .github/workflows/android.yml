@@ -10,8 +10,8 @@ on:
       - 'dev'
 
 jobs:
-  build:
-    name: Build
+  release:
+    name: Build Release
     runs-on: ubuntu-latest
 
     steps:
@@ -31,18 +31,13 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v4
         
-      - name: Build library release and app debug
+      - name: Build release for all modules
         run: |
           ./gradlew :robok-gui:assembleRelease
           ./gradlew :robok-antlr4:assembleRelease
-          ./gradlew :app:assembleDebug
+          ./gradlew :robok-engine:assembleRelease
+          ./gradlew :app:assembleRelease
 
-      - name: Upload debug app
-        uses: actions/upload-artifact@v4
-        with:
-          name: app
-          path: app/build/outputs/apk/debug/
-          
       - name: Upload release library-gui
         uses: actions/upload-artifact@v4
         with:
@@ -54,3 +49,67 @@ jobs:
         with:
           name: library-antlr
           path: robok-antlr4/build/outputs/aar/
+
+      - name: Upload release library-engine
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-engine
+          path: robok-engine/build/outputs/aar/
+          
+      - name: Upload release app
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: app/build/outputs/apk/release/
+
+  debug:
+    name: Build Debug
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v4
+        
+      - name: Build debug for all modules
+        run: |
+          ./gradlew :robok-gui:assembleDebug
+          ./gradlew :robok-antlr4:assembleDebug
+          ./gradlew :robok-engine:assembleDebug
+          ./gradlew :app:assembleDebug
+
+      - name: Upload debug library-gui
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-gui-debug
+          path: robok-gui/build/outputs/aar/
+          
+      - name: Upload debug library-antlr4
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-antlr-debug
+          path: robok-antlr4/build/outputs/aar/
+
+      - name: Upload debug library-engine
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-engine-debug
+          path: robok-engine/build/outputs/aar/
+          
+      - name: Upload debug app
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/
