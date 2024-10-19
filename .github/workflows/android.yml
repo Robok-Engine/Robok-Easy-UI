@@ -35,7 +35,6 @@ jobs:
         run: |
           ./gradlew :robok-gui:assembleRelease
           ./gradlew :robok-antlr4:assembleRelease
-          ./gradlew :robok-engine:assembleRelease
           ./gradlew :app:assembleRelease
 
       - name: Upload release library-gui
@@ -49,12 +48,6 @@ jobs:
         with:
           name: library-antlr
           path: robok-antlr4/build/outputs/aar/
-
-      - name: Upload release library-engine
-        uses: actions/upload-artifact@v4
-        with:
-          name: library-engine
-          path: robok-engine/build/outputs/aar/
           
       - name: Upload release app
         uses: actions/upload-artifact@v4
@@ -87,7 +80,6 @@ jobs:
         run: |
           ./gradlew :robok-gui:assembleDebug
           ./gradlew :robok-antlr4:assembleDebug
-          ./gradlew :robok-engine:assembleDebug
           ./gradlew :app:assembleDebug
 
       - name: Upload debug library-gui
@@ -101,12 +93,6 @@ jobs:
         with:
           name: library-antlr-debug
           path: robok-antlr4/build/outputs/aar/
-
-      - name: Upload debug library-engine
-        uses: actions/upload-artifact@v4
-        with:
-          name: library-engine-debug
-          path: robok-engine/build/outputs/aar/
           
       - name: Upload debug app
         uses: actions/upload-artifact@v4
