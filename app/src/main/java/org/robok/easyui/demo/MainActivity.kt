@@ -19,6 +19,7 @@ package org.robok.easyui.demo
 
 import android.os.Bundle
 import androidx.activity.*
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.*
