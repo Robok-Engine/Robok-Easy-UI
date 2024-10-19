@@ -1,4 +1,4 @@
-package org.robok.antlr4.gui;
+package org.robok.easyui.antlr4;
 
 // Generated from GUI.g4 by ANTLR 4.13.2
 
