@@ -21,4 +21,4 @@
 #-renamesourcefileattribute SourceFile
 
 
--keep class org.robok.easyui.** { *; }
+-keep class org.robok.easyui.GUIBuilder { *; }
