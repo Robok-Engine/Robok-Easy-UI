@@ -3,8 +3,9 @@ grammar GUI;
 guiFile: component* EOF;
 
 component
-    : IDENTIFIER '{' (component | argumentList)* '}'  // Layouts como Column
-    | IDENTIFIER '(' argumentList ')'                 // Componentes como Button, Text
+    : IDENTIFIER '(' argumentList ')' '{' (component | argumentList)* '}'  // Layouts com parâmetros e corpo
+    | IDENTIFIER '{' (component | argumentList)* '}'                       // Layouts como Column sem parênteses
+    | IDENTIFIER '(' argumentList ')'                                      // Componentes como Button, Text
     ;
 
 argumentList
