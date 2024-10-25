@@ -53,6 +53,7 @@ class GUIBuilder(
 
     private fun rootView() {
         if (codeComments) xmlCodeList.newLineBroken(comment("Opening Root Layout"))
+        xmlCodeList.newLineBroken("""<?xml version="1.0" encoding="utf-8"?>""")
         xmlCodeList.newLineBroken("<LinearLayout")
         indentLevel++
         xmlCodeList.newLineBroken(DefaultValues.XMLNS(indent))
@@ -113,11 +114,6 @@ class GUIBuilder(
                 }
                 indentLevel--
                 if (codeComments)
-                    xmlCodeList.newLineBroken(
-                        comment(
-                            "removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1))
-                        )
-                    )
                 closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
             } else {
                 onError("Error: invalid tag format  tag of closing.")
@@ -141,11 +137,6 @@ class GUIBuilder(
                 xmlCodeList.newLineBroken("${indent}$closingTagXml" + "\n")
                 indentLevel--
                 if (codeComments)
-                    xmlCodeList.newLineBroken(
-                        comment(
-                            "removing " + closingTagLayoutList.get((closingTagLayoutList.size - 1))
-                        )
-                    )
                 closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
             } else {
                 onError("Error: invalid tag format  tag of closing.")
