@@ -160,7 +160,7 @@ class GUIBuilder(
             val method = this::class.java.getDeclaredMethod(methodName)
             method.invoke(this)
         } catch (e: InvocationTargetException) {
-            onError(e.toString())
+            onError("runMethod: " + e.toString())
         }
     }
 
@@ -170,6 +170,7 @@ class GUIBuilder(
             val method = this::class.java.getDeclaredMethod(methodName, *parameterTypes)
             method.invoke(this, *args)
         } catch (e: NoSuchMethodException) {
+            
             onError(e.toString())
         } catch (e: InvocationTargetException) {
             val originalException = e.cause

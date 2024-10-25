@@ -53,6 +53,7 @@ public class GUIParserListener extends GUIBaseListener {
     public void enterComponent(ComponentContext ctx) {
         String componentName = ctx.IDENTIFIER().getText();
         if (ctx.getText().contains("{")) {
+            this.componentName = componentName;
             guiBuilder.newLog(Utils.comment("enterLayout"));
             guiBuilder.runMethod(componentName);
             // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para
