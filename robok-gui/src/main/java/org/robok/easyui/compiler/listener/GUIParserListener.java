@@ -53,10 +53,12 @@ public class GUIParserListener extends GUIBaseListener {
     public void enterComponent(ComponentContext ctx) {
         String componentName = ctx.IDENTIFIER().getText();
         if (ctx.getText().contains("{")) {
+            guiBuilder.newLog(Utils.comment("enterLayout"));
             guiBuilder.runMethod(componentName);
             // runMethodWithParams("enterLayout", componentName);  // Chama o método específico para
             // layouts ao abrir {
         } else {
+            guiBuilder.newLog(Utils.comment("enterComponent"));
             guiBuilder.runMethod(componentName);
             this.componentName = componentName;
         }
@@ -81,6 +83,7 @@ public class GUIParserListener extends GUIBaseListener {
     
     @Override
     public void enterArgument(ArgumentContext ctx) {
+        guiBuilder.newLog(Utils.comment("enterArgument is starting"));
         String key;
         if (ctx.IDENTIFIER() != null) {
             key = ctx.IDENTIFIER().getText();
