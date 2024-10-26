@@ -39,6 +39,10 @@ class GUIBuilder(
     private val codeComments: Boolean = false,
     private val verticalRoot: Boolean = false,
 ) {
+    companion object {
+        private const val TAG = "GUIBuilder"
+    }
+    
     val xmlCodeList: MutableList<String> = mutableListOf()
     private var indentLevel = 0
     private val indent: String
@@ -245,5 +249,6 @@ class GUIBuilder(
             buildXML(), 
             config!!
         )
+        Log.d(TAG, config.toString())
     }
 }
