@@ -50,10 +50,11 @@ class GUIBuilder(
     val closingTagLayoutList: MutableList<String> = mutableListOf()
     var attributeConverter: AttributeConverter? = null
 
-    private var orientation: String = ""
-    private var style: String = ""
+    private var orientation: String = "portrait"
+    private var style: String = "defaultStyle"
     private var config: Config = Config(orientation = "portrait", style = "defaultStyle")
-
+    private var isConfigEnable = false;
+    
     init {
         rootView()
         attributeConverter = AttributeConverter()
@@ -117,6 +118,10 @@ class GUIBuilder(
 
     fun closeBlockComponent() {
         if (closingTagLayoutList.isNotEmpty()) {
+            if(isConfigEnable){
+                isConfigEnable = false
+                return
+            }
            /* if (closingTagLayoutList.last().equals(Config.getName())) {
                 xmlCodeList.newLineBroken(comment("It's here"))
                 config = Config(orientation = orientation, style = style)
@@ -214,7 +219,7 @@ class GUIBuilder(
             }
             
             config = Config(orientation = orientation, style = style)
-            
+            isConfigEnable = true
             return
         }
 
