@@ -63,7 +63,6 @@ class MainActivity : ComponentActivity() {
         var showErrorDialog = remember { mutableStateOf(false) }
         var showProgress by remember { mutableStateOf(false) }
         var codeComments = remember { mutableStateOf(false) }
-
         var error by remember { mutableStateOf("") }
         var generatedCode by remember { mutableStateOf("") }
         var code by remember {
@@ -76,7 +75,7 @@ class MainActivity : ComponentActivity() {
             )
         }
 
-        // screen cintent
+        // screen content
         Column(
             modifier = Modifier.fillMaxSize().padding(16.dp),
             verticalArrangement = Arrangement.Center,
@@ -94,8 +93,8 @@ class MainActivity : ComponentActivity() {
                         GUIBuilder(
                             context = this@MainActivity,
                             codeComments = codeComments.value,
-                            onGenerateCode = {
-                                generatedCode = it
+                            onGenerateCode = { code, config ->
+                                generatedCode = code
                                 showCodeDialog.value = true
                                 showProgress = false
                             },
