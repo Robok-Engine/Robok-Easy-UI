@@ -35,7 +35,7 @@ import org.robok.easyui.config.Config
 
 class GUIBuilder(
     private val context: Context,
-    private val onGenerateCode: (String, Config?) -> Unit,
+    private val onGenerateCode: (String, Config) -> Unit,
     val onError: (String) -> Unit,
     private val codeComments: Boolean = false,
     private val verticalRoot: Boolean = false,
@@ -54,7 +54,10 @@ class GUIBuilder(
     
     private var orientation: String = ""
     private var style: String = ""
-    private var config: Config? = null
+    private var config: Config = Config(
+        orientation = "portrait", 
+        style = "defaultStyle"
+    )
 
     init {
         rootView()
@@ -248,7 +251,7 @@ class GUIBuilder(
         if (codeComments) xmlCodeList.newLine("\n" + comment("End."))
         onGenerateCode(
             buildXML(), 
-            config!!
+            config
         )
         Log.d(TAG, config.toString())
     }
