@@ -117,11 +117,12 @@ class GUIBuilder(
     }
 
     fun closeBlockComponent() {
-        if (closingTagLayoutList.isNotEmpty()) {
-            if(isConfigEnable){
+    if(isConfigEnable){
                 isConfigEnable = false
                 return
             }
+            
+        if (closingTagLayoutList.isNotEmpty()) {
            /* if (closingTagLayoutList.last().equals(Config.getName())) {
                 xmlCodeList.newLineBroken(comment("It's here"))
                 config = Config(orientation = orientation, style = style)
