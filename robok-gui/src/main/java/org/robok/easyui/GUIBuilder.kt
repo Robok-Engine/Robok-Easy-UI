@@ -193,7 +193,7 @@ class GUIBuilder(
         var attribute = ""
 
         if (methodName.equals(Config.getName())) {
-            closingTagLayoutList.newLine(methodName)
+            if(!closingTagLayoutList.last().equals(methodName)) closingTagLayoutList.newLine(methodName)
             when (key) {
                 "orientation" -> orientation = value
                 "style" -> style = value
