@@ -132,7 +132,7 @@ class GUIBuilder(
                     xmlCodeList.newLineBroken(previousAttribute + closingTagXml)
                 }
                 indentLevel--
-                if (codeComments) closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
+                closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
             } else {
                 onError("Error: invalid tag format  tag of closing.")
             }
@@ -154,7 +154,7 @@ class GUIBuilder(
 
                 xmlCodeList.newLineBroken("${indent}$closingTagXml" + "\n")
                 indentLevel--
-                if (codeComments) closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
+                closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
             } else {
                 onError("Error: invalid tag format  tag of closing.")
             }
