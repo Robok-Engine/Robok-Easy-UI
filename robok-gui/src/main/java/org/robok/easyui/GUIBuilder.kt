@@ -18,6 +18,7 @@ package org.robok.easyui
  */
 
 import android.content.Context
+import android.util.Log
 
 import java.lang.reflect.InvocationTargetException
 
