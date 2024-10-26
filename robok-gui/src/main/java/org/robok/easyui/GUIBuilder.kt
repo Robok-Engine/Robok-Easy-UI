@@ -111,6 +111,7 @@ class GUIBuilder(
         if (closingTagLayoutList.isNotEmpty()) {
             if (closingTagLayoutList.last().equals(Config.getName())) {
                 config = Config(orientation = orientation, style = style)
+                closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
                 return
             }
             val tags = closingTagLayoutList.last().split(":")
