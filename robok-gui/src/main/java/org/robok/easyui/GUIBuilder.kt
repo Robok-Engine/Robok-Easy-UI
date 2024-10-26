@@ -153,7 +153,7 @@ class GUIBuilder(
                 onError("Error: invalid tag format  tag of closing.")
             }
         } else {
-            onError("Error: No layout to close.")
+            onError("Error: No layout to close in closeBlockComponent.")
         }
     }
 
@@ -175,7 +175,7 @@ class GUIBuilder(
                 onError("Error: invalid tag format  tag of closing.")
             }
         } else {
-            onError("Error: No layout to close.")
+            onError("Error: No layout to close in closeBlockLayout.")
         }
     }
 
