@@ -31,10 +31,8 @@ import androidx.compose.ui.draw.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.window.*
-
 import org.robok.easyui.GUIBuilder
 import org.robok.easyui.compiler.GUICompiler
-
 import org.robok.easyui.demo.ui.components.editor.HighlightingEditor
 import org.robok.easyui.demo.ui.components.syntax.SyntaxType
 import org.robok.easyui.demo.ui.theme.RobokTheme
