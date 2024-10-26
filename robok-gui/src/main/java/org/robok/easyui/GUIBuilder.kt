@@ -87,6 +87,7 @@ class GUIBuilder(
         if (codeComments) xmlCodeList.newLineBroken(comment("Text Component"))
         xmlCodeList.newLineBroken("${indent}<TextView")
         indentLevel++
+        xmlCodeList.newLineBroken("${indent}android:drawable=\"\"" + config.style + "Text")
         closingTagLayoutList.newLine("Text:/>")
     }
 
@@ -94,6 +95,7 @@ class GUIBuilder(
         if (codeComments) xmlCodeList.newLineBroken(comment("Button  Component"))
         xmlCodeList.newLineBroken("${indent}<Button")
         indentLevel++
+        xmlCodeList.newLineBroken("${indent}android:drawable=\"\"" + config.style + "Button")
         closingTagLayoutList.newLine("Button:/>")
     }
 
