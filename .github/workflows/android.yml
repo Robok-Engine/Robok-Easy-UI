@@ -41,13 +41,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: library-gui
-          path: robok-gui/build/outputs/aar/
+          path: robok-gui/build/
           
       - name: Upload release library-antlr4
         uses: actions/upload-artifact@v4
         with:
           name: library-antlr
-          path: robok-antlr4/build/outputs/aar/
+          path: robok-antlr4/build/
           
       - name: Upload release app
         uses: actions/upload-artifact@v4
@@ -86,13 +86,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: library-gui-debug
-          path: robok-gui/build/outputs/aar/
+          path: robok-gui/build/
           
       - name: Upload debug library-antlr4
         uses: actions/upload-artifact@v4
         with:
           name: library-antlr-debug
-          path: robok-antlr4/build/outputs/aar/
+          path: robok-antlr4/build/
           
       - name: Upload debug app
         uses: actions/upload-artifact@v4
