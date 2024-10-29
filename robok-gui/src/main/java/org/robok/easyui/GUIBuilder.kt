@@ -20,13 +20,12 @@ package org.robok.easyui
 import android.content.Context
 import android.util.Log
 import java.lang.reflect.InvocationTargetException
+import org.robok.easyui.components.Components
 import org.robok.easyui.config.Config
 import org.robok.easyui.converter.AttributeConverter
-import org.robok.easyui.internal.DefaultValues
 import org.robok.easyui.internal.Utils.comment
 import org.robok.easyui.internal.newLine
 import org.robok.easyui.internal.newLineBroken
-import org.robok.easyui.components.Components
 
 /*
  * Class that generates XML from the received data.
@@ -54,8 +53,6 @@ class GUIBuilder(
         components.rootView()
         attributeConverter = AttributeConverter()
     }
-
-    
 
     fun newLog(log: String) {
         if (codeComments) components.xmlCodeList.newLine(log)
@@ -184,7 +181,9 @@ class GUIBuilder(
 
         components.indentLevel++
         val attributeConverted = attributeConverter?.convert(key)
-        components.xmlCodeList.newLineBroken(components.indent + attributeConverted + "=" + "\"$value\"")
+        components.xmlCodeList.newLineBroken(
+            components.indent + attributeConverted + "=" + "\"$value\""
+        )
         components.indentLevel--
 
         if (containsCloseTag) {

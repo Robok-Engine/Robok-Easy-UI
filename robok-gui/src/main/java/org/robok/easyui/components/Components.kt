@@ -1,20 +1,24 @@
-package org.robok.easyui.components;
-import org.robok.easyui.internal.Utils.comment
-import org.robok.easyui.internal.DefaultValues
-import org.robok.easyui.internal.newLineBroken
-import org.robok.easyui.internal.newLine
-import org.robok.easyui.config.Config
+package org.robok.easyui.components
 
-class Components(private val codeComments: Boolean = false,
-                 private val verticalRoot: Boolean = false){
+import org.robok.easyui.config.Config
+import org.robok.easyui.internal.DefaultValues
+import org.robok.easyui.internal.Utils.comment
+import org.robok.easyui.internal.newLine
+import org.robok.easyui.internal.newLineBroken
+
+class Components(
+    private val codeComments: Boolean = false,
+    private val verticalRoot: Boolean = false,
+) {
 
     var indentLevel = 0
     val indent: String
         get() = "\t".repeat(indentLevel)
+
     val xmlCodeList: MutableList<String> = mutableListOf()
     val closingTagLayoutList: MutableList<String> = mutableListOf()
     var config: Config = Config(orientation = "portrait", style = "defaultStyle")
-    
+
     fun rootView() {
         if (codeComments) xmlCodeList.newLineBroken(comment("Opening Root Layout"))
         xmlCodeList.newLineBroken("""<?xml version="1.0" encoding="utf-8"?>""")
@@ -86,5 +90,4 @@ class Components(private val codeComments: Boolean = false,
     fun config() {
         /* its fake method*/
     }
-    
 }
