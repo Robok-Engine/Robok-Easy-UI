@@ -53,8 +53,8 @@ class GUIBuilder(
     private var orientation: String = "portrait"
     private var style: String = "defaultStyle"
     private var config: Config = Config(orientation = "portrait", style = "defaultStyle")
-    private var isConfigEnable = false;
-    
+    private var isConfigEnable = false
+
     init {
         rootView()
         attributeConverter = AttributeConverter()
@@ -83,7 +83,7 @@ class GUIBuilder(
         indentLevel++
         closingTagLayoutList.newLine("Column:</LinearLayout>")
     }
-    
+
     fun Row() {
         if (codeComments) xmlCodeList.newLineBroken(comment("Opening Row Layout"))
         xmlCodeList.newLineBroken("${indent}<LinearLayout")
@@ -117,7 +117,7 @@ class GUIBuilder(
         )
         closingTagLayoutList.newLine("Button:/>")
     }
-    
+
     /*
      * for test
      */
@@ -137,13 +137,13 @@ class GUIBuilder(
     }
 
     fun closeBlockComponent() {
-    if(isConfigEnable){
-                isConfigEnable = false
-                return
-            }
-            
+        if (isConfigEnable) {
+            isConfigEnable = false
+            return
+        }
+
         if (closingTagLayoutList.isNotEmpty()) {
-           /* if (closingTagLayoutList.last().equals(Config.getName())) {
+            /* if (closingTagLayoutList.last().equals(Config.getName())) {
                 xmlCodeList.newLineBroken(comment("It's here"))
                 config = Config(orientation = orientation, style = style)
                 closingTagLayoutList.removeAt(closingTagLayoutList.size - 1)
@@ -232,13 +232,13 @@ class GUIBuilder(
 
         if (methodName.equals(Config.getName())) {
             /*if (!closingTagLayoutList.last().equals(methodName))
-                closingTagLayoutList.newLine(methodName)*/
-                
+            closingTagLayoutList.newLine(methodName)*/
+
             when (key) {
                 "orientation" -> orientation = value
                 "style" -> style = value
             }
-            
+
             config = Config(orientation = orientation, style = style)
             isConfigEnable = true
             return
