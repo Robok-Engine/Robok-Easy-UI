@@ -83,6 +83,16 @@ class GUIBuilder(
         indentLevel++
         closingTagLayoutList.newLine("Column:</LinearLayout>")
     }
+    
+    fun Row() {
+        if (codeComments) xmlCodeList.newLineBroken(comment("Opening Row Layout"))
+        xmlCodeList.newLineBroken("${indent}<LinearLayout")
+        indentLevel++
+        xmlCodeList.newLineBroken("${indent}\tandroid:orientation=\"horizontal\"")
+        xmlCodeList.newLineBroken(">")
+        indentLevel++
+        closingTagLayoutList.newLine("Row:</LinearLayout>")
+    }
 
     fun Text() {
         if (codeComments) xmlCodeList.newLineBroken(comment("Text Component"))
@@ -97,7 +107,7 @@ class GUIBuilder(
     }
 
     fun Button() {
-        if (codeComments) xmlCodeList.newLineBroken(comment("Button  Component"))
+        if (codeComments) xmlCodeList.newLineBroken(comment("Button Component"))
         xmlCodeList.newLineBroken("${indent}<Button")
         indentLevel++
         xmlCodeList.newLineBroken(
@@ -106,6 +116,16 @@ class GUIBuilder(
                 "\""
         )
         closingTagLayoutList.newLine("Button:/>")
+    }
+    
+    /*
+     * for test
+     */
+    fun MaterialButton() {
+        if (codeComments) xmlCodeList.newLineBroken(comment("MaterialButton Component"))
+        xmlCodeList.newLineBroken("${indent}<com.google.android.material.button.MaterialButton")
+        indentLevel++
+        closingTagLayoutList.newLine("com.google.android.material.button.MaterialButton:/>")
     }
 
     fun config() {
