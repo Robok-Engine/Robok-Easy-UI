@@ -1,4 +1,4 @@
-name: ANTLR Workflow
+name: ANTLR Generate
 
 on:
   workflow_dispatch:
@@ -18,7 +18,8 @@ jobs:
 
       - name: Run ANTLR
         run: |
-          java -jar assets/antlr4/jar/antlr4-4.13.2-complete.jar -o /assets/antlr4/generated/ /assets/antlr4/RobokEasyUI/grammar/GUI.g4
+          cd /assets/antlr4/RobokEasyUI/grammar/
+          java -jar assets/antlr4/jar/antlr4-4.13.2-complete.jar -o /assets/antlr4/generated/ GUI.g4
 
       - name: Move .interp files
         run: |
