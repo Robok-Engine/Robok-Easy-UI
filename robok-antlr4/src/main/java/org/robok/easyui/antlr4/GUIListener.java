@@ -1,5 +1,6 @@
 // Generated from GUI.g4 by ANTLR 4.13.2
 package org.robok.easyui.antlr4;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -27,6 +28,26 @@ public interface GUIListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitComponent(GUIParser.ComponentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GUIParser#attributeScope}.
+	 * @param ctx the parse tree
+	 */
+	void enterAttributeScope(GUIParser.AttributeScopeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GUIParser#attributeScope}.
+	 * @param ctx the parse tree
+	 */
+	void exitAttributeScope(GUIParser.AttributeScopeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GUIParser#attributeDefault}.
+	 * @param ctx the parse tree
+	 */
+	void enterAttributeDefault(GUIParser.AttributeDefaultContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GUIParser#attributeDefault}.
+	 * @param ctx the parse tree
+	 */
+	void exitAttributeDefault(GUIParser.AttributeDefaultContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GUIParser#argumentList}.
 	 * @param ctx the parse tree
