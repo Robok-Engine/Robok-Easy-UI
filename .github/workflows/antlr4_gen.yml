@@ -1,0 +1,45 @@
+name: ANTLR Workflow
+
+on:
+  workflow_dispatch:
+jobs:
+  generate-antlr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Run ANTLR
+        run: |
+          java -jar assets/antlr4/jar/antlr4-4.13.2-complete.jar -o /assets/antlr4/generated/ /assets/antlr4/RobokEasyUI/grammar/GUI.g4
+
+      - name: Move .interp files
+        run: |
+          mkdir -p /assets/antlr4/RobokEasyUI/interp/
+          mv /assets/antlr4/generated/*.interp /assets/antlr4/RobokEasyUI/interp/ || true
+
+      - name: Move .tokens files
+        run: |
+          mkdir -p /assets/antlr4/RobokEasyUI/tokens/
+          mv /assets/antlr4/generated/*.tokens /assets/antlr4/RobokEasyUI/tokens/ || true
+          
+      - name: Move .java files
+        run: |
+          mkdir -p /robok-antlr4/src/main/java/org/robok/easyui/antlr4/
+          mv /assets/antlr4/generated/*.java /robok-antlr4/src/main/java/org/robok/easyui/antlr4/ || true
+          
+      - name: List generated files
+        run: |
+          echo "Files in interp directory:"
+          ls /assets/antlr4/RobokEasyUI/interp/
+          echo "Files in tokens directory:"
+          ls /assets/antlr4/RobokEasyUI/tokens/
+          echo "Files in java directory:"
+          ls /robok-antlr4/src/main/java/org/robok/easyui/antlr4/
