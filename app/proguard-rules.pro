@@ -22,3 +22,4 @@
 
 
 -keep class org.robok.easyui.GUIBuilder { *; }
+-keep class org.robok.easyui.components.Components { *; }
