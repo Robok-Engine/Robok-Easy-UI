@@ -16,25 +16,25 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
           
-      - name: List files in assets/antlr4/RobokEasyUI/grammar
+      - name: List files in assets/antlr4/grammar
         run: |
           ls
-          ls -R /assets/antlr4/RobokEasyUI/
+          ls -R /assets/antlr4/
 
       - name: Run ANTLR
         run: |
-          cd /assets/antlr4/RobokEasyUI/grammar/
+          cd /assets/antlr4/grammar/
           java -jar assets/antlr4/jar/antlr4-4.13.2-complete.jar -o /assets/antlr4/generated/ GUI.g4
 
       - name: Move .interp files
         run: |
-          mkdir -p /assets/antlr4/RobokEasyUI/interp/
-          mv /assets/antlr4/generated/*.interp /assets/antlr4/RobokEasyUI/interp/ || true
+          mkdir -p /assets/antlr4/interp/
+          mv /assets/antlr4/generated/*.interp /assets/antlr4/interp/ || true
 
       - name: Move .tokens files
         run: |
-          mkdir -p /assets/antlr4/RobokEasyUI/tokens/
-          mv /assets/antlr4/generated/*.tokens /assets/antlr4/RobokEasyUI/tokens/ || true
+          mkdir -p /assets/antlr4/tokens/
+          mv /assets/antlr4/generated/*.tokens /assets/antlr4/tokens/ || true
           
       - name: Move .java files
         run: |
@@ -44,8 +44,8 @@ jobs:
       - name: List generated files
         run: |
           echo "Files in interp directory:"
-          ls /assets/antlr4/RobokEasyUI/interp/
+          ls /assets/antlr4/interp/
           echo "Files in tokens directory:"
-          ls /assets/antlr4/RobokEasyUI/tokens/
+          ls /assets/antlr4/tokens/
           echo "Files in java directory:"
           ls /robok-antlr4/src/main/java/org/robok/easyui/antlr4/
