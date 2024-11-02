@@ -46,53 +46,48 @@ import org.robok.easyui.demo.ui.components.syntax.*
 
 @Composable
 fun HighlightingEditor(
-    value: String,
-    onValueChange: (String) -> Unit,
-    syntaxType: String,
-    focusable: Boolean = true,
-    modifier: Modifier = Modifier,
+  value: String,
+  onValueChange: (String) -> Unit,
+  syntaxType: String,
+  focusable: Boolean = true,
+  modifier: Modifier = Modifier,
 ) {
-    AndroidView(
-        factory = { ctx ->
-            HorizontalScrollView(ctx).apply {
-                isHorizontalScrollBarEnabled = true
-                addView(
-                    EditText(ctx).apply {
-                        setText(value)
-                        setFocusable(focusable)
-                        gravity = Gravity.TOP or Gravity.START
-                        addTextChangedListener(
-                            object : TextWatcher {
-                                override fun beforeTextChanged(
-                                    s: CharSequence?,
-                                    start: Int,
-                                    count: Int,
-                                    after: Int,
-                                ) {}
+  AndroidView(
+    factory = { ctx ->
+      HorizontalScrollView(ctx).apply {
+        isHorizontalScrollBarEnabled = true
+        addView(
+          EditText(ctx).apply {
+            setText(value)
+            setFocusable(focusable)
+            gravity = Gravity.TOP or Gravity.START
+            addTextChangedListener(
+              object : TextWatcher {
+                override fun beforeTextChanged(
+                  s: CharSequence?,
+                  start: Int,
+                  count: Int,
+                  after: Int,
+                ) {}
 
-                                override fun onTextChanged(
-                                    s: CharSequence?,
-                                    start: Int,
-                                    before: Int,
-                                    count: Int,
-                                ) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
-                                override fun afterTextChanged(s: Editable?) {
-                                    s?.let { onValueChange(it.toString()) }
-                                }
-                            }
-                        )
-                        SimpleHighlighter(this, syntaxType)
-                    }
-                )
-            }
-        },
-        update = { scrollView ->
-            val editText = scrollView.getChildAt(0) as? EditText
-            if (editText?.text.toString() != value) {
-                editText?.setText(value)
-            }
-        },
-        modifier = modifier,
-    )
+                override fun afterTextChanged(s: Editable?) {
+                  s?.let { onValueChange(it.toString()) }
+                }
+              }
+            )
+            SimpleHighlighter(this, syntaxType)
+          }
+        )
+      }
+    },
+    update = { scrollView ->
+      val editText = scrollView.getChildAt(0) as? EditText
+      if (editText?.text.toString() != value) {
+        editText?.setText(value)
+      }
+    },
+    modifier = modifier,
+  )
 }
