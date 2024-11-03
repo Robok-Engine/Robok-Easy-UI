@@ -14,8 +14,8 @@ attributeScope
     ;    
     
 component
-    : IDENTIFIER '(' argumentList ')' '{' (component | argumentList)* '}'  // Layouts with parameters and body
-    | IDENTIFIER '{' (component | argumentList)* '}'                       // Layouts like Column without parentheses
+    : IDENTIFIER '(' argumentList ')' '{' (component | attributeDefault | argumentList)* '}'  // Layouts with parameters and body
+    | IDENTIFIER '{' (component | attributeDefault | argumentList)* '}'                       // Layouts like Column without parentheses
     | IDENTIFIER '(' argumentList ')'                                      // Components like Button, Text
     ;
         
