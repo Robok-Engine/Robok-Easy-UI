@@ -4,11 +4,7 @@ T__2=3
 T__3=4
 T__4=5
 T__5=6
-<<<<<<< HEAD
-T__6=7
-=======
 DEFAULT=7
->>>>>>> bb7da5a (fix: defaultAttribute not undestand code)
 IDENTIFIER=8
 IDENTIFIER_COLON=9
 STRING=10
@@ -22,12 +18,6 @@ HASH_COMMENT=16
 ')'=2
 '{'=3
 '}'=4
-<<<<<<< HEAD
-'default'=5
-','=6
-'='=7
-=======
 ','=5
 '='=6
 'default'=7
->>>>>>> bb7da5a (fix: defaultAttribute not undestand code)
