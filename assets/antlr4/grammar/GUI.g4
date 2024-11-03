@@ -14,14 +14,19 @@ attributeScope
     ;
     
 attributeDefault
+<<<<<<< HEAD
     : 'default' '(' argumentList ')' '{' (component | argumentList)* '}'  // Scoped attribute using `argument`
     | 'default' '(' argumentList ')'                                      // Global attribute without scoped block
+=======
+    : DEFAULT '(' argumentList ')' '{' (component | argumentList)* '}'  // Scoped attribute using `argument`
+    | DEFAULT '(' argumentList ')'                                      // Global attribute without scoped block
+>>>>>>> bb7da5a (fix: defaultAttribute not undestand code)
     ;
         
 argumentList
     : argument (',' argument)*  // Argument list
     ;
-
+ 
 argument
     : IDENTIFIER '=' value               // Argument with simple identifier
     | IDENTIFIER_COLON '=' value      // Argument with identifier that can include colons
@@ -32,6 +37,10 @@ value
    | NUMBER
    | IDENTIFIER_DOT;                    // Value can be a string, number, boolean, or identifier with dot notation
 
+<<<<<<< HEAD
+=======
+DEFAULT: 'default';
+>>>>>>> bb7da5a (fix: defaultAttribute not undestand code)
 IDENTIFIER: [a-zA-Z_][a-zA-Z_0-9]*;       // Identifier for components and parameter names
 IDENTIFIER_COLON: [a-zA-Z_][a-zA-Z_0-9:]*;  // Identifier that can include colons
 STRING: '"' (~["\\] | '\\' .)* '"';        // String value
