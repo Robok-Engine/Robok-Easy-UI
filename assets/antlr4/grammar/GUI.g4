@@ -1,21 +1,22 @@
 grammar GUI;
 
-guiFile: (component | attributeScope | attributeDefault)* EOF;
+guiFile: (attributeDefault | attributeScope | component)* EOF;
 
+
+attributeDefault
+    : DEFAULT '(' argumentList ')' '{' (component | argumentList)* '}'  // Scoped attribute using `argument`
+    | DEFAULT '(' argumentList ')'                                      // Global attribute without scoped block
+    ;
+    
+attributeScope
+    : IDENTIFIER '(' STRING ')' '{' (component | argumentList)* '}'  // Scoped attribute
+    | IDENTIFIER '(' STRING ')'                                      // Global attribute without scoped block
+    ;    
+    
 component
     : IDENTIFIER '(' argumentList ')' '{' (component | argumentList)* '}'  // Layouts with parameters and body
     | IDENTIFIER '{' (component | argumentList)* '}'                       // Layouts like Column without parentheses
     | IDENTIFIER '(' argumentList ')'                                      // Components like Button, Text
-    ;
-
-attributeScope
-    : IDENTIFIER '(' STRING ')' '{' (component | argumentList)* '}'  // Scoped attribute
-    | IDENTIFIER '(' STRING ')'                                      // Global attribute without scoped block
-    ;
-    
-attributeDefault
-    : DEFAULT '(' argumentList ')' '{' (component | argumentList)* '}'  // Scoped attribute using `argument`
-    | DEFAULT '(' argumentList ')'                                      // Global attribute without scoped block
     ;
         
 argumentList

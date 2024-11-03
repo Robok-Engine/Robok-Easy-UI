@@ -19,15 +19,15 @@ public interface GUIListener extends ParseTreeListener {
 	 */
 	void exitGuiFile(GUIParser.GuiFileContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GUIParser#component}.
+	 * Enter a parse tree produced by {@link GUIParser#attributeDefault}.
 	 * @param ctx the parse tree
 	 */
-	void enterComponent(GUIParser.ComponentContext ctx);
+	void enterAttributeDefault(GUIParser.AttributeDefaultContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GUIParser#component}.
+	 * Exit a parse tree produced by {@link GUIParser#attributeDefault}.
 	 * @param ctx the parse tree
 	 */
-	void exitComponent(GUIParser.ComponentContext ctx);
+	void exitAttributeDefault(GUIParser.AttributeDefaultContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GUIParser#attributeScope}.
 	 * @param ctx the parse tree
@@ -39,15 +39,15 @@ public interface GUIListener extends ParseTreeListener {
 	 */
 	void exitAttributeScope(GUIParser.AttributeScopeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GUIParser#attributeDefault}.
+	 * Enter a parse tree produced by {@link GUIParser#component}.
 	 * @param ctx the parse tree
 	 */
-	void enterAttributeDefault(GUIParser.AttributeDefaultContext ctx);
+	void enterComponent(GUIParser.ComponentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GUIParser#attributeDefault}.
+	 * Exit a parse tree produced by {@link GUIParser#component}.
 	 * @param ctx the parse tree
 	 */
-	void exitAttributeDefault(GUIParser.AttributeDefaultContext ctx);
+	void exitComponent(GUIParser.ComponentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GUIParser#argumentList}.
 	 * @param ctx the parse tree

@@ -29,13 +29,13 @@ public class GUIBaseListener implements GUIListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComponent(GUIParser.ComponentContext ctx) { }
+	@Override public void enterAttributeDefault(GUIParser.AttributeDefaultContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComponent(GUIParser.ComponentContext ctx) { }
+	@Override public void exitAttributeDefault(GUIParser.AttributeDefaultContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -53,13 +53,13 @@ public class GUIBaseListener implements GUIListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAttributeDefault(GUIParser.AttributeDefaultContext ctx) { }
+	@Override public void enterComponent(GUIParser.ComponentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAttributeDefault(GUIParser.AttributeDefaultContext ctx) { }
+	@Override public void exitComponent(GUIParser.ComponentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
