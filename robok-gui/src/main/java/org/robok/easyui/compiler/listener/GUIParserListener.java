@@ -21,8 +21,10 @@ import static org.robok.easyui.antlr4.GUIParser.ArgumentContext;
 import static org.robok.easyui.antlr4.GUIParser.ArgumentListContext;
 import static org.robok.easyui.antlr4.GUIParser.ComponentContext;
 import static org.robok.easyui.antlr4.GUIParser.GuiFileContext;
+import static org.robok.easyui.antlr4.GUIParser.AttributeDefaultContext;
 
 import org.robok.easyui.GUIBuilder;
+import org.robok.easyui.internal.Utils;
 import org.robok.easyui.antlr4.GUIBaseListener;
 
 /*
@@ -85,6 +87,17 @@ public class GUIParserListener extends GUIBaseListener {
     }
     guiBuilder.runMethodWithParameters("addAttribute", componentName, key, value);
   }
+    
+    @Override
+    public void enterAttributeDefault(AttributeDefaultContext ctx) {
+        guiBuilder.newLog(Utils.comment("enterAttributeDefault"));
+    }
+    
+    @Override
+    public void exitAttributeDefault(AttributeDefaultContext ctx) {
+        guiBuilder.newLog(Utils.comment("exitAttributeDefault"));
+    }
+    
 
   public String getValue(ArgumentContext ctx) {
     String value = "null";
