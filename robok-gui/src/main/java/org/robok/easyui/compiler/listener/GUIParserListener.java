@@ -52,6 +52,7 @@ public class GUIParserListener extends GUIBaseListener {
   @Override
   public void enterComponent(ComponentContext ctx) {
     String componentName = ctx.IDENTIFIER().getText();
+    guiBuilder.newLog(Utils.comment("enterComponent: " + componentName));
     this.componentName = componentName;
     guiBuilder.runMethod(componentName);
   }
