@@ -17,6 +17,7 @@ package org.robok.easyui.compiler.listener;
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import android.content.ComponentName;
 import static org.robok.easyui.antlr4.GUIParser.ArgumentContext;
 import static org.robok.easyui.antlr4.GUIParser.ArgumentListContext;
 import static org.robok.easyui.antlr4.GUIParser.ComponentContext;
@@ -58,6 +59,7 @@ public class GUIParserListener extends GUIBaseListener {
   // Detecta o fechamento de um layout (ex: })
   @Override
   public void exitComponent(ComponentContext ctx) {
+      componentName = "";
     if (ctx.getText().endsWith("}")) {
       guiBuilder.closeBlockLayout();
     } else guiBuilder.closeBlockComponent();
@@ -90,12 +92,14 @@ public class GUIParserListener extends GUIBaseListener {
     
     @Override
     public void enterAttributeDefault(AttributeDefaultContext ctx) {
-        guiBuilder.newLog(Utils.comment("enterAttributeDefault"));
+        componentName = ctx.DEFAULT().getText();
+        guiBuilder.newLog(Utils.comment("enterAttributeDefault: " + componentName));
     }
     
     @Override
     public void exitAttributeDefault(AttributeDefaultContext ctx) {
-        guiBuilder.newLog(Utils.comment("exitAttributeDefault"));
+        guiBuilder.newLog(Utils.comment("exitAttributeDefault: " + componentName));
+        componentName = "";
     }
     
 
