@@ -18,5 +18,9 @@ package org.robok.easyui.internal
  */
 
 internal object Utils {
-    @JvmStatic fun comment(cmmt: String): String = "<!-- ${cmmt} -->"
+
+  @JvmStatic fun comment(cmmt: String): String = "<!-- ${cmmt} -->"
+  
+  @JvmStatic fun convertStyleToFileName(style: String): String = style.replace(Regex("([A-Z])"), "_$1").lowercase()
+  
 }
