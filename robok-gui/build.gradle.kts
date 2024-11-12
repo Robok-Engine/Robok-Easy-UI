@@ -1,6 +1,7 @@
 plugins {
   id("com.android.library")
   id("org.jetbrains.kotlin.android")
+  id("org.jetbrains.kotlin.plugin.serialization")
   id("maven-publish")
 }
 
@@ -35,7 +36,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 dependencies {
   implementation("org.antlr:antlr4:4.13.2")
   implementation("org.antlr:antlr4-runtime:4.13.2")
-  
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
   implementation(project(":robok-antlr4"))
 }
 
