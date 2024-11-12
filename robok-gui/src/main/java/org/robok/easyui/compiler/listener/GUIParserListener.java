@@ -83,7 +83,7 @@ public class GUIParserListener extends GUIBaseListener {
    */
   @Override
   public void enterArgument(ArgumentContext ctx) {
-    String key = DefaultValues.DEFAULT_KEY;
+    String key = DefaultValues.AttributeDefaults.DEFAULT_KEY;
     
     if (ctx.IDENTIFIER() != null) {
       key = ctx.IDENTIFIER().getText();
@@ -91,7 +91,7 @@ public class GUIParserListener extends GUIBaseListener {
       key = ctx.IDENTIFIER_COLON().getText();
     }
     
-    String value = getValue(getAttributeValue);
+    String value = getAttributeValue(ctx);
     
     if (value.startsWith("\"") && value.endsWith("\"")) {
       value = value.substring(1, value.length() - 1);
@@ -108,7 +108,7 @@ public class GUIParserListener extends GUIBaseListener {
    * Returns the attribute value (example: text = "A", this méthod will return A)
    */
   private String getAttributeValue(ArgumentContext ctx) {
-    String value = DefaultValues.DEFAULT_VALUE;
+    String value = DefaultValues.AttributeDefaults.DEFAULT_VALUE;
 
     if (ctx.value().STRING() != null) {
       value = ctx.value().STRING().getText();
