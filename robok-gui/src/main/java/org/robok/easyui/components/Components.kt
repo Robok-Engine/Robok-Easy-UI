@@ -18,7 +18,7 @@ package org.robok.easyui.components
  */
 
 import org.robok.easyui.config.Config
-import org.robok.easyui.internal.DefaultValues
+import org.robok.easyui.internal.AttributeDefaults
 import org.robok.easyui.internal.Utils.comment
 import org.robok.easyui.internal.Utils.convertStyleToFileName
 import org.robok.easyui.internal.newLine
@@ -42,9 +42,9 @@ class Components(
     xmlCodeList.newLineBroken("""<?xml version="1.0" encoding="utf-8"?>""")
     xmlCodeList.newLineBroken("<LinearLayout")
     indentLevel++
-    xmlCodeList.newLineBroken(DefaultValues.XMLNS(indent))
-    xmlCodeList.newLineBroken("${indent}${DefaultValues.LAYOUT_HEIGHT}")
-    xmlCodeList.newLineBroken("${indent}${DefaultValues.LAYOUT_WIDTH}")
+    xmlCodeList.newLineBroken(AttributeDefaults.XMLNS(indent))
+    xmlCodeList.newLineBroken("${indent}${AttributeDefaults.LAYOUT_HEIGHT}")
+    xmlCodeList.newLineBroken("${indent}${AttributeDefaults.LAYOUT_WIDTH}")
     if (verticalRoot) xmlCodeList.newLineBroken("${indent}\tandroid:orientation=\"vertical\"")
     xmlCodeList.newLine("${indent}\tandroid:id=\"@+id/root_view\"")
     xmlCodeList.newLineBroken(">")

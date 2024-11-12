@@ -24,7 +24,7 @@ import static org.robok.easyui.antlr4.GUIParser.GuiFileContext;
 
 import org.robok.easyui.GUIBuilder;
 import org.robok.easyui.antlr4.GUIBaseListener;
-import org.robok.easyui.internal.DefaultValues.AttributeDefaults;
+import org.robok.easyui.internal.AttributeDefaults;
 
 /*
  * Class that identifies the code and uses the { @link GUIBuilder } to generate de the.
