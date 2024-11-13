@@ -35,11 +35,11 @@ public class GUIParserListener extends GUIBaseListener {
 
   private GUIBuilder guiBuilder;
   private String componentName;
-  
+
   public GUIParserListener(GUIBuilder guiBuilder) {
     this.guiBuilder = guiBuilder;
   }
-  
+
   /*
    * When finish the code
    */
@@ -77,33 +77,33 @@ public class GUIParserListener extends GUIBaseListener {
   public void enterArgumentList(ArgumentListContext ctx) {
     String componentName = ctx.getParent().getChild(0).getText();
   }
-  
+
   /*
    * When enter new argument (example text = "")
    */
   @Override
   public void enterArgument(ArgumentContext ctx) {
     String key = AttributeDefaults.DEFAULT_KEY;
-    
+
     if (ctx.IDENTIFIER() != null) {
       key = ctx.IDENTIFIER().getText();
     } else {
       key = ctx.IDENTIFIER_COLON().getText();
     }
-    
+
     String value = getAttributeValue(ctx);
-    
+
     if (value.startsWith("\"") && value.endsWith("\"")) {
       value = value.substring(1, value.length() - 1);
     }
-    
+
     if (value.contains("\\\"")) {
       value = value.replaceAll("\\\"", "&quot;");
     }
-    
+
     guiBuilder.runMethodWithParameters("addAttribute", componentName, key, value);
   }
-  
+
   /*
    * Returns the attribute value (example: text = "A", this méthod will return A)
    */
