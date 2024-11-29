@@ -75,5 +75,5 @@ dependencies{
     implementation("androidx.activity:activity-compose:1.9.3")
     
     implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.13.0-alpha07")
+    implementation("com.google.android.material:material:1.13.0-alpha08")
 }
