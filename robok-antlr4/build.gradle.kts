@@ -6,7 +6,7 @@ plugins {
 
 android {
   namespace = "org.robok.easyui.antlr4"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     minSdk = 21
