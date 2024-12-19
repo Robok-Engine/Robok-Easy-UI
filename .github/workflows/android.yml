@@ -33,9 +33,9 @@ jobs:
         
       - name: Build release for all modules
         run: |
-          ./gradlew :robok-gui:assembleRelease
-          ./gradlew :robok-antlr4:assembleRelease
-          ./gradlew :app:assembleRelease
+          ./gradlew :robok-gui:assembleRelease --stacktrace
+          ./gradlew :robok-antlr4:assembleRelease --stacktrace
+          ./gradlew :app:assembleRelease --stacktrace
 
       - name: Upload release library-gui
         uses: actions/upload-artifact@v4
@@ -78,9 +78,9 @@ jobs:
         
       - name: Build debug for all modules
         run: |
-          ./gradlew :robok-gui:assembleDebug
-          ./gradlew :robok-antlr4:assembleDebug
-          ./gradlew :app:assembleDebug
+          ./gradlew :robok-gui:assembleDebug --stacktrace
+          ./gradlew :robok-antlr4:assembleDebug --stacktrace
+          ./gradlew :app:assembleDebug --stacktrace
 
       - name: Upload debug library-gui
         uses: actions/upload-artifact@v4
