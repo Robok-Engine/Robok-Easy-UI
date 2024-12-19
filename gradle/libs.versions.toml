@@ -1,0 +1,44 @@
+[versions]
+android = "8.7.3"
+kotlin = "2.1.0"
+compose-compiler = "2.1.0"
+androidx-compose = "2024.11.00"
+androidx-lifecycle-runtime-ktx = "2.8.7"
+androidx-core-ktx = "1.15.0"
+androidx-core-splashscreen = "1.0.1"
+androidx-compose-activity = "1.9.3"
+antlr4 = "4.13.2"
+ktx-serialization-json = "1.7.3"
+
+[plugins]
+# Android Gradle Plugin
+android-lib = { id = "com.android.library", version.ref = "android" }
+android-app = { id = "com.android.application", version.ref = "android" } 
+
+# Kotlin
+kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+# Compose
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "compose-compiler" }
+
+[libraries]
+# AndroidX Compose
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-compose-activity" }
+
+# Androidx
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle-runtime-ktx" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "androidx-core-splashscreen" }
+
+# Antlr4
+antlr4 = { group = "org.antlr", name = "antlr4", version.ref = "antlr4" }
+antlr4-runtime = { group = "org.antlr", name = "antlr4-runtime", version.ref = "antlr4" }
+
+# KotlinX
+ktx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "ktx-serialization-json" }

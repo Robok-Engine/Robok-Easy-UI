@@ -1,7 +1,6 @@
 plugins {
-  id("com.android.library")
-  id("kotlin-android")
-  id("maven-publish")
+  alias(libs.plugins.android.app)
+  alias(libs.plugins.kotlin)
 }
 
 android {
@@ -10,41 +9,19 @@ android {
 
   defaultConfig {
     minSdk = 21
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    consumerProguardFiles("consumer-rules.pro")
-  }
-
-  buildTypes {
-    release {
-      isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-    }
   }
 
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
   }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "11"
+  kotlinOptions.jvmTarget = "21"
 }
 
 dependencies {
-  implementation("org.antlr:antlr4:4.13.2")
-  implementation("org.antlr:antlr4-runtime:4.13.2")
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            groupId = "com.github.robok-engine"
-            artifactId = "robok-antlr4"
-            version  = "1.0.0-Alpha01"
-            
-            from(components.findByName("release"))
-        }
-    }
+  implementation(libs.antlr4)
+  implementation(libs.antlr4.runtime)
 }
