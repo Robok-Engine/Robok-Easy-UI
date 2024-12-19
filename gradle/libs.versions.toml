@@ -9,6 +9,7 @@ androidx-core-splashscreen = "1.0.1"
 androidx-compose-activity = "1.9.3"
 antlr4 = "4.13.2"
 ktx-serialization-json = "1.7.3"
+sora-editor = "0.23.5"
 
 [plugins]
 # Android Gradle Plugin
