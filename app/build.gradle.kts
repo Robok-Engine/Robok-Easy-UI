@@ -59,6 +59,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 dependencies {
   implementation(projects.robokGui)
+  
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.material3)
@@ -67,4 +68,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.core.splashscreen)
+  
+  implementation(libs.sora.editor)
+  implementation(libs.sora.editor.language.textmate)
 }

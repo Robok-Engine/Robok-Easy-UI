@@ -31,10 +31,11 @@ import androidx.compose.ui.draw.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.window.*
+import io.github.rosemoe.sora.text.Content
 import org.robok.easyui.GUIBuilder
 import org.robok.easyui.compiler.GUICompiler
-import org.robok.easyui.demo.ui.components.editor.HighlightingEditor
-import org.robok.easyui.demo.ui.components.syntax.SyntaxType
+import org.robok.easyui.demo.ui.components.editor.CodeEditor
+import org.robok.easyui.demo.ui.components.editor.rememberCodeEditorState
 import org.robok.easyui.demo.ui.theme.RobokTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -76,7 +77,12 @@ class MainActivity : ComponentActivity() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-      HighlightingEditor(value = code, onValueChange = { code = it }, syntaxType = SyntaxType.XML)
+      val editorState = rememberCodeEditorState(
+        initialContent = Content(code),
+        isEditable = true,
+        onCodeChanged = { code = it }
+      )
+      CodeEditor(state = editorState)
       Button(
         onClick = {
           showProgress = true
@@ -145,9 +151,8 @@ class MainActivity : ComponentActivity() {
       onDismissRequest = { showCodeDialog.value = false },
       title = { Text(text = stringResource(id = R.string.generated_code)) },
       text = {
-        SelectionContainer {
-          HighlightingEditor(value = generatedCode, onValueChange = {}, syntaxType = SyntaxType.XML)
-        }
+        val editorState = rememberCodeEditorState(initialContent = Content(generatedCode))
+        CodeEditor(modifier = Modifier.padding(innerPadding).fillMaxSize(), state = editorState)
       },
       confirmButton = { Button(onClick = { showCodeDialog.value = false }) { Text("OK") } },
     )

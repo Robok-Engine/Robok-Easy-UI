@@ -42,3 +42,7 @@ antlr4-runtime = { group = "org.antlr", name = "antlr4-runtime", version.ref = "
 
 # KotlinX
 ktx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "ktx-serialization-json" }
+
+# Sora Editor 
+sora-editor = { group = "io.github.Rosemoe.sora-editor", name = "editor", version.ref = "sora-editor" }
+sora-editor-language-textmate = { group = "io.github.Rosemoe.sora-editor", name = "language-textmate", version.ref = "sora-editor" }
