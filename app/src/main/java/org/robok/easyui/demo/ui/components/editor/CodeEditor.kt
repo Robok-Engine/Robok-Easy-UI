@@ -60,12 +60,10 @@ fun CodeEditor(modifier: Modifier = Modifier, state: CodeEditorState) {
     setCodeEditorFactory(isDarkMode = dark, context = context, state = state)
   }
   AndroidView(
-    factory = { editor }, 
+    factory = { editor },
     modifier = modifier,
     onRelease = { it.release() },
-    update = {
-      state.content = it.text 
-    }
+    update = { state.content = it.text },
   )
 }
 
@@ -132,7 +130,7 @@ private fun setCodeEditorFactory(
 data class CodeEditorState(
   var editor: CodeEditor? = null,
   val initialContent: Content = Content(),
-  val isEditable: Boolean = false 
+  val isEditable: Boolean = false,
 ) {
   var content by mutableStateOf(initialContent)
 }

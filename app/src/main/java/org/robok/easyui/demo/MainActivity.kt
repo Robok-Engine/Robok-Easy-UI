@@ -77,11 +77,12 @@ class MainActivity : ComponentActivity() {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-      val editorState = rememberCodeEditorState(
-        initialContent = Content(code),
-        isEditable = true,
-        onCodeChanged = { code = it }
-      )
+      val editorState =
+        rememberCodeEditorState(
+          initialContent = Content(code),
+          isEditable = true,
+          onCodeChanged = { code = it },
+        )
       CodeEditor(state = editorState)
       Button(
         onClick = {
