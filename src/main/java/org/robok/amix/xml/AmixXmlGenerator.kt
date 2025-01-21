@@ -31,7 +31,7 @@ import org.robok.amix.ext.newLineBroken
  * Class that generates XML from the received data.
  */
 
-internal class AmixXmlGenerator(
+class AmixXmlGenerator(
   private val context: Context,
   private val onGenerateCode: (String, Config) -> Unit,
   val onError: (String) -> Unit,
