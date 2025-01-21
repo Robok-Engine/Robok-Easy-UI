@@ -1,0 +1,89 @@
+Column(
+  width = "match_parent",
+  height = "match_parent"
+) {
+  Text(
+    id = "text",
+    text = "Text",
+    width = "wrap_content",
+    height = "wrap_content"
+  )
+  Button(
+    id = "button",
+    text = "Button",
+    width = "wrap_content",
+    height = "wrap_content"
+  )
+  MaterialButton(
+    id = "materialbutton",
+    text = "MaterialButton",
+    width = "wrap_content",
+    height = "wrap_content"
+  )
+  Image(
+    id = "image",
+    width = "wrap_content",
+    height = "wrap_content",
+    src = "/some/image/name"
+  )
+  Row(
+    width = "match_parent",
+    height = "wrap_content"
+  ) { 
+    CircleProgress(
+      id = "circle_prog",
+      width = "wrap_content",
+      height = "wrap_content"
+    )
+    BarProgress(
+      id = "bar_prog",
+      width = "wrap_content",
+      height = "wrap_content"
+    )
+  }
+  Box(
+    width = "match_parent",
+    height = "wrap_content"
+  ) { 
+    Switch(
+      id = "switch",
+      text = "Switch",
+      width = "wrap_content",
+      height = "wrap_content"
+    )
+    CheckBox(
+      id = "checkbox",
+      text = "CheckBox",
+      width = "wrap_content",
+      height = "wrap_content"
+    )
+  }
+  RadioGroup(
+    width = "match_parent",
+    height = "wrap_content"
+  ) {
+    RadioButton(
+      id = "radio1",
+      text = "Radio 1",
+      width = "wrap_content",
+      height = "wrap_content"
+    )
+    RadioButton(
+      id = "radio2",
+      text = "Radio 2",
+      width = "wrap_content",
+      height = "wrap_content"
+    )
+    RadioButton(
+      id = "radio3",
+      text = "Radio 3",
+      width = "wrap_content",
+      height = "wrap_content"
+    )
+  }
+  Slider(
+    id = "slider",
+    width = "wrap_content",
+    height = "wrap_content"
+  )
+}
