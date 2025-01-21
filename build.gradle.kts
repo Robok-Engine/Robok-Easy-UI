@@ -18,10 +18,14 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-  alias(libs.plugins.android.app)
+  alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin)
   alias(libs.plugins.kotlin.serialization)
+  `maven-publish`
 }
+
+group = "org.robok"
+version = libs.versions.lib.version.get()
 
 android {
   namespace = "org.robok.easyui"
@@ -42,6 +46,20 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     jvmTarget.set(JvmTarget.JVM_21)
   }
 }
+
+afterEvaluate {
+  publishing {
+    publications {
+      register("mavenRelease", MavenPublication::class) {
+        groupId = "org.robok"
+        artifactId = "amix"
+        version = libs.versions.lib.version.get()
+        from(components["release"])
+      }
+    }
+  }
+}
+
 
 dependencies {
   implementation(libs.antlr4)

@@ -4,10 +4,11 @@ kotlin = "2.1.0"
 antlr4 = "4.13.2"
 ktx-serialization-json = "1.7.3"
 
+lib-version = "1.0.0"
+
 [plugins]
 # Android Gradle Plugin
-android-lib = { id = "com.android.library", version.ref = "android" }
-android-app = { id = "com.android.application", version.ref = "android" } 
+android-library = { id = "com.android.library", version.ref = "android" }
 
 # Kotlin
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
