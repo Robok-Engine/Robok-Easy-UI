@@ -1,3 +1,5 @@
+package org.robok.amix.internal
+
 /*
  *  This file is part of Robok © 2024.
  *
@@ -15,32 +17,11 @@
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-plugins {
-  alias(libs.plugins.android.app)
-  alias(libs.plugins.kotlin)
-  alias(libs.plugins.kotlin.serialization)
-}
+internal object Utils {
 
-android {
-  namespace = "org.robok.easyui"
-  compileSdk = 35
+  @JvmStatic fun comment(cmmt: String): String = "<!-- ${cmmt} -->"
 
-  defaultConfig {
-    minSdk = 21
-  }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-  }
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "21"
-}
-
-dependencies {
-  implementation(libs.antlr4)
-  implementation(libs.antlr4.runtime)
-  implementation(libs.ktx.serialization.json)
+  @JvmStatic
+  fun convertStyleToFileName(style: String): String =
+    style.replace(Regex("([A-Z])"), "_$1").lowercase()
 }

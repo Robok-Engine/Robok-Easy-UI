@@ -1,3 +1,5 @@
+package org.robok.amix.ext
+
 /*
  *  This file is part of Robok © 2024.
  *
@@ -15,32 +17,27 @@
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-plugins {
-  alias(libs.plugins.android.app)
-  alias(libs.plugins.kotlin)
-  alias(libs.plugins.kotlin.serialization)
-}
-
-android {
-  namespace = "org.robok.easyui"
-  compileSdk = 35
-
-  defaultConfig {
-    minSdk = 21
-  }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+/*
+ * Add new line on MutableList.
+ */
+internal fun MutableList<String>.newLine(text: String) {
+  if (text.isNotEmpty()) {
+    this.add("$text")
   }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "21"
+/*
+ * Add new line with \n in MutableList.
+ */
+internal fun MutableList<String>.newLineBroken(text: String) {
+  if (text.isNotEmpty()) {
+    this.add("$text\n")
+  }
 }
 
-dependencies {
-  implementation(libs.antlr4)
-  implementation(libs.antlr4.runtime)
-  implementation(libs.ktx.serialization.json)
+/*
+ * Add Empty Line in List
+ */
+internal fun MutableList<String>.newEmptyLine() {
+  this.add("\n")
 }

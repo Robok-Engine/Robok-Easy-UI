@@ -1,3 +1,5 @@
+package org.robok.amix.converter
+
 /*
  *  This file is part of Robok © 2024.
  *
@@ -15,32 +17,19 @@
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-plugins {
-  alias(libs.plugins.android.app)
-  alias(libs.plugins.kotlin)
-  alias(libs.plugins.kotlin.serialization)
-}
+internal object AttributesAbbreviations {
+  public val attributes: Map<String, String> =
+    mapOf(
+      "layout:an:bm" to "android:layout_alignParentBottom",
+      "layout:an:be" to "android:layout_alignBaseline",
+      "layout:gravity:cr:hl" to "android:layout_centerHorizontal",
+      "layout:gravity:cr:vl" to "android:layout_centerVertical",
+      "layout:an:st" to "android:layout_alignParentStart",
+      "layout:an:tp" to "android:layout_alignParentTop",
+      "layout:an:ed" to "android:layout_alignParentEnd",
+    )
 
-android {
-  namespace = "org.robok.easyui"
-  compileSdk = 35
-
-  defaultConfig {
-    minSdk = 21
+  public fun convert(attribute: String): String? {
+    return attributes[attribute]
   }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-  }
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "21"
-}
-
-dependencies {
-  implementation(libs.antlr4)
-  implementation(libs.antlr4.runtime)
-  implementation(libs.ktx.serialization.json)
 }

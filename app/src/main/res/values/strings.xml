@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Robok Easy UI Demo</string>
-    <string name="create_basic_gui">Create Basic GUI</string>
-    <string name="generated_code">Generated Code</string>
-    <string name="error_ocurred">An error ocurred</string>
-    <string name="code_comments">Use comments Generated Code</string>
-    <string name="code">Code</string>
-</resources>

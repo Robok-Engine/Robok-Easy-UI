@@ -1,6 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 pluginManagement {
   repositories {
     gradlePluginPortal()
@@ -17,8 +14,4 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "Robok-Easy-UI"
-
-include(":app")
-include(":robok-gui")
-include(":robok-antlr4")
+rootProject.name = "Robok-Amix"
