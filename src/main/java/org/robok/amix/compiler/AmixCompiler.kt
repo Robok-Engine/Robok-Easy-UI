@@ -34,9 +34,10 @@ import org.robok.amix.compiler.listener.AmixParserListener
 class AmixCompiler(private val xmlGenerator: AmixXmlGenerator, private val code: String) {
 
   fun compile() {
+    if (code == null) throw AmixNullCodeException()
     val th = Thread {
       try {
-        val input = CharStreams.fromString(code)
+        val input = CharStreams.fromString(code!!)
         val lexer = AmixLexer(input)
         val tokens = CommonTokenStream(lexer)
         val parser = AmixParser(tokens)
