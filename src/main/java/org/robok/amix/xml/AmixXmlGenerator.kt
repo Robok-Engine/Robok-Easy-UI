@@ -48,7 +48,7 @@ class AmixXmlGenerator(
   private var components: Components = Components(codeComments, verticalRoot)
 
   init {
-    components.rootView()
+    components.Root()
   }
 
   public fun closeBlockComponent() {
