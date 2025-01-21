@@ -25,28 +25,28 @@ import org.robok.amix.internal.antlr4.AmixParser.ComponentContext
 import org.robok.amix.internal.antlr4.AmixParser.GuiFileContext
 import org.robok.amix.internal.AttributeDefaults
 
-internal class AmixParserListener(private val builder: AmixXmlGenerator) : AmixBaseListener() {
+internal class AmixParserListener(private val xmlGenerator: AmixXmlGenerator) : AmixBaseListener() {
   private var componentName: String = ""
 
   /** when finish the code */
   override fun exitGuiFile(context: GuiFileContext) {
-    builder.finish()
+    xmlGenerator.finish()
     super.exitGuiFile(context)
   }
 
   /** Called in start of component Example: Column { or Button( */
   override fun enterComponent(context: ComponentContext) {
     componentName = context.IDENTIFIER().text
-    builder.runMethod(componentName)
+    xmlGenerator.runMethod(componentName)
   }
 
   /** Called in end of component Example } or ) */
   override fun exitComponent(context: ComponentContext) {
     if (context.text.endsWith("}")) {
-      builder.closeBlockLayout()
+      xmlGenerator.closeBlockLayout()
       return
     }
-    builder.closeBlockComponent()
+    xmlGenerator.closeBlockComponent()
   }
 
   /*
@@ -78,7 +78,7 @@ internal class AmixParserListener(private val builder: AmixXmlGenerator) : AmixB
       value = value.replace("\\\"", "&quot;")
     }
 
-    builder.runMethodWithParameters("addAttribute", componentName, key, value)
+    xmlGenerator.runMethodWithParameters("addAttribute", componentName, key, value)
   }
 
   /*

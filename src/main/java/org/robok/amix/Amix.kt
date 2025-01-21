@@ -55,14 +55,14 @@ class Amix(val context: Context) {
     }
 
     fun create(): Amix {
-      val xmlBuilder =
+      val xmlGenerator =
         AmixXmlGenerator(
           context = context,
           codeComments = useComments,
           onGenerateCode = onGenerateCode,
           onError = onError
         )
-      val amixCompiler = AmixCompiler(xmlBuilder = xmlBuilder, code = code)
+      val amixCompiler = AmixCompiler(xmlGenerator = xmlGenerator, code = code)
       return Amix(context).apply {
         compiler = amixCompiler
       }
