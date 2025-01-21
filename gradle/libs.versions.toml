@@ -1,5 +1,5 @@
 [versions]
-android = "8.7.3"
+android = "8.8.0"
 kotlin = "2.1.0"
 antlr4 = "4.13.2"
 ktx-serialization-json = "1.7.3"
