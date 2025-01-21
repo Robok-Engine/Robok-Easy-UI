@@ -2,7 +2,7 @@
 android = "8.8.0"
 kotlin = "2.1.0"
 antlr4 = "4.13.2"
-ktx-serialization-json = "1.7.3"
+ktx-serialization-json = "1.8.0"
 
 lib-version = "1.0.0"
 
