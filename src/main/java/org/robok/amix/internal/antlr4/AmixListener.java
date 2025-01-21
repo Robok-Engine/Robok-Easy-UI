@@ -1,4 +1,4 @@
-package org.robok.easyui.internal.antlr4;
+package org.robok.amix.internal.antlr4;
 
 // Generated from Amix.g4 by ANTLR 4.13.2
 
