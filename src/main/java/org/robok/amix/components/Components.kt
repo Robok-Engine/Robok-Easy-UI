@@ -17,6 +17,7 @@ package org.robok.amix.components
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import org.robok.amix.annotation.Component
 import org.robok.amix.config.Config
 import org.robok.amix.ext.newLine
 import org.robok.amix.ext.newLineBroken
@@ -37,7 +38,8 @@ internal class Components(
   val closingTagLayoutList: MutableList<String> = mutableListOf()
   var config: Config = Config(orientation = "portrait", style = "defaultStyle")
 
-  fun rootView() {
+  @Component("Root")
+  fun Root() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Opening Root Layout"))
     xmlCodeList.newLineBroken("""<?xml version="1.0" encoding="utf-8"?>""")
     xmlCodeList.newLineBroken("<LinearLayout")
@@ -51,6 +53,7 @@ internal class Components(
     indentLevel++
   }
 
+  @Component("Column")
   fun Column() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Opening Column Layout"))
     xmlCodeList.newLineBroken("${indent}<LinearLayout")
@@ -61,6 +64,7 @@ internal class Components(
     closingTagLayoutList.newLine("Column:</LinearLayout>")
   }
 
+  @Component("Row")
   fun Row() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Opening Row Layout"))
     xmlCodeList.newLineBroken("${indent}<LinearLayout")
@@ -71,6 +75,7 @@ internal class Components(
     closingTagLayoutList.newLine("Row:</LinearLayout>")
   }
 
+  @Component("Box")
   fun Box() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Opening Box Layout"))
     xmlCodeList.newLineBroken("${indent}<RelativeLayout")
@@ -80,6 +85,7 @@ internal class Components(
     closingTagLayoutList.newLine("Box:</RelativeLayout>")
   }
 
+  @Component("Text")
   fun Text() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Text Component"))
     xmlCodeList.newLineBroken("${indent}<TextView")
@@ -92,6 +98,7 @@ internal class Components(
     closingTagLayoutList.newLine("Text:/>")
   }
 
+  @Component("Image")
   fun Image() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Image Component"))
     xmlCodeList.newLineBroken("${indent}<ImageView")
@@ -104,6 +111,7 @@ internal class Components(
     closingTagLayoutList.newLine("Image:/>")
   }
 
+  @Component("CircleProgress")
   fun CircleProgress() {
     if (codeComments) xmlCodeList.newLineBroken(comment("CircleProgress Component"))
     xmlCodeList.newLineBroken("${indent}<ProgressBar")
@@ -116,6 +124,7 @@ internal class Components(
     closingTagLayoutList.newLine("CircleProgress:/>")
   }
 
+  @Component("BarProgress")
   fun BarProgress() {
     if (codeComments) xmlCodeList.newLineBroken(comment("BarProgress Component"))
     xmlCodeList.newLineBroken("${indent}<ProgressBar")
@@ -131,6 +140,7 @@ internal class Components(
     closingTagLayoutList.newLine("BarProgress:/>")
   }
 
+  @Component("Switch")
   fun Switch() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Switch Component"))
     xmlCodeList.newLineBroken("${indent}<Switch")
@@ -143,6 +153,7 @@ internal class Components(
     closingTagLayoutList.newLine("Switch:/>")
   }
 
+  @Component("CheckBox")
   fun CheckBox() {
     if (codeComments) xmlCodeList.newLineBroken(comment("CheckBox Component"))
     xmlCodeList.newLineBroken("${indent}<CheckBox")
@@ -155,6 +166,7 @@ internal class Components(
     closingTagLayoutList.newLine("CheckBox:/>")
   }
 
+  @Component("RadioGroup")
   fun RadioGroup() {
     if (codeComments) xmlCodeList.newLineBroken(comment("RadioGroup Component"))
     xmlCodeList.newLineBroken("${indent}<RadioGroup")
@@ -167,6 +179,7 @@ internal class Components(
     closingTagLayoutList.newLine("RadioGroup:/>")
   }
 
+  @Component("RadioButton")
   fun RadioButton() {
     if (codeComments) xmlCodeList.newLineBroken(comment("RadioButton Component"))
     xmlCodeList.newLineBroken("${indent}<RadioButton")
@@ -179,6 +192,7 @@ internal class Components(
     closingTagLayoutList.newLine("RadioButton:/>")
   }
 
+  @Component("Slider")
   fun Slider() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Slider Component"))
     xmlCodeList.newLineBroken("${indent}<SeekBar")
@@ -191,6 +205,7 @@ internal class Components(
     closingTagLayoutList.newLine("Slider:/>")
   }
 
+  @Component("Button")
   fun Button() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Button Component"))
     xmlCodeList.newLineBroken("${indent}<Button")
@@ -203,9 +218,7 @@ internal class Components(
     closingTagLayoutList.newLine("Button:/>")
   }
 
-  /*
-   * for test
-   */
+  @Component("MaterialButton")
   fun MaterialButton() {
     if (codeComments) xmlCodeList.newLineBroken(comment("MaterialButton Component"))
     xmlCodeList.newLineBroken("${indent}<com.google.android.material.button.MaterialButton")
@@ -213,7 +226,5 @@ internal class Components(
     closingTagLayoutList.newLine("com.google.android.material.button.MaterialButton:/>")
   }
 
-  fun config() {
-    /* its fake method*/
-  }
+  fun config() = Unit
 }
