@@ -15,6 +15,8 @@
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
   alias(libs.plugins.android.app)
   alias(libs.plugins.kotlin)
