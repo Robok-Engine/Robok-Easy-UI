@@ -38,6 +38,10 @@ internal class Components(
   val closingTagLayoutList: MutableList<String> = mutableListOf()
   var config: Config = Config(orientation = "portrait", style = "defaultStyle")
 
+  /** just to not crash in reflection */
+  fun config() = Unit
+
+  /*********** Layouts ************/
   @Component("Root")
   fun Root() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Opening Root Layout"))
@@ -85,6 +89,20 @@ internal class Components(
     closingTagLayoutList.newLine("Box:</RelativeLayout>")
   }
 
+  @Component("RadioGroup")
+  fun RadioGroup() {
+    if (codeComments) xmlCodeList.newLineBroken(comment("RadioGroup Component"))
+    xmlCodeList.newLineBroken("${indent}<RadioGroup")
+    indentLevel++
+    xmlCodeList.newLineBroken(
+      "${indent}android:background=\"@drawable/" +
+        convertStyleToFileName(config.style + "RadioGroup") +
+        "\""
+    )
+    closingTagLayoutList.newLine("RadioGroup:</RadioGroup>")
+  }
+
+  /*********** Widgets ************/
   @Component("Text")
   fun Text() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Text Component"))
@@ -96,6 +114,27 @@ internal class Components(
         "\""
     )
     closingTagLayoutList.newLine("Text:/>")
+  }
+
+  @Component("Button")
+  fun Button() {
+    if (codeComments) xmlCodeList.newLineBroken(comment("Button Component"))
+    xmlCodeList.newLineBroken("${indent}<Button")
+    indentLevel++
+    xmlCodeList.newLineBroken(
+      "${indent}android:background=\"@drawable/" +
+        convertStyleToFileName(config.style + "Button") +
+        "\""
+    )
+    closingTagLayoutList.newLine("Button:/>")
+  }
+
+  @Component("MaterialButton")
+  fun MaterialButton() {
+    if (codeComments) xmlCodeList.newLineBroken(comment("MaterialButton Component"))
+    xmlCodeList.newLineBroken("${indent}<com.google.android.material.button.MaterialButton")
+    indentLevel++
+    closingTagLayoutList.newLine("com.google.android.material.button.MaterialButton:/>")
   }
 
   @Component("Image")
@@ -166,19 +205,6 @@ internal class Components(
     closingTagLayoutList.newLine("CheckBox:/>")
   }
 
-  @Component("RadioGroup")
-  fun RadioGroup() {
-    if (codeComments) xmlCodeList.newLineBroken(comment("RadioGroup Component"))
-    xmlCodeList.newLineBroken("${indent}<RadioGroup")
-    indentLevel++
-    xmlCodeList.newLineBroken(
-      "${indent}android:background=\"@drawable/" +
-        convertStyleToFileName(config.style + "RadioGroup") +
-        "\""
-    )
-    closingTagLayoutList.newLine("RadioGroup:/>")
-  }
-
   @Component("RadioButton")
   fun RadioButton() {
     if (codeComments) xmlCodeList.newLineBroken(comment("RadioButton Component"))
@@ -204,27 +230,4 @@ internal class Components(
     )
     closingTagLayoutList.newLine("Slider:/>")
   }
-
-  @Component("Button")
-  fun Button() {
-    if (codeComments) xmlCodeList.newLineBroken(comment("Button Component"))
-    xmlCodeList.newLineBroken("${indent}<Button")
-    indentLevel++
-    xmlCodeList.newLineBroken(
-      "${indent}android:background=\"@drawable/" +
-        convertStyleToFileName(config.style + "Button") +
-        "\""
-    )
-    closingTagLayoutList.newLine("Button:/>")
-  }
-
-  @Component("MaterialButton")
-  fun MaterialButton() {
-    if (codeComments) xmlCodeList.newLineBroken(comment("MaterialButton Component"))
-    xmlCodeList.newLineBroken("${indent}<com.google.android.material.button.MaterialButton")
-    indentLevel++
-    closingTagLayoutList.newLine("com.google.android.material.button.MaterialButton:/>")
-  }
-
-  fun config() = Unit
 }
