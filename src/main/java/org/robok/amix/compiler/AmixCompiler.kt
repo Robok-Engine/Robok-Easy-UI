@@ -31,7 +31,7 @@ import org.robok.amix.compiler.listener.AmixParserListener
  * @author Thiarley Rocha (ThDev-only).
  */
 
-class AmixCompiler(private val xmlGenerator: AmixXmlGenerator, private val code: String) {
+class AmixCompiler(private val xmlGenerator: AmixXmlGenerator, private val code: String?) {
 
   fun compile() {
     if (code == null) throw AmixNullCodeException()
