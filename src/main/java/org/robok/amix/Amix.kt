@@ -29,11 +29,11 @@ class Amix(val context: Context) {
   fun compile() = compiler.compile()
 
   class Builder(private val context: Context) {
+    private lateinit var onGenerateCode: OnGenerateCode
+    private lateinit var onError: OnError
     private var useComments: Boolean = false
     private var code: String? = null
-    private var onGenerateCode: (String, Config) -> Unit = { _, _ -> }
-    private var onError: (String) -> Unit = {}
-
+    
     fun setUseComments(useComments: Boolean): Builder {
       this.useComments = useComments
       return this
@@ -44,12 +44,12 @@ class Amix(val context: Context) {
       return this
     }
 
-    fun setOnGenerateCode(onGenerateCode: (String, Config) -> Unit): Builder {
+    fun setOnGenerateCode(onGenerateCode: OnGenerateCode): Builder {
       this.onGenerateCode = onGenerateCode
       return this
     }
 
-    fun setOnError(onError: (String) -> Unit): Builder {
+    fun setOnError(onError: OnError): Builder {
       this.onError = onError
       return this
     }
@@ -59,11 +59,23 @@ class Amix(val context: Context) {
         AmixXmlGenerator(
           context = context,
           codeComments = useComments,
-          onGenerateCode = onGenerateCode,
-          onError = onError,
+          onGenerateCode = { code, config ->
+            onGenerateCode.call(code, config)
+          },
+          onError = { onError.call(it) },
         )
       val amixCompiler = AmixCompiler(xmlGenerator = xmlGenerator, code = code)
       return Amix(context).apply { compiler = amixCompiler }
     }
+  }
+
+  @FunctionalInterface
+  interface OnGenerateCode {
+    fun call(code: String, config: Config)
+  }
+
+  @FunctionalInterface
+  interface OnError {
+    fun call(error: String)
   }
 }
