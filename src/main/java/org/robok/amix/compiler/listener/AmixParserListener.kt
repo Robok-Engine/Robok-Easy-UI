@@ -25,7 +25,7 @@ import org.robok.amix.internal.antlr4.AmixParser.ComponentContext
 import org.robok.amix.internal.antlr4.AmixParser.GuiFileContext
 import org.robok.amix.internal.AttributeDefaults
 
-internal class AmixParserListener(private val xmlGenerator: AmixXmlGenerator) : AmixBaseListener() {
+class AmixParserListener(private val xmlGenerator: AmixXmlGenerator) : AmixBaseListener() {
   private var componentName: String = ""
 
   /** when finish the code */
