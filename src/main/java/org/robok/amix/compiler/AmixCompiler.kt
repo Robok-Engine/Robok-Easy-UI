@@ -21,10 +21,10 @@ import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.atn.PredictionMode
 import org.antlr.v4.runtime.tree.ParseTreeWalker
-import org.robok.amix.xml.AmixXmlGenerator
+import org.robok.amix.compiler.listener.AmixParserListener
 import org.robok.amix.internal.antlr4.AmixLexer
 import org.robok.amix.internal.antlr4.AmixParser
-import org.robok.amix.compiler.listener.AmixParserListener
+import org.robok.amix.xml.AmixXmlGenerator
 
 /*
  * Class that uses ANTLR4 to compile the Code and use { @link AmixParserListener }.

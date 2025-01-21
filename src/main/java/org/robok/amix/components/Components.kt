@@ -18,11 +18,11 @@ package org.robok.amix.components
  */
 
 import org.robok.amix.config.Config
+import org.robok.amix.ext.newLine
+import org.robok.amix.ext.newLineBroken
 import org.robok.amix.internal.AttributeDefaults
 import org.robok.amix.internal.Utils.comment
 import org.robok.amix.internal.Utils.convertStyleToFileName
-import org.robok.amix.ext.newLine
-import org.robok.amix.ext.newLineBroken
 
 internal class Components(
   private val codeComments: Boolean = false,

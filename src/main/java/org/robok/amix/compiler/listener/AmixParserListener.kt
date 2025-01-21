@@ -17,13 +17,13 @@ package org.robok.amix.compiler.listener
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import org.robok.amix.xml.AmixXmlGenerator
+import org.robok.amix.internal.AttributeDefaults
 import org.robok.amix.internal.antlr4.AmixBaseListener
 import org.robok.amix.internal.antlr4.AmixParser.ArgumentContext
 import org.robok.amix.internal.antlr4.AmixParser.ArgumentListContext
 import org.robok.amix.internal.antlr4.AmixParser.ComponentContext
 import org.robok.amix.internal.antlr4.AmixParser.GuiFileContext
-import org.robok.amix.internal.AttributeDefaults
+import org.robok.amix.xml.AmixXmlGenerator
 
 class AmixParserListener(private val xmlGenerator: AmixXmlGenerator) : AmixBaseListener() {
   private var componentName: String = ""

@@ -23,9 +23,9 @@ import java.lang.reflect.InvocationTargetException
 import org.robok.amix.components.Components
 import org.robok.amix.config.Config
 import org.robok.amix.converter.AttributeConverter
-import org.robok.amix.internal.Utils.comment
 import org.robok.amix.ext.newLine
 import org.robok.amix.ext.newLineBroken
+import org.robok.amix.internal.Utils.comment
 
 /*
  * Class that generates XML from the received data.

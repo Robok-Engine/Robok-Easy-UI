@@ -17,4 +17,4 @@ package org.robok.amix.compiler
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class AmixNullCodeException(): Exception("Amix Code cannot be null.")
+class AmixNullCodeException() : Exception("Amix Code cannot be null.")

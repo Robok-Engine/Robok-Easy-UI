@@ -18,8 +18,8 @@ package org.robok.amix
  */
 
 import android.content.Context
-import org.robok.amix.config.Config
 import org.robok.amix.compiler.AmixCompiler
+import org.robok.amix.config.Config
 import org.robok.amix.xml.AmixXmlGenerator
 
 class Amix(val context: Context) {
@@ -32,7 +32,7 @@ class Amix(val context: Context) {
     private var useComments: Boolean = false
     private var code: String? = null
     private var onGenerateCode: (String, Config) -> Unit = { _, _ -> }
-    private var onError: (String) -> Unit = { }
+    private var onError: (String) -> Unit = {}
 
     fun setUseComments(useComments: Boolean): Builder {
       this.useComments = useComments
@@ -60,12 +60,10 @@ class Amix(val context: Context) {
           context = context,
           codeComments = useComments,
           onGenerateCode = onGenerateCode,
-          onError = onError
+          onError = onError,
         )
       val amixCompiler = AmixCompiler(xmlGenerator = xmlGenerator, code = code)
-      return Amix(context).apply {
-        compiler = amixCompiler
-      }
+      return Amix(context).apply { compiler = amixCompiler }
     }
   }
 }
