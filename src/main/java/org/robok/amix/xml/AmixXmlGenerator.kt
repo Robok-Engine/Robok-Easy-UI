@@ -17,8 +17,6 @@ package org.robok.amix.xml
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import android.content.Context
-import android.util.Log
 import java.lang.reflect.InvocationTargetException
 import org.robok.amix.components.Components
 import org.robok.amix.config.Config
@@ -32,7 +30,6 @@ import org.robok.amix.internal.Utils.comment
  */
 
 class AmixXmlGenerator(
-  private val context: Context,
   private val onGenerateCode: (String, Config) -> Unit,
   val onError: (String) -> Unit,
   private val codeComments: Boolean = false,
@@ -201,6 +198,5 @@ class AmixXmlGenerator(
     components.xmlCodeList.newLineBroken("</LinearLayout>")
     if (codeComments) components.xmlCodeList.newLine("\n" + comment("End."))
     onGenerateCode(buildXML(), components.config)
-    Log.d(TAG, components.config.toString())
   }
 }

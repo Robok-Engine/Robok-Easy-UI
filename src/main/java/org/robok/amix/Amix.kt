@@ -17,18 +17,17 @@ package org.robok.amix
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import android.content.Context
 import org.robok.amix.compiler.AmixCompiler
 import org.robok.amix.config.Config
 import org.robok.amix.xml.AmixXmlGenerator
 
-class Amix(val context: Context) {
+class Amix {
 
   lateinit var compiler: AmixCompiler
 
   fun compile() = compiler.compile()
 
-  class Builder(private val context: Context) {
+  class Builder {
     private lateinit var onGenerateCode: OnGenerateCode
     private lateinit var onError: OnError
     private var useComments: Boolean = false
@@ -57,7 +56,6 @@ class Amix(val context: Context) {
     fun create(): Amix {
       val xmlGenerator =
         AmixXmlGenerator(
-          context = context,
           codeComments = useComments,
           onGenerateCode = { code, config ->
             onGenerateCode.call(code, config)
@@ -65,7 +63,7 @@ class Amix(val context: Context) {
           onError = { onError.call(it) },
         )
       val amixCompiler = AmixCompiler(xmlGenerator = xmlGenerator, code = code)
-      return Amix(context).apply { compiler = amixCompiler }
+      return Amix().apply { compiler = amixCompiler }
     }
   }
 

@@ -18,27 +18,18 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-  alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin)
   alias(libs.plugins.kotlin.serialization)
   `maven-publish`
+  `java-library`
 }
 
 group = "org.robok"
 version = libs.versions.lib.version.get()
 
-android {
-  namespace = "org.robok.easyui"
-  compileSdk = 35
-
-  defaultConfig {
-    minSdk = 21
-  }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-  }
+java {
+  sourceCompatibility = JavaVersion.VERSION_21
+  targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
@@ -54,12 +45,11 @@ afterEvaluate {
         groupId = "org.robok"
         artifactId = "amix"
         version = libs.versions.lib.version.get()
-        from(components["release"])
+        from(components["java"])
       }
     }
   }
 }
-
 
 dependencies {
   implementation(libs.antlr4)
