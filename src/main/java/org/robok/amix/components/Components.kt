@@ -41,7 +41,7 @@ internal class Components(
   /** just to not crash in reflection */
   fun config() = Unit
 
-  /*********** Layouts ************/
+  /** ********* Layouts *********** */
   @Component("Root")
   fun Root() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Opening Root Layout"))
@@ -102,7 +102,7 @@ internal class Components(
     closingTagLayoutList.newLine("RadioGroup:</RadioGroup>")
   }
 
-  /*********** Widgets ************/
+  /** ********* Widgets *********** */
   @Component("Text")
   fun Text() {
     if (codeComments) xmlCodeList.newLineBroken(comment("Text Component"))

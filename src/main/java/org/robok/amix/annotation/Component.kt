@@ -17,5 +17,4 @@ package org.robok.amix.annotation
  *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-@Retention(AnnotationRetention.SOURCE)
-annotation class Component(val name: String)
+@Retention(AnnotationRetention.SOURCE) annotation class Component(val name: String)

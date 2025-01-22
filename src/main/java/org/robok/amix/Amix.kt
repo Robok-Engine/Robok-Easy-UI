@@ -32,7 +32,7 @@ class Amix {
     private lateinit var onError: OnError
     private var useComments: Boolean = false
     private var code: String? = null
-    
+
     fun setUseComments(useComments: Boolean): Builder {
       this.useComments = useComments
       return this
@@ -57,9 +57,7 @@ class Amix {
       val xmlGenerator =
         AmixXmlGenerator(
           codeComments = useComments,
-          onGenerateCode = { code, config ->
-            onGenerateCode.call(code, config)
-          },
+          onGenerateCode = { code, config -> onGenerateCode.call(code, config) },
           onError = { onError.call(it) },
         )
       val amixCompiler = AmixCompiler(xmlGenerator = xmlGenerator, code = code)
