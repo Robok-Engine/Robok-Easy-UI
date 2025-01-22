@@ -28,9 +28,9 @@ class Amix {
   fun compile() = compiler.compile()
 
   class Builder {
-    private lateinit var onGenerateCode: OnGenerateCode
-    private lateinit var onError: OnError
     private var useComments: Boolean = false
+    private var onGenerateCode: OnGenerateCode? = null
+    private var onError: OnError? = null
     private var code: String? = null
 
     fun setUseComments(useComments: Boolean): Builder {
@@ -57,8 +57,8 @@ class Amix {
       val xmlGenerator =
         AmixXmlGenerator(
           codeComments = useComments,
-          onGenerateCode = { code, config -> onGenerateCode.call(code, config) },
-          onError = { onError.call(it) },
+          onGenerateCode = { code, config -> onGenerateCode?.call(code, config) },
+          onError = { onError?.call(it) },
         )
       val amixCompiler = AmixCompiler(xmlGenerator = xmlGenerator, code = code)
       return Amix().apply { compiler = amixCompiler }
