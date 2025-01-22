@@ -42,8 +42,8 @@ Column(
 - **What's config field?**: Config field is used to store config layout  
 Available Config's:  
 style: a theme for ui (more used on Robok Engine)
-orientation: a orientation for layout, landscape portraint etc.  
-(These Config are just returned in the onGenerateCodr, they are not added to the xml code.)
+orientation: a orientation for layout, landscape portrait etc.  
+(These Config are just returned in the onGenerateCode, they are not added to the xml code.)
 
 ## How to compile 
 
