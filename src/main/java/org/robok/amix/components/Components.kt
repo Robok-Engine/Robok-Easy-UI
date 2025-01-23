@@ -91,14 +91,11 @@ internal class Components(
 
   @Component("RadioGroup")
   fun RadioGroup() {
-    if (codeComments) xmlCodeList.newLineBroken(comment("RadioGroup Component"))
+    if (codeComments) xmlCodeList.newLineBroken(comment("Opening RadioGroup Layout"))
     xmlCodeList.newLineBroken("${indent}<RadioGroup")
     indentLevel++
-    xmlCodeList.newLineBroken(
-      "${indent}android:background=\"@drawable/" +
-        convertStyleToFileName(config.style + "RadioGroup") +
-        "\""
-    )
+    xmlCodeList.newLineBroken(">")
+    indentLevel++
     closingTagLayoutList.newLine("RadioGroup:</RadioGroup>")
   }
 
