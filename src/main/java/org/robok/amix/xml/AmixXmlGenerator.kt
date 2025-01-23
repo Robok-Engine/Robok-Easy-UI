@@ -34,16 +34,21 @@ class AmixXmlGenerator(
   val onError: (String) -> Unit,
   private val useComments: Boolean = false,
   private val useStyle: Boolean = false,
-  private val verticalRoot: Boolean = false,
+  private val useVerticalRoot: Boolean = false,
 ) {
   companion object {
     private const val TAG = "AmixXmlGenerator"
   }
 
-  private var orientation: String = "portrait"
-  private var style: String = "defaultStyle"
+  private var orientation = "portrait"
+  private var style = "defaultStyle"
   private var isConfigEnable = false
-  private var components: Components = Components(useComments, verticalRoot)
+
+  private var components = Components(
+    useComments = useComments,
+    useStyle = useStyle,
+    useVerticalRoot = useVerticalRoot
+  )
 
   init {
     components.Root()

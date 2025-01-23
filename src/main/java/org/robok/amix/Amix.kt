@@ -30,6 +30,7 @@ class Amix {
   class Builder {
     private var useComments: Boolean = false
     private var useStyle: Boolean = false
+    private var useVerticalRoot: Boolean = false
     private var onGenerateCode: OnGenerateCode? = null
     private var onError: OnError? = null
     private var code: String? = null
@@ -41,6 +42,11 @@ class Amix {
 
     fun setUseStyle(useStyle: Boolean): Builder {
       this.useStyle = useStyle
+      return this
+    }
+
+    fun setUseVerticalRoot(useVerticalRoot: Boolean): Builder {
+      this.useVerticalRoot = useVerticalRoot
       return this
     }
 
@@ -63,7 +69,8 @@ class Amix {
       val xmlGenerator =
         AmixXmlGenerator(
           useComments = useComments,
-          useStyle = useStyle
+          useStyle = useStyle,
+          useVerticalRoot = useVerticalRoot,
           onGenerateCode = { code, config -> onGenerateCode?.call(code, config) },
           onError = { onError?.call(it) },
         )
