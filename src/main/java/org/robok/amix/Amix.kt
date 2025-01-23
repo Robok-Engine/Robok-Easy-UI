@@ -65,13 +65,11 @@ class Amix {
     }
   }
 
-  @FunctionalInterface
-  interface OnGenerateCode {
+  fun interface OnGenerateCode {
     fun call(code: String, config: Config)
   }
 
-  @FunctionalInterface
-  interface OnError {
+  fun interface OnError {
     fun call(error: String)
   }
 }
