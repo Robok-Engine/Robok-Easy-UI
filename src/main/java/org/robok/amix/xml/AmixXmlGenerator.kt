@@ -32,7 +32,8 @@ import org.robok.amix.internal.Utils.comment
 class AmixXmlGenerator(
   private val onGenerateCode: (String, Config) -> Unit,
   val onError: (String) -> Unit,
-  private val codeComments: Boolean = false,
+  private val useComments: Boolean = false,
+  private val useStyle: Boolean = false,
   private val verticalRoot: Boolean = false,
 ) {
   companion object {
@@ -42,7 +43,7 @@ class AmixXmlGenerator(
   private var orientation: String = "portrait"
   private var style: String = "defaultStyle"
   private var isConfigEnable = false
-  private var components: Components = Components(codeComments, verticalRoot)
+  private var components: Components = Components(useComments, verticalRoot)
 
   init {
     components.Root()
@@ -61,7 +62,7 @@ class AmixXmlGenerator(
         val closingTagGui = tags[0]
         val closingTagXml = tags[1]
 
-        if (codeComments)
+        if (useComments)
           components.xmlCodeList.newLineBroken(comment("Closing $closingTagGui Layout"))
 
         if (closingTagXml.equals("/>")) {
@@ -90,7 +91,7 @@ class AmixXmlGenerator(
         val closingTagGui = tags[0]
         val closingTagXml = tags[1]
 
-        if (codeComments)
+        if (useComments)
           components.xmlCodeList.newLineBroken(comment("Closing $closingTagGui Layout"))
 
         components.xmlCodeList.newLineBroken("${components.indent}$closingTagXml" + "\n")
@@ -182,7 +183,7 @@ class AmixXmlGenerator(
   }
 
   public fun newLog(log: String) {
-    if (codeComments) components.xmlCodeList.newLine(log)
+    if (useComments) components.xmlCodeList.newLine(log)
   }
 
   public fun buildXML(): String {
@@ -194,9 +195,9 @@ class AmixXmlGenerator(
   public fun finish() {
     components.indentLevel--
     components.indentLevel--
-    if (codeComments) components.xmlCodeList.newLineBroken(comment("Closing Root Layout"))
+    if (useComments) components.xmlCodeList.newLineBroken(comment("Closing Root Layout"))
     components.xmlCodeList.newLineBroken("</LinearLayout>")
-    if (codeComments) components.xmlCodeList.newLine("\n" + comment("End."))
+    if (useComments) components.xmlCodeList.newLine("\n" + comment("End."))
     onGenerateCode(buildXML(), components.config)
   }
 }

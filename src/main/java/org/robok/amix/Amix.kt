@@ -29,12 +29,18 @@ class Amix {
 
   class Builder {
     private var useComments: Boolean = false
+    private var useStyle: Boolean = false
     private var onGenerateCode: OnGenerateCode? = null
     private var onError: OnError? = null
     private var code: String? = null
 
     fun setUseComments(useComments: Boolean): Builder {
       this.useComments = useComments
+      return this
+    }
+
+    fun setUseStyle(useStyle: Boolean): Builder {
+      this.useStyle = useStyle
       return this
     }
 
@@ -56,7 +62,8 @@ class Amix {
     fun create(): Amix {
       val xmlGenerator =
         AmixXmlGenerator(
-          codeComments = useComments,
+          useComments = useComments,
+          useStyle = useStyle
           onGenerateCode = { code, config -> onGenerateCode?.call(code, config) },
           onError = { onError?.call(it) },
         )
