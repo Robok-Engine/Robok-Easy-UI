@@ -1,4 +1,4 @@
-# Robok-Amix
+# Amix
 
 A language to create layout
 
@@ -8,7 +8,7 @@ Write in .amx (Amix) and convert to Android Views (XML).
 
 ## Add to project
 
-[![JitPack Release](https://jitpack.io/v/Robok-Engine/Robok-Amix.svg)](https://jitpack.io/#Robok-Engine/Robok-Amix)
+[![JitPack Release](https://jitpack.io/v/AmixLang/Amix.svg)](https://jitpack.io/#AmixLang/Amix)
 
 ```kotlin
 allprojects {
@@ -17,7 +17,7 @@ allprojects {
     }
 }
 
-implementation("com.github.Robok-Engine:Robok-Amix:<version>")
+implementation("com.github.AmixLang:Amix:<version>")
 ```
 
 ## Syntax

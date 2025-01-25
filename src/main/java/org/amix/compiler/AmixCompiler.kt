@@ -1,30 +1,30 @@
-package org.robok.amix.compiler
+package org.amix.compiler
 
 /*
- *  This file is part of Robok © 2024.
+ *  This file is part of Amix © 2024.
  *
- *  Robok is free software: you can redistribute it and/or modify
+ *  Amix is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  Robok is distributed in the hope that it will be useful,
+ *  Amix is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
+ *   along with Amix.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.atn.PredictionMode
 import org.antlr.v4.runtime.tree.ParseTreeWalker
-import org.robok.amix.compiler.listener.AmixParserListener
-import org.robok.amix.internal.antlr4.AmixLexer
-import org.robok.amix.internal.antlr4.AmixParser
-import org.robok.amix.xml.AmixXmlGenerator
+import org.amix.compiler.listener.AmixParserListener
+import org.amix.internal.antlr4.AmixLexer
+import org.amix.internal.antlr4.AmixParser
+import org.amix.xml.AmixXmlGenerator
 
 /*
  * Class that uses ANTLR4 to compile the Code and use { @link AmixParserListener }.

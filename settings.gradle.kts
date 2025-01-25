@@ -13,4 +13,4 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "Robok-Amix"
+rootProject.name = "Amix"

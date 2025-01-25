@@ -1,29 +1,29 @@
-package org.robok.amix.compiler.listener
+package org.amix.compiler.listener
 
 /*
- *  This file is part of Robok © 2024.
+ *  This file is part of Amix © 2024.
  *
- *  Robok is free software: you can redistribute it and/or modify
+ *  Amix is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  Robok is distributed in the hope that it will be useful,
+ *  Amix is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
+ *   along with Amix.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import org.robok.amix.internal.AttributeDefaults
-import org.robok.amix.internal.antlr4.AmixBaseListener
-import org.robok.amix.internal.antlr4.AmixParser.ArgumentContext
-import org.robok.amix.internal.antlr4.AmixParser.ArgumentListContext
-import org.robok.amix.internal.antlr4.AmixParser.ComponentContext
-import org.robok.amix.internal.antlr4.AmixParser.GuiFileContext
-import org.robok.amix.xml.AmixXmlGenerator
+import org.amix.internal.AttributeDefaults
+import org.amix.internal.antlr4.AmixBaseListener
+import org.amix.internal.antlr4.AmixParser.ArgumentContext
+import org.amix.internal.antlr4.AmixParser.ArgumentListContext
+import org.amix.internal.antlr4.AmixParser.ComponentContext
+import org.amix.internal.antlr4.AmixParser.GuiFileContext
+import org.amix.xml.AmixXmlGenerator
 
 class AmixParserListener(private val xmlGenerator: AmixXmlGenerator) : AmixBaseListener() {
   private var componentName: String = ""

@@ -1,29 +1,29 @@
-package org.robok.amix.xml
+package org.amix.xml
 
 /*
- *  This file is part of Robok © 2024.
+ *  This file is part of Amix © 2024.
  *
- *  Robok is free software: you can redistribute it and/or modify
+ *  Amix is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  Robok is distributed in the hope that it will be useful,
+ *  Amix is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *   along with Robok.  If not, see <https://www.gnu.org/licenses/>.
+ *   along with Amix.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import java.lang.reflect.InvocationTargetException
-import org.robok.amix.components.Components
-import org.robok.amix.config.Config
-import org.robok.amix.converter.AttributeConverter
-import org.robok.amix.ext.newLine
-import org.robok.amix.ext.newLineBroken
-import org.robok.amix.internal.Utils.comment
+import org.amix.components.Components
+import org.amix.config.Config
+import org.amix.converter.AttributeConverter
+import org.amix.ext.newLine
+import org.amix.ext.newLineBroken
+import org.amix.internal.Utils.comment
 
 /*
  * Class that generates XML from the received data.
