@@ -52,7 +52,9 @@ fun main(vararg args: String) {
   val context: Context = /* Obtain your Context, ex:  from an Activity or Application */
   
   val amix = Amix.Builder(context)
-    .setUseComments(true) // Enable comments in xml code (not recommended)
+    .setUseStyle(false) // Enable style in Components, (will add a tag in  componnets to use Robok components, like background
+    .setUseVerticalRoot(false) // Use orientation vertical in root view if true
+    .setUseComments(false) // Enable comments in xml code (not recommended)
     .setCode("<example-code>") // some amix code
     .setOnGenerateCode { generatedCode, config ->
       // here you can do something with your generated Android Views XML Layout code
